@@ -1,0 +1,1053 @@
+__TOC__
+
+== Criteria ==
+{| class="wikitable"
+!Criteria
+!Score
+|-
+!Documentation
+!10
+|-
+|
+#Technical documents (By week 7)
+#*Your team will need to create and update the following technical documents. The latest version of all documents must be updated in GIT repository in pdf format.
+#**Use case diagrams for all functions (one or two sentences for each use case).
+#**Sequence diagrams (SD) for key functions.
+#**Class diagram(s) for your design (major components).
+#**Logical diagram (with physical data types). [ [http://blue.smu.edu.sg/is203/example-logical-diagram.pdf sample] ]
+#Meeting minutes
+#*Upon a team meeting (internally or with supervisor), one of your team members will need to write minutes; the minutes taker role should be rotated.
+#*All minutes need to be uploaded to your team’s GIT repository in an easily identifiable manner, within 24 hours after the meeting ends.
+#*Minutes need to be specific (with agenda, assignment of tasks and due date). Download a template [http://blue.smu.edu.sg/is203/minutes-template.docx here].
+#*Put the supervisor & internal meeting minutes in different folders.
+#*Put the date of the meeting in the minutes file name (minutes-N-DD-MM-YYYY.docx), where N is the meeting number.
+#Test plan and test cases
+#*You must have a test plan and test cases.
+#*The test plan and test cases must be updated every iteration to match the functionalities produced during that iteration.
+#*Each of your test cases should be linked to one or more requirement IDs.
+#*Up-to-date test plan and test cases needs to be in the GIT repository.
+#Metrics documents
+#*You must track schedule and bug metrics and take corresponding action if required.
+#*The metric numbers and actions taken need to be updated in the corresponding documents. Actions should be as specific as possible. The up-to-date documents need to be in GIT repository.
+#Code comments
+#*Include program comments in your code.
+#*Write Javadoc comments for all classes. Generate the Javadoc API in the Javadocs folder.
+|
+|-
+!Project Management
+!50
+|-
+|
+#Pair programming
+#*Any changes to your app directory must be pair programmed. This includes the building of user interfaces.
+#*Pair rotation is a MUST!
+#*In your schedule (in pplog), you will need to keep the following fields (date & time, pair assigned, tasks assigned, and venue).
+#*It is okay to change the pairs (with proper reasons), but make sure to update the schedule as early as possible.
+#*We might drop by!
+#Continuous, consistent and correct usage of GIT (Refer to slides)
+#*Prevent GIT audit errors (provided by the pplog tool).
+#**It is expected that you can make a few mistakes at the beginning of the project, but errors at later iterations will cause serious impact.
+#*Good directory structure in GIT throughout the term
+#**Refer to the suggested directory structure presented later in this document
+#Fair job allocation
+#*Everyone does a bit of everything is the Optimal case. We like it!
+#*Everyone must have an opportunity to be a PM during a graded week, which include 3 supervisor meetings (week 5/6, 9, 11), PM review (week 7), UAT (week 12), and final presentation (week 14)
+#Schedule
+#*Create a schedule before the start of any project work.
+#*Track your schedule, and adjust when you are behind (or early). The schedule metric given in the lecture video/slides must be used.
+#*Update your progress on a routine basis
+#*If your team would like to add functionalities, or if there is a need to drop any functionality, you should inform your supervisor as early as possible.
+#Metrics tracking
+#*Your team will need to continuously track schedule metrics and bug metrics (introduced in the lecture video on ‘metrics’ and corresponding slides).
+#*Know why you are tracking these metrics.
+#*The pplog tool calculates the schedule metrics (along with other useful metric to improve your schedule). It is important that you still need to monitor those metrics and take necessary actions.
+#*Bug metrics should be calculated on your own based on your test cases.
+#Supervisor meeting
+#*Attending supervisor meetings is compulsory.
+#*Latecomers will be penalized.
+#Good team dynamics
+#*Cohesive
+#*Equal share of work
+#*Peer learning
+#*Ability to resolve conflict. If it is not possible to do it within the team, the team should raise the issue with the supervisor EARLY. Note that you do not get penalized if you raise valid concerns. It is how you manage conflicts!
+#Peer evaluation (Week 8 & 14).
+#*It is a must to complete peer eval and provide constructive feedback to your team members. Consolidated scores of mid-evaluation will be returned to the team.
+#Iterative & Incremental development
+#*Plan your project schedule with multiple iterations.
+#*Integrate, deploy, and test your app at every iteration.
+#*Meet the milestones.
+#Use the deployment servers
+#*Your app needs to be deployed and tested on deployment servers (The base deployment platform will be OpenShift. In addition, deployment to Google App Engine is highly recommended for ‘Black’ teams.)
+#*Everyone in the team needs to know how to deploy.
+#*Heuristic evaluation, In-class UAT, final UAT will be done with the deployed app.
+|
+|-
+!Presentations (All done in-class)
+!20
+|-
+|
+#Week 7 (In class): Interim Review (also known as PM Review) Presentation
+#Week 9 (In the second supervisor meeting): Heuristic Evaluation
+#Week 12 (In class): User Acceptance Test
+#Week 14 (in class): Final Presentation
+
+#*The following applies for the above presentations:
+#**Late submission into GIT or late deployment results in 0 mark (The deadline is strictly applied, so do not submit at the last moment!).
+#**If slides being presented are not the one in SVN, 0 mark.
+|
+3<br />
+3<br />
+4<br />
+10<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+|-
+!Application
+!20
+|-
+|
+#Application fulfills the requirements given
+#Intuitive user interface
+
+|
+|}
+
+== Project Scope==
+#Your team will need to provide a set of functionalities. Every functionality described in the later section is part of the full project scope. However, your team is advised to do the suggested features only (we will suggest a proper scope based on the overall competency of your team). Your team can always do more if your team can confidently handle more features.
+#*The suggested functionalities are what the customer has explicitly requested for. Therefore, please make sure that the suggested functionalities are finished and tested before progressing to additional functionalities.
+#*Additional features/functionalities cannot replace suggested features. Having broken suggested features is really bad project management. Also, dropping suggested functionalities, and providing additional functionalities is a definite NO-NO. Please don’t do that!
+#*In case your team needs to drop suggested features, please make sure your project supervisor is informed.
+#*You can also go beyond the suggested features. But, make sure that your team can still manage the scope confidently, and inform your supervisor.
+#Some design/scope rules you should follow are:
+#*Having working code is more important than beautiful design.
+#*Ease of use is more important than nice aesthetics.
+#A key part of the SE experience is understanding how to manage your schedule. As discussed in class, we want every team to have a sustainable pace where every team member still has adequate time for the other modules they need to do during the semester. In essence, SE should not be consuming all your time.
+#*Everything else being equal, implementing more features will be considered better. However, remember that the key of SE project lies in proper project management given a suggested scope.
+#After understanding the project scope, the team’s technical competency, and schedule availability, your team may decide that it is not possible to finish all the suggested project requirements by the deadline. In such cases, you are allowed to drop functionalities to ensure that your team can maintain a sustainable pace during the semester. However, if you do plan to drop any functionalities (including the recommended features to your team), you must do the following
+#*You will need to convince your supervisor, at the earliest reasonable time, that dropping the functionality(s) is necessary for your team to maintain a sustainable pace for the rest of the semester. Note: it is very hard to convince a supervisor that a functionality is too hard to implement if your team has not started implementing any functionalities yet.
+#*If your supervisor agrees, you can go ahead and drop the functionality and adjust your schedule appropriately.
+#*We will not penalize your team (PM-grading wise) for dropping functionalities if you do it for the right reasons, with the full knowledge and blessings of your supervisor, and early in the semester.
+
+== Project Process ==
+For the success of software projects and produce quality software, it is essential to have and follow a good process throughout the project. For this SE project, your team is required to adopt combination of an iterative process and an agile process that includes the following practices.
+
+#Iterative Process
+#*Your team will need to plan your project with multiple iterations.
+#*Your team will need to appropriately break down the functional (non-functional) requirements into iterations to meet the important project milestones.
+#Pair Programming
+#*Pair programming is a software development technique whereby two programmers work together using the same laptop. One types in the code while the other reviews each line of code as it is typed in. The person typing is called the driver while the person reviewing the code is called the observer or navigator.
+#*The two programmers switch roles frequently (possibly every 30 minutes or less).
+#Auditing your Pair Programming
+#*Pair programming logs should be updated before and after each pair programming session. Before the session starts, it should contain the pair (member names), venue (where you are coding), and the task(s) that you are working on for that session. Within 2 hours of completion, it should be updated to reflect the status of the tasks that were worked on.
+#*We will be using an automated checker to verify your pair programming log against GIT logs. The audit results will be shown in the pplog tool. If one of the pair programmers does not commit any code during a schedule pair programming session, or if anyone commits to the app folder without scheduling a pp session, the audit results will indicate a violation. We will take such violations seriously, especially for the ones made late (closer to the project ends).
+#Collective Code Ownership
+#*Collective code ownership means that everyone is responsible for all the code. Pair programming contributes to this practice: by working in different pairs, all the programmers get to see all the parts of the code. A major advantage claimed for collective ownership is that it speeds up the development process, because if an error occurs in the code any programmer may fix it.
+#Use Case Driven Development
+#Coding Standards
+#Mandatory Use of GIT
+#*GIT must be used consistently and correctly by all team members.
+#*We use commit logs as a sign of individual project activity.
+#*So don’t share GIT accounts and passwords!
+#Role Rotation
+#*Roles (PM and pair programmers) should be regularly rotated unless you can defend why not.
+#*Every team member should be a PM at least for one iteration which include an important project milestone (one of the PM review, UAT, final presentation, supervisor meetings)
+#Continuous Integration
+#*Your team is expected to integrate (and possibly test) all your software components frequently. Your codes should be uploaded to GIT after integration. A working copy of your application should be running on Openshift (and Google App Engine for ‘Black’ teams_.
+#Tracking of Two Metrics – schedule metric and bug metric
+
+== Presentation Requirements ==
+
+===PM Review (Week 7, In-Class)===
+Your presentation will need to include the following:
+#Functionalities
+#*Introduce your team colour and required functionalities.
+#*Do you plan to drop/add any functionalities?
+#*Do you plan to use any frameworks, or stick with MVC or JSP Model 1 or JSP only?
+#*There is no need to show any domain diagram, sequence diagrams, class diagrams or use cases.
+#Schedule
+#*Tell us your schedule. Do not show us the raw schedule on pplog. Summarize it but give us sufficient details to have a bird’s-eye view of your project.
+#*What are your planned iterations and what are the tasks in each iteration?
+#*When is each iteration starting and ending?
+#*Who is doing what?
+#*What are your milestones?
+#*How much buffer time do you have?
+#*Show us your critical path.
+#Metrics (Schedule & Bug)
+#*What is the current value for each metric & did you have to take any action according to your mitigation plan?
+#Roles & responsibilities
+#*Who is doing what (Project Manager, coder, etc.)?
+#*What is the rotation plan? List specifically the PM is in charge of which milestone?
+#What are the pair programming teams and the rotation plan for the teams?
+#*Video on presentation tips: http://www.youtube.com/watch?v=lpvgfmEU2Ck
+
+#Notes:
+#*Please present in this sequence.
+#*You will have 10 minutes for your presentation. Decide wisely on how much time you want to allocate on each section. Make sure to do several dry runs so that you know how long your presentation actually takes.
+#*Not everyone in the team needs to present but whole team must be present during the presentation.
+#*Everyone is expected to answer questions.
+#*Questions can be directed to the team in general or any particular member of the team.
+#*The order of the presentation will be random.
+#*The presentation time will start whether or not all team members are present.
+#*No formal attire required.
+#*Participation will be judged based on the quality of the questions asked during the Q&A sessions.
+#*Read the additional slides (in eLearn) for additional information about presentation.
+
+===Heuristic Evaluation (Week 9, In the 2nd Supervisor Meeting)===
+#Show a user interface prototype of key functionalities
+#Prototype should be running from Openshift (http://app-2015is203gXtY.rhcloud.com) (and Google App Engine for the ‘Black’ teams)
+#Key Functionalities
+#*Basic App Usage Reports
+#*Top-k App Usage Reports
+#Note: Your application should use our data provided on week 9.
+
+===User Acceptance Test (UAT) (Week 12, In-Class)===
+#We will test if your developed application will pass a set of usage tests. All functional aspects of the system can be tested.
+#UAT will be done in two different ways: (1) a manual UAT during the week-12 class, and an automated UAT in the same week after the class. Manual UAT will be done through your web UI, and automated UAT will be performed using the JSON API. So, make sure that your JSON API works as well!
+#Application must be integrated and running from the deployment server(s). No points will be awarded if the application is not running from Openshift (and Google App Engine for ‘Black’ teams).
+#Do not redeploy your app until the automated UAT is over (we will let you know when you can start re-deploying).
+#Critiques of the functionality and the user interface (by instructors and other teams in your section) will be provided. You can use these comments to fix all the bugs for your final submission of the application.
+#The list of user-specified tests will be provided after we complete all the UATs.
+#Bring your own Ethernet cable to avoid wireless LAN issues
+
+===Final Presentation (Week 14, In-Class) ===
+You will be given 10 minutes for your final presentation followed by 10-minutes Q&A. Your presentation will need to include the following:
+#Schedule (Do not show us your MS Project file)
+#*Visual representation of Actual Versus Planned Schedule in 2 or less readable slides. A timeline representation is sufficient here.
+#*Did you drop any functionalities, implement any additional functionalities, and/or use any frameworks or external libraries? If so what.
+#*Show us your breakdown of work. Separate the programming tasks from the non-programming tasks. For programming tasks, show us the task allocation as well as the hours spent by each team member. Explain why your work allocation was fair. Show us absolute numbers as well as percentages.
+#*Tell us about the problems you faced tracking your schedule and how you overcame them.
+#Schedule and Bug Metrics
+#*Show us a visual representation for each metric that shows the values of each metric over time.
+#*Tell us how you used the metrics to fix problems identified.
+#*Give us examples of concrete follow-on actions you took to fix the most severe problems identified by these metrics.
+#*What were some of the challenges faced (and how you overcame them) when collecting and using the metrics?
+#Use of GIT
+#*Demonstrate to us that you used GIT consistently, correctly, and evenly (across your entire team). You should use data (in nice graphical forms) from your commit logs, commit histories, and the audit result(match/no match/not logged) from the pplog system to substantiate your claims.
+#Others
+#*Tell us what are the main takeaways you have gained from doing the project?
+#*Any team conflicts/issues/problems and how your team resolved it. Be sensitive. This is not a finger pointing session.
+#*Something particularly interesting about your team members that you did not know before SE.
+#Some notes about final presentation:
+#*Final presentation slides must be committed to GIT before the project deadline (15 Nov 11.59pm)
+#*You must use the slides committed during presentation.
+#*Everybody has to be present and punctual, and have to stay for the entire presentation slot
+#*You are allowed to choose your presenters. However, all team members are strongly encouraged to present.
+
+== Meeting with Supervisors ==
+#Your team will meet up with your supervisor for one 30 minute meeting every two weeks. These meetings will allow us to review your team’s progress from week to week, provide feedback, identify and track problems to help the team stay on track. The supervisor meetings will be scheduled as below (We will provide detailed dates and time once we identify teams’ possible meeting slots)
+#*Supervisor meeting 1: week 5/6
+#*Supervisor meeting 2: week 9
+#*Supervisor meeting 3: week 11
+#*For week 7/8, your supervisor will provide feedback through the PM review presentation.
+#All members must attend every supervisor meeting.
+#Your team must have a prepared agenda for each meeting (slides are useful for this) and must be prepared to discuss. Your current PM should lead the meeting. However, everyone should know what is going on and be ready to answer questions if asked.
+#Progress for the past two weeks.
+#Any deviation from the planned schedule? Be specific! Tell us the number of days you are ahead/behind schedule. Not some vague answers ("somewhat behind schedule").
+#Goal(s) for the coming two weeks and immediate milestone.
+#Any problems (existing or potential) that threaten the successful, on-time completion of your project.
+#Who did what? Make sure you have your latest build on the deployment server and ready to demo. Source code checked out to your laptop and be ready to explain your codes.
+#What is the current status of all three metrics? Show evidence of tracking. Note: the pplog software only computes the metric numbers for your schedule metrics. You still need to show us evidence of tracking and using (i.e., you looked at the number and did the right mitigation) the metric values. You also need to show us your tracking, and actions taken for your bug metric
+#You are expected to be on time for your meetings. Do not waste everyone’s time by being late or unprepared.
+
+== Requirements Overview ==
+
+Project scenarios: Various SMU organizations would like to understand online and physical behaviour of SMU students to better support students’ life at SMU campus; for example, IITS would like to understand what types of apps students use and where they use those apps for proper bandwidth allocation of Campus WiFi or installations of new access points. Moreover, building managers may need to find out where the students are located and how they move around on campus for better utilization of limited spaces. Besides SMU organizations, individual students may want to quantify and trace their own smartphone usage to understand if they are overusing smartphones and reduce the phone use time if necessary.
+
+It is well known that SIS students are good at designing and building web applications, so the university requested your team to build an SMU Analytics application (we call it SMUA, hereinafter). SMUA is a web application that can be used by any valid users to obtain useful statistics on the smartphone app usage and locations of SMU students. Users are allowed to select the type of analytics services (e.g., the most popular smartphone app used by SIS students, highly utilized spaces in SIS building, etc.), and SMUA will show the corresponding information in return in a user-friendly manner.
+
+In the remaining of this section, we will first provide the summary list of features that SMUA provides. Then, we specify more details on each requirement. Your team will be assigned with a team colour (i.e., one of {Blue, Cyan, White, Black}) determined by overall team capability, and the colour will indicate which functionalities will be suggested to your team.
+
+The table below describes which functionalities are recommended for different team colours. As you may notice, each functionality will be associated with a colour (i.e., one of {Blue, Green, Red, Black}), and your team colour is the combination of the functionality colours that you are suggested to work on.
+
+{| class="wikitable"
+!Team Colour
+!Suggested Functionalities
+|-
+|Blue
+|Blue
+|-
+|Cyan
+|Blue + Green
+|-
+|White
+|Blue + Green + Red
+|-
+|Black
+|Blue + Green + Red + Black
+|}
+
+===Functionality Overview===
+#Login (Blue)
+#*A user is able to log in with their email ID and password.
+#*All the reports are only accessible after logging in.
+#Bootstrap (Blue)
+#*The administrator can bootstrap the SMUA system with app usage and demographics data.
+#*The administrator can add additional data while the application is running.
+#Basic App Usage Report (Blue)
+#*A user can see the following app usage stats for any given duration:
+#**Breakdown by usage time category (e.g., High/Medium/Low)
+#**Breakdown by usage time category and demographics
+#**Breakdown by app category
+#**Diurnal pattern of app usage time
+#Top-k App Usage Report (Blue)
+#*A user can see the top-k users/apps for any given duration:
+#**Top-k most used apps (given a school)
+#**Top-k students with most app usage (given an app category)
+#**Top-k schools with most app usage (given an app category)
+#Smartphone Overuse Report (Blue)
+#*A user can see a smartphone overuse index (based on smartphone usage time, gaming time, and frequency of checking smartphones) for themselves for self-feedback and potential behaviour changes.
+#Dual Interfaces (Web UI and Web Services) (Blue)
+#*Web UI: Provide a user-friendly web UI for all features that your team needs to implement. The basic UI requirement is showing results in nicely formatted tables, text, etc.
+#*Web Services: Provide JSON APIs that allow all functionalities to be queried programmatically by other machines.
+#Loading Location Data (Green)
+#*The administrator can bootstrap the SMUA system with location data of students.
+#*The administrator should also be able to add new location data while the application is running.
+#Deletion of Data (Green)
+#*While loading location data for bootstrapping, the app may be required to delete a subset of data which could cause undesirable bias to the analysis.
+#*Also, the administrator is able to delete a subset of data (for a certain user over a certain period), using a web UI while the application is running.
+#*All the subsequent queries after the deletion need to be performed without deleted data.
+#Smartphone Usage Heatmap (Green)
+#*A user can see the density of people using smartphones for a specified floor in the SIS building, given a particular date and time. (Output does not need to be in graphical form.)
+#Social Activeness Report (Green)
+#*A user can calculate their own social activeness (based on social communication app usage and physical grouping).
+#Advanced Smartphone Overuse Report (Red)
+#*A user can see an improved overuse index that considers inappropriate use of smartphones under certain contexts: usage in seminar rooms and while in small groups.
+#Graphical UIs (Heatmap and Chart) (Red)
+#*The heatmap is graphically shown on SIS floor maps.
+#*The basic app usage reports and top-k app usage reports are graphically presented using charts.
+#Use of framework (Red)
+#*Your team is required to use a web framework (e.g., Struts, Stripes, Hibernate, Play) for the app development.
+#*All the team members will need to understand how to use the framework.
+#*Among various features of frameworks, you are required to use the MVC template provided by the framework along with the persistence layer. Use of other features is optional.
+#Dual deployment (Black)
+#*The application is deployed in the free tier of Google App Engine in addition to OpenShift.
+#Fast execution of queries (Black)
+#*Bootstrap of the given location data need to be finished in a designated time.
+#*All queries need to be finished in a designated time.
+
+== Understanding Terms and Data ==
+
+=== Glossary Of Terms ===
+
+We below provide several definitions that will be useful to know when reading the rest of the sections.
+
+====MAC_Address====
+
+This is the hardware address of any Wi-Fi capable device (laptop, phone, etc.). A MAC address refers to one and only one unique device. Thus, you can consider a MAC address as the identifier to know which device reports the location.
+
+The format for the MAC_Address field in location.csv is different from the normal MAC address format. This is because the data used for this project has been anonymised to hide the identities of the devices. In particular, the standard MAC address format of XX:XX:XX:XX:XX:XX (where each of the 6 XX values can be any hexadecimal number from 00 to FF) has been converted to a SHA-1 hashed value. SHA-1 is a cryptographic function that ensures that you cannot identify the original value of the data that is hashed. You will learn more about it in IST.
+
+All references to MAC address below refer to the hashed MAC addresses. Unhashed MAC addresses are not used at all in this app. Additionally, as the SHA-1 hash is rendered as a 40-digit hexadecimal number, it is case insensitive. (“1234567890abcdef1234567890abcdef12345678” is equivalent to “1234567890ABCDEF1234567890ABcdeF12345678”.)
+
+====app_id====
+This is a unique number assigned to individual applications. This can be used as an identifier of a specific application.
+
+====location_id====
+
+This is a specific spot in the SIS building for which location data is being reported. Refer to the maps provided to identify exactly where each location_id is found in the SIS building. You can assume that every device is always located at the exact center of the location_id it is reported to be at. You do not have to consider that the device might be a few meters away from the location_id.
+
+====Semantic Place====
+
+A semantic place is a human understandable location such as GSR 2.1, SIS Seminar Room 2.4, etc. Each semantic place is composed of 1 or more location_ids. Refer to the location-lookup.csv file for the list of location_ids that make up each semantic location.
+
+For many of the functions below, you will need to consider all the location_ids that make up a particular semantic location to determine the final analytics value. For example, to determine how many people are in the SIS Seminar Room 8.8 (which is made up of 8 location_ids for example), you will need to add the number of people at each of the 8 location_ids that make up SIS Seminar Room 8.8. That total value is the final count of the number of people in the seminar room.
+
+====Duration of interest/Processing window====
+
+For most of the functionalities, they will require as user input either (1) a start date and end date, or (2) a specific date and time. This affects the range of app usage updates or location updates that you will use to compute the result.
+
+For (1), use updates that are within the start date and end date, both inclusive. E.g. if 2 Aug and 4 Aug are specified, use updates where 2015-08-02 <= date <= 2015-08-04.
+
+For (2), use updates that are from 15 minutes before (inclusive) to the specified date and time (exclusive). E.g. if 2 Aug 12:00:00 pm is specified, use updates where 2015-08-02 11:45:00 <= timestamp < 2015-08-02 12:00:00.
+
+===Understanding the app usage data===
+To implement app usage-based features of the SMUA system, it is very necessary to understand the characteristics of the provided app usage data and several relevant assumptions.
+
+#The app usage traces are real traces that have been anonymised. Thus they have all the characteristics of real-world data -- for better or worse!
+#The app usage of every user is updated whenever the user interacted with applications (e.g., click the button, scroll the page, texting, etc) with a timestamp. Also, it captures other system events occurred in mobile OSes such as receiving notifications, etc.
+#Every app usage update is associated with identifiable users and their demographic information. You can assume that there will always only be one MAC address for each user.
+#The app usage time can be approximated and calculated by the time difference between the first interaction with a specific app and the first interaction with the subsequent app. When there is no subsequent update within 2 minutes (<=120 sec), assume that the user has continued using the app for 10 more seconds from the last interaction with the app. Let’s assume the app data for a specific user is as follows.
+#*t=1 (second), WhatsApp
+#*t=7, WhatsApp
+#*t=21, WhatsApp
+#*t=30, Facebook
+#*t=520, GoogleMap
+#*t=970, Calendar
+#For the above example, usage duration of WhatsApp is 30-1 = 29, i.e., difference between first occurrence of WhatsApp and the first occurrence of the next app, i.e., the Facebook. (Note that it is not 21-1=20!!!) The usage duration of Facebook is 10 sec as there is no subsequent update for the following 2 minutes.
+#The smartphone access frequency is approximated and calculated based on the number of ‘phone use sessions’. A phone use session is a group of continuous interactions with apps where the two subsequent interactions are not more than 2 minutes apart (>120 sec). In the above example, there are three phone use sessions: The first session is (WhatsApp at t=1, WhatsApp at t=7, WhatsApp at t=21, Facebook at t=30), the second is (GoogleMap at t=520) and the third session is (Calendar at t=970). The smartphone access frequency is calculated as the number of phone use sessions per hour (averaged over the duration of interest).
+
+===Understanding the location data===
+To implement location-based features of the SMUA system, it is very important to understand the characteristics of the provided location data and several relevant assumptions
+
+Note: The location data is only required for implementing some of the green, red, and black functionalities. It is not required for implementing blue functionalities.
+
+#The location traces are real traces that have been anonymised. Similar to app usage data, they have all the characteristics of real-world data! Especially, the locations provided may not be 100% accurate due to the errors in underlying location tracking technology. This means that you might sometimes see wrong location updates. Expect that some location updates may not make sense physically. However, assume that all location updates are accurate when you process the data to answer the user queries!
+
+#The location of every user is updated every several minutes (usually every 2-3 minutes, but sometimes it takes more) and only when they are within the SIS building. Note: The update rate varies for different users, and even for the same user, the update rate may not be constant. Again, this is often the case for real-world location data.
+
+#Assume that a user stays at a particular location until a new update says otherwise. For example, when a user is reported to be at location_id = 211 at time = 11:40:30 and at location_id = 213, at time = 11:43:27 (the next update for that user in the dataset), you can assume that the user has stayed at location 211 between 11:40:30 and 11:43:26. If there is no subsequent update for 5 minutes, the user is assumed to stay there for 5 minutes, and then left the SIS building after that. Also, assume that a user is outside of the SIS building when his/her location is not available at all.
+
+#Different from app usage data, a large portion of location updates are not associated with identifiable users and their demographic information. Only a partial set of detected MAC addresses have matching demographic information in demographics.csv. You can assume that there will always only be one MAC address for each user.
+
+==Detailed Logic Specification==
+
+
+===Login (Blue)===
+A valid user (as provided in demographics.csv) is allowed to log in with their email ID and password. All other functions are only accessible after logging in. Moreover, some functions can only be accessed when logged in as the administrator.
+
+Email ID refers to the part before the @ sign of the email (<email ID>@<sch>.smu.edu.sg). There is no need to provide any form of user management (creation, deletion, change password etc.).
+
+As only SMU students are users of SMUA at this point, we use the terms ‘students’ and ‘users’ interchangeably throughout this document.
+
+
+
+===Bootstrap (Blue)===
+
+You need to build an admin page to bootstrap the system, i.e. to initialize the SMUA system with the necessary historical app usage and demographics data for analysis. The admin page is only accessible by the administrator (username: admin) at the URL http://<host>/admin. The admin page need not be pretty but it has to be user friendly without the need for the administrator to understand JSON-formatted messages.
+
+You need to inform the teaching team of the following details when requested:
+#administrator password to login to your admin page to bootstrap or add new data
+#OpenShift username@host (so that we can login via winscp to check your war file timestamp)
+
+The admin page provides two functions: (1) bootstrap and (2) add data.
+In both cases, the system will show the list of errors (with filename, row number, and error message), as well as the number of records successfully loaded from each file. If there are multiple errors per row, all errors must be reported, in the specified order.
+
+====Bootstrap with app usage & demographics data====
+
+Bootstrap involves clearing all existing data in the database and replacing them with values supplied in the data file (example datafiles to be updated soon!). The bootstrap data file is a ZIP file containing the following three CSV files:
+#demographics.csv
+#app-lookup.csv
+#app.csv
+For each of the files, process them in order from the first row to the last. The header row is considered row 1, and the first data row is row 2. You may assume that the above three files will all be present and the header row is correct with all the necessary fields.
+
+Upon processing, each row is run through the common validations. If there are no errors, then it is run through the file-specific validations. If there are still no errors, then the data is added to the database. Errors are reported with the filename, row number, and error message(s). If a single line has multiple errors, output all the errors in the order specified.
+
+Additionally, if there is any whitespace at the start or end of each field, it must be removed before starting the common validations. For example if the email is “apple.hsu  “ (one or more whitespace characters at the end), the whitespace must be removed before storing it into the database.
+
+====Common Validations for all data files====
+For all the fields, you need to check if the field is blank. An error is produced for each blank field, and output in the left-to-right order of the CSV fields. A row is discarded, with no need to do further file-specific validation listed below, if any of the fields is blank.
+
+====File-specific Validations====
+If one or more fields fail the file-specific validations, the row is discarded, but all the errors are returned. Errors are output in the order they are listed in the tables below.
+
+=====demographics.csv=====
+This file stores the list of students who can log into SMUA along with their demographic information.
+{| class="wikitable"
+!Field
+!Description
+|-
+|mac-address
+|the (hashed) MAC address indicating the unique id of a user's device
+|-
+|name
+|the full name of the student
+|-
+|password
+|the password of the student
+|-
+|email
+|the email address of the student (case-insensitive)
+|-
+|gender
+|the gender of the student (male/female)
+|}
+
+List of validations for demographics.csv
+{| class="wikitable"
+|"invalid mac address"
+|if the value is not a SHA-1 hash value (a hexadecimal number, 40 digits long)
+|-
+|"invalid password"
+|if the length of the password is less than 8 characters or it includes whitespace
+|-
+|"invalid email"
+|if email is not of the format xxx.<year>@<school>.smu.edu.sg where school is either business, accountancy, sis, economics, law, or socsc, and year is between 2011 to 2015 (both inclusive). xxx should contains only letters (a-z or A-Z), numbers or dot.
+|-
+|"invalid gender"
+|if gender is not either "M" or "F" (case-insensitive)
+|}
+
+=====app-lookup.csv=====
+This file maps the app ids (e.g., 1, 2, …) used in app.csv with application name and category. For instance, an app id 1 is mapped to (Facebook, Social) and an app id 2 is mapped to (AngryBird, Game).
+{| class="wikitable"
+!Field
+!Description
+|-
+|app-id
+|the unique identifier of the app
+|-
+|app-name
+|the name of the app
+|-
+|app-category
+|the category of the app
+|}
+
+List of validations for app-lookup.csv
+{| class="wikitable"
+!Field
+!Description
+|-
+|"invalid app id"
+|if the app-id is not a positive non-zero integer value
+|-
+|“invalid app category”
+|if app category is not one of  “Books”,  “Social” , “Education”, “Entertainment”, “Information”, “Library”, “Local”, “Tools”, “Fitness”, “Games”, “Others” (case-insensitive)
+|}
+
+=====app.csv=====
+This file provides the app usage history of users who have agreed to report their usage data.
+{| class="wikitable"
+!Field
+!Description
+|-
+|timestamp
+|the time of that a user accessed the app. It is in the following format: YYYY-MM-DD HH:MM:SS
+|-
+|mac-address
+|the hashed MAC address indicating the unique id of the traced device (case-insensitive)
+|-
+|app-id
+|the unique identifier of the app
+|}
+
+List of validations for app.csv
+{| class="wikitable"
+!Field
+!Description
+|-
+|"invalid app"
+|if the app-id is not one of the app-id in app-lookup.csv
+|-
+|"invalid mac address"
+|if the value is not a SHA-1 hash value (a hexadecimal number, 40 digits long)
+|-
+|“no matching mac address”
+|if the value is a SHA-1 hash value, but there is no corresponding MAC address in demographics.csv
+|-
+|"invalid timestamp"
+|if the date & time is not of the correct format: YYYY-MM-DD HH:MM:SS
+|-
+|"duplicate row"
+|if there is already an existing record with the same values: <timestamp>, <mac-address>, the latest row (i.e. having the largest row number) will be loaded into the database and the previous row(s) will be discarded with this error message
+|}
+
+====Upload additional app usage & demographics data====
+
+In addition to the bootstrap capabilities listed above, the admin page should have the functionality to read additional app.csv and/or demographics.csv files. The system should accept a zip file that contains one or both of the csv files. This operation adds the data in the files to the database, without clearing the database first. The new data should then be immediately available for queries.
+
+These files are of the same format as the app.csv and demographics.csv files used for bootstrapping. Use the same validations listed for these data file(s).
+
+For the additional app.csv,
+#You will need to check for duplicate entries against the existing records in the database. If there are duplicates, discard the one in the additional file uploaded. If there are multiple duplicates in the additional file, discard all of them.
+#If there are duplicate records within the additional file uploaded, apply the same rule as bootstrap (use the last record and discard the earlier records).
+#Use the same error message ("duplicate row") for the above two scenarios, but the line number will be the line number of the record in the additional file uploaded.
+You can assume unique records for the additional demographics.csv.
+
+
+
+===Basic App Usage Report (Blue)===
+This functionality will allow a user to see four different app usage time reports for a given duration. The following subsections describe the request, response, and logic of each report in more detail. In all reports, you will need to consider all users who reported a valid data at least once during the given period.
+
+====Breakdown by usage time category====
+Given a start date and end date (both inclusive), show the number of users that have an average daily smartphone usage time belonging to each of three categories: Intense User (5 hours <= daily usage time), Normal User (1 <= average daily usage time < 5 hours), and Mild User (daily usage time < 1 hour). For each category, show also the percentage of the total.
+
+Daily smartphone usage time is the total time duration that the user used any app for the day (the daily value should be averaged when multiple days are involved).
+
+====Breakdown by usage time category and demographics====
+A more advanced version of the above report allows the user to show the further breakdown of the number of students in each usage time category by a combination of one or more of (year/gender/school) attributes, in that order. For example, a user can query to generate the above report that shows the further breakdown by gender first, then year, then school.
+
+====Breakdown by app category====
+Given a start date and end date (both inclusive), calculate total app usage time per app category (Books/Social/Education/Entertainment/…).
+For each app category, show the daily usage hours as well as the percentage of the total (i.e., compare the hours per category with the total hours).
+
+====Diurnal pattern of app usage time====
+This report shows a diurnal pattern of the app usage given a specific day. Also, a user can narrow down the target users by providing one or more demographics filtering conditions (year/gender/school).  If filter(s) are specified, consider all users who match the filtering conditions and report data at least once during the specified day. If no filter is specified, simply consider all users who reported app usage data during the day.
+
+For those users, aggregate app usage time per hour, averaged across all the target users, and output the average app usage time per user (in minutes) for every hour. The output should looks something like: 12 AM (inclusive) ~ 1AM (exclusive): 5 minutes, 1AM~2AM: 1 minutes, …. 5PM~6PM: 20 minutes, 11PM~12AM:   13 minutes.
+
+
+
+===Top-k App Usage Report (Blue)===
+
+A user can request various top-k reports for the durations of interest. ‘Top-k’ is just a formal way of saying (for example, when k=4) "Give me the Top 4 entries in the list", when the list is ranked in a certain way. In every case where top-k is used, k can range from 1 to 10 (both inclusive, in integer increments). So your software must be able to return the top 1 to the top 10 entries for all functions using top-k.
+
+The ‘ranks’ are the various entries that make up the lists used for reporting the top-k values. In all cases, sort the ranks and the top rank (the one with the most entries) is the 1st entry, the next rank is the second entry etc. Note: It is possible for ranks to have more than one entry in cases of ties. If two entries have the same value, assign them the same rank. In such cases, you should "skip" the following ranks depending on the number of ties. The below tale shows an example (with fake application names):
+
+{| class="wikitable"
+!Rank (for most popular apps)
+!App names
+|-
+|1
+|Facebook, WhatsApp
+|-
+|3
+|Chrome
+|-
+|4
+|Google Maps, Photos, SBS Transit
+|-
+|7
+|Dropbox
+|-
+|8
+|Calendar
+|}
+
+If you were asked to return the top-3 (top-k where k = 3) most popular app names, you would output ranks 1 (with two tied entries) and 3 from this table. Within each rank, the entries need to be sorted lexicographically.
+
+If you were asked to return the top-5, you would output the rank 1, 3, and 4 (with every tied entry). Note that in the above example, a total of six apps (from Facebook to SBS Transit) will be returned as all tied entries must be returned for the 4th rank.
+
+There is no need to return the result with 0 entries. For instance, in the above example, you don’t need to include empty results for rank 2 as it is skipped due to the ties in rank 1. If the user asked for top-10 in the above example, you also don’t need to include empty results for rank 9 and 10.
+
+====Top-k most used apps (given a school)====
+Given a certain school, start date and end date (both inclusive) as user input, show the top-k apps with most app usage time by students in that school.
+
+====Top-k students with most app usage (given an app category)====
+Given an app category, start date and end date (both inclusive) as user input, show the top-k students with most usage time in that app category.
+
+====Top-k schools with most app usage (given an app category)====
+Given an app category, start date and end date (both inclusive) as user input, show the top-k schools with the most app usage time in the specified category.
+
+
+
+===Smartphone Overuse Report (Blue)===
+Given a start date and end date (both inclusive), this functionality generates personalized reports to allow a user to understand if they are unnecessarily overusing the smartphone. This report is generated based on the logged-in user’s data only. The user can use this quantified information to determine if behavioural changes are necessary.
+
+Whether or not the user is overusing the smartphone is determined by combination of three different metrics: (1) daily smartphone usage duration, (2) daily gaming duration, and (3) frequency of smartphone accesses.
+
+The report first needs to calculate and show the three values. You already know how to calculate smartphone usage time, and gaming time – this time you just need to consider the logged-in user’s data only. Also, it calculates and outputs a combined overuse index based on the following table:
+
+{| class="wikitable"
+|
+|Severe
+|Moderate
+|Light
+|-
+|Smartphone usage duration
+|>= 5 hours
+|>=3 hours or < 5 hours
+|< 3 hours
+|-
+|Gaming duration
+|>= 2 hours
+|>=1 hours or < 2 hours
+|< 1 hours
+|-
+|Phone access frequency
+|More than 5
+|4 or 5
+|3 or less
+|}
+
+#The overuse index is set to ‘Overusing’ if any one or more criteria fall in ‘Severe’ category.
+#The index is set to ‘Normal’ only when all three criteria are in ‘Light’ category.
+#The index is set to ‘ToBeCautious’ for all the other cases.
+
+
+
+===Dual Interfaces (Web UI and Web Services) (Blue)===
+Your application needs to provide not only web UI (to allow a user to query your SMUA system) but also web services interfaces, i.e., JSON APIs (to allow other machines/third party app to query your SMUA system).
+
+Web UI needs to be easy to use and intuitive. The basic UI requirement is to show the results in nicely formatted tables, etc. Project will be tested using the latest version of Chrome with a display resolution of 1024 x 768.
+
+You will also need to provide JSON APIs that allow all functionalities to be queried programmatically by other machines. Refer to a separate section later for the full JSON API requirements.
+
+
+
+===Loading Location Data (Green)===
+
+Now, your team is required to enhance SMUA to provide location-based analytics in combination with app usage stats. As a first step to do this, the administrator should be able to bootstrap the SMUA system with location data. Similar to the app usage data, the administrator should also be able to add new location data while the application is running.
+
+====Bootstrapping with location data====
+
+The overall bootstrap process is the same as the bootstrap of app usage data. Now, the data file to bootstrap will include two additional csv files (location-lookup.csv and location.csv) in addition to the three files (demographics.csv, app.csv, app-lookup.csv) used previously. So, there will be two cases for bootstrap where (1) the data file includes the three csv files for the basic bootstrap and (2) the data file includes five csv files with location data. In both cases, all existing data in the database need to be cleared before bootstrapping starts. Assume that there are no other cases (e.g., missing location-lookup.csv), and the header row of the location data is correct with all necessary fields.
+
+The appropriate errors should be reported as necessary. All the common data validations are applied similarly for the location data.
+
+=====location.csv=====
+This file provides the location data of user in the SIS building. (More specifically, of the devices connected to SMU WiFi within SIS building).
+
+Note: location.csv can and will contain location updates for many MAC addresses that do not appear in demographics.csv. This is normal and expected and you should still use these "unknown" users location updates in statistics that do not require specific demographics.
+
+{| class="wikitable"
+!Field
+!Description
+|-
+|timestamp
+|the time of the location update in the following format: YYYY-MM-DD HH:MM:SS
+|-
+|mac-address
+|the hashed MAC address indicating the unique id of the traced device (case-insensitive)
+|-
+|location-id
+|the unique identifier for the location; location-id is not an (x,y) coordinate. We will provide a floor map that shows the mapping between location ids and actual locations on the map
+|}
+
+=====List of validations for the location.csv=====
+{| class="wikitable"
+|"invalid location"
+|if the location-id is not one of the valid location-id in the location-lookup file
+|-
+|"invalid mac address"
+|if the value is not a SHA-1 hash value (a hexadecimal number, 40 digits long)
+|-
+|"invalid timestamp"
+|if the date & time is not of the correct format: YYYY-MM-DD HH:MM:SS
+|-
+|"duplicate row"
+|if there is already an existing record with values: <timestamp>, <mac-address>. The latest row (i.e having the largest row number) will be loaded into the database and the previous row(s) will be discarded with this error message
+|}
+
+=====location-lookup.csv=====
+This file maps the location ids (e.g., 211, 212) used in location.csv to semantic places (e.g., SIS seminar room 1). For instance, a location id 213 is mapped to a semantic place (SIS seminar_room 2). Multiple location ids can be mapped to the same semantic place: for instance location ids 213, 214, 214 are mapped to the same "SIS seminar_room 2".
+
+{| class="wikitable"
+!Field
+!Description
+|-
+|location-id
+|the unique identifier for a location
+|-
+|semantic-place
+|the name of the semantic place in SIS-building. Should be of format "SMUSISL<level number><specific location>" or "SMUSISB<level number><specific location>"
+|}
+
+=====List of validations for the location-lookup.csv=====
+A row is discarded if any of the fields is invalid but all the errors will be returned.
+{| class="wikitable"
+|"invalid location id"
+|if the location-id is not a valid positive non-zero integer value.
+|-
+|“invalid semantic place”
+|if the semantic place is not in the format specified above.
+|}
+
+====Upload additional location data====
+Similar to app usage data, location data can be added to the application while it is running, without removing the existing location data. The new data should then be immediately available for queries. The same format and validations for location.csv are used. Duplicate row handling for location.csv is as outlined for app.csv earlier.
+
+
+
+===Deletion of Data (Green)===
+The app may be required to delete a subset of location data (for a certain user or a certain day) which cause undesirable bias to the analysis. Only the administrator is allowed to delete the data.
+
+The data deletion can be done in two different ways.
+#Using a location-delete.csv file that includes all the entries to be deleted: This file may be included in the zip file uploaded to bootstrap or add data. You will need to iterate through all the records in the location-delete.csv file, which follows the same format as location.csv. If the record is found in the database, you should delete that record from the database. If not, you can simply move on to the next record without producing an error. At the end, your app should show how many records are actually deleted and how many records are not found in the database. All the subsequent queries after the deletion need to be performed without the data deleted.
+#Using a web UI that shows deletion condition (user’s MAC address, start date, end date): All the data of the specified user between the start date and the end date (both inclusive) should be deleted from the database. Again, the subsequent queries need to be performed without the data deleted.
+
+
+
+===Smartphone Usage Heatmap (Green)===
+A user can see the density of people using smartphones for all semantic places on a specified floor in the SIS building, given a particular date and time; use the location data reported for 15 minutes prior to the specified date and time – For example, if the input is 3PM for September 1st, use the data reported between 2:45PM (inclusive) to 3PM (exclusive) on the date. The crowd density should be shown in a user-friendly way.
+
+#The crowd density is an integer between 0 and 5 (both inclusive). It is calculated by counting the number of people using smartphones in each semantic place. Use the following threshold for crowd density:
+
+{| class="wikitable"
+!Density
+!Number of people using smartphones (for all location_ids in the semantic place)
+|-
+|0
+|0
+|-
+|1
+|1 to 3
+|-
+|2
+|4 to 7
+|-
+|3
+|8 to 13
+|-
+|4
+|14 to 20
+|-
+|5
+|21 and more
+|}
+
+#Density should be aggregated per semantic place (e.g., a seminar_room1), not per location_id (e.g., 211).
+#When there exist more than two location updates for the same device during the 15-minute processing window, consider that the user is at the most recent location for the whole duration.
+#When a user reported app usage at least once during the 15-minute processing window, consider that the user has used smartphones.
+
+
+===Social Activeness Report (Green)===
+This report shows the social activeness of the logged-in user for a specific day. As proxies to monitor social activeness, we use online social communication as well as physical grouping.
+
+#Using online social communication activities: The report shows the total use time of the apps in “Social” category. Also, show the breakdown of individual app use time as percentages of the total.
+#Using physical grouping: The report shows the total time the user spent in the SIS building, and the percentages of time spent in groups versus time spent alone while in the SIS building.
+#*It is considered that the person was in a group when they located with someone at the same semantic place for more than or equal to 5 minutes.
+
+
+===Advanced Smartphone Overuse Report (Red)===
+This report shows the smartphone overuse of the logged-in user in more sophisticated ways (considering the situations of smartphone use). In the basic overuse report, your team simply considered the duration and frequency of smartphone usage. In this advanced report, your team will newly consider the fact that the overuse is more serious when the user uses their smartphone during classes or when they are in a small group.
+
+The logic first identifies the time duration when the user had classes or was in a small group:
+#Consider that the user had a class when the user was located inside one of the seminar rooms for more than one hour continuously.
+#Consider that the user was in a small group when the user was co-located with less than three people (i.e., 1 or 2) at the same semantic place continuously for more than five minutes.
+#Do not double-count the time when the user was in a small group in a seminar room.
+
+Then, it identifies how long the user used the smartphone during those time spans.  Output 1) the average daily total class time and the average daily total time being in a small group, and 2) average daily smartphone usage time (excluding the use of apps in the category of ‘’Information” or “Education” as this might be productive use) during the specified start/end date duration. Also, output the overuse index:
+#The index value is set to ‘Overusing’ if the user spent more than 15% of class/small-group time in non-productive smartphone usage,
+#The index value is set to “Normal” if the percentage is less than 5%,
+#Otherwise, the index value is set to ‘ToBeCautious’.
+
+
+===Graphical UIs (Heatmap and Chart) (Red)===
+Now, your team will need to improve SMUA’s UI using graphical interfaces.
+#The heatmap needs to be graphically shown on SIS floor maps. See the section titled "libraries and external code" for links to maps of SIS as well as graphics libraries that can help you display the crowd density (and other features) in nice ways (e.g., overlaying the information on a floor map). For the purposes of display on web UI, assume that the mapping between the semantic places and location_ids is fixed. Also we will not add any new location ids or semantic places on the map. When the JSON APIs are tested, semantic place to location id mapping may change, and there may be new location ids or semantic place.
+#The basic app usage report and top-k app usage reports need to be graphically presented using charts.
+
+
+
+===Use of framework (Red)===
+Your team will use a web application framework (e.g., Struts, Stripes, Play, etc.) along with a persistence layer framework (Hibernate, Play, etc.) to develop SMUA. Using a framework will involve a learning curve at the beginning, but once you are familiar with it, it will actually save lots of time that would be spent on tedious work, and help you manage a clean and structured application architecture.
+
+Among many features provided by a framework, your team is required to use the MVC template provided by the framework along with properly using a persistence layer. Note that all the team members need to understand how to use the framework.
+
+===Dual deployment (Black)===
+The application (all functionalities) needs to be deployed in the free tier (not a trial or paid version) of Google App Engine in addition to OpenShift. For all the milestones, dual deployment needs to be considered. Please refer to the slides/labs for more details.
+
+
+===Fast execution of queries (Black)===
+Users would like to have a faster application, which means that the application needs to return query results within a given time. Also, bootstrap of the large dataset needs to be finished in a designated time. Please try to use various techniques (indexing, batching, algorithm optimization, etc) to improve the latency of bootstrap and query processing! We will clarify the time requirements later.
+
+==Web Service Requirements==
+
+===Overview===
+SMUA uses a RESTful API using JSON. All JSON API requests result in a status value. The two status values are success and error.
+
+Requests use a simple REST-style HTTP GET/POST. To invoke the API, include a non-empty r value in the URL. The format of a request is as follows:
+
+<pre>
+http://<host>/json/<service>?token=tokenValue&paramA=valueA&paramB=valueB
+</pre>
+The request queries parameter may vary across different services.
+For this project, all requests (except for the authenticate service) require the sending of the token obtained via the authenticate service.
+
+For example:
+<pre>
+http://<host>/json/heatmap?floor=2&date=2014-03-29T12:30:00&token=eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0MDk3MTIxNTMsImlhdCI6MTQwOTcwODU1M30.h66rOPHh992gpEPtErfqBP3Hrfkh_nNxYwPG0gcAuCc
+</pre>
+
+===JSON Basic===
+Below are some clarification about the JSON language. When in doubt, refer to the [http://json.org/ JSON Specification]
+* If unsure, test it out with the json checker provided [https://github.com/yllee/jsonchecker JSON Checker]
+==== JSON Values ====
+A JSON values can be a/an
+* number (integer or floating point). To indicate a floating number, always put a decimal place. For example, 12.0 instead of 12.
+* string (in double quotes)
+* Boolean (true or false)
+* array (in square brackets). array values are ordered.
+* object (in curly brackets)
+* null
+
+==== Ordering ====
+* An array is an ordered collection of values.
+* An object is an unordered set of name/value pairs.
+
+==== Whitespace ====
+* JSON generally ignores any whitespace around or between syntactic elements (values and punctuation, but not within a string value).
+
+JSON format for each functionality is specified in detail below.
+
+===Common Validations for JSON requests ===
+For all the input fields, you need to check
+# if the mandatory field is missing
+# if the field is blank.
+# if the token is invalid.
+
+Valid Request:
+<pre>
+http://<host>/json/heatmap?token=[tokenValue]&floor=2&date=2014-03-29T12:30:00
+</pre>
+
+Invalid request:
+<pre>
+http://<host>/json/heatmap?token=HappyHappyJoyJoy&date=
+</pre>
+
+The response return should be:
+(Note: The messages field should have all the missing/blank fields or invalid token errors)
+
+<pre>
+{
+  "status": "error"
+  "messages": [ "blank date","invalid token", "missing floor" ]
+}
+</pre>
+
+Note:
+* If there is any missing/blank fields or invalid token, you can return the error and do not have to perform any other field validity checks or any other logical validations.
+* Sort all error messages in '''alphabetical order.'''
+
+===Function-Specific Validations(Updating otw)===
+==== Authenticate ====
+Request:
+<pre>
+http://<host>/json/authenticate
+</pre>
+
+request post parameters:
+{| class="wikitable"
+!field
+!description
+!error message
+|-
+|username
+|the user's username
+|"invalid username/password"
+|-
+|password
+| the user's password
+|"invalid username/password"
+|}
+
+Response:
+If authentication is successful, a JSON web token is returned:
+
+<pre>
+{
+    "status": "success",
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0MDk3MTIxNTMsImlhdCI6MTQwOTcwODU1M30.h66rOPHh992gpEPtErfqBP3Hrfkh_nNxYwPG0gcAuCc"
+}
+</pre>
+
+Use the [http://blue.smu.edu.sg/is203/jwt API] (updated 8 Oct). You will need the following jar files [http://blue.smu.edu.sg/is203/jwt/lib/is203-jwt-v2.jar is203-jwt-v2.jar],[http://blue.smu.edu.sg/is203/jwt/lib/json-smart-1.2.jar json-smart-1.2.jar],[http://blue.smu.edu.sg/is203/jwt/lib/nimbus-jose-jwt-2.26.1.jar nimbus-jose-jwt-2.26.1.jar]. The process is as follows:
+#Upon check that the username & password pair is valid, generate a token using the sign method. You will need a sharedSecret (This is a random string of length 16 that you need to share with the instructional team).
+#For every JSON web service, you need to verify that the token is valid (i.e. the verify method returns true and does not throw any exceptions).
+
+====Bootstrap====
+Bootstrapping is done by sending a multi-part request (http://www.faqs.org/rfcs/rfc1867.html) to the server. You can assume that the user is using a form to send the multi-part request:
+
+<pre>
+ <form action="http://<host>/json/bootstrap"  method="post" enctype="multipart/form-data">
+
+  Filename:
+  <input type="file" name="bootstrap-file" /><br />
+  <input type='text' name='token' value='eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0MDk3MTIxNTMsImlhdCI6MTQwOTcwODU1M30.h66rOPHh992gpEPtErfqBP3Hrfkh_nNxYwPG0gcAuCc' />
+  <input type="submit" value="Bootstrap" />
+</form>
+</pre>
+
+Upload of additional location and demographics data file is done in a similar way to the http://<host>/json/update.
+
+Note:
+#You must clear all existing data before bootstrapping.
+#If the bootstrapping is successful, the following response is returned. The num-record-loaded array is sorted by filename.
+
+<pre>
+{
+  "status": "success",
+  "num-record-loaded":
+     [
+        { "demographics.csv": 539 },
+        { "app-lookup.csv": 270 },
+        { "app.csv": 22578}
+     ]
+}
+</pre>
+
+Note: "num-record-loaded" indicates the number of records loaded(i.e. processed) successfully (no error) into your system for each of file in the zipped file.
+
+#If the bootstrap is unsuccessful, return the following message with the appropriate errors (the full list of errors are listed below). The errors are ordered by file (alphabetical), then by line number. Within each array of error messages, the messages are also ordered.
+#*For missing field validations, follow the left-to-right order of the CSV field list specified for each file.
+#*For other validations, follow the order specified in the lists provided above.
+<pre>
+{
+  "status": "error",
+  "num-record-loaded":
+     [
+        { "demographics.csv": 539 },
+        { "app-lookup.csv": 270 },
+        { "app.csv": 22578}
+     ],
+  "error":
+     [
+        {
+          "file" : "demographics.csv",
+          "line" : 452,
+          "message" : ["invalid email"]
+        },
+        {
+          "file" : "app.csv",
+          "line" : 5,
+          "message" : ["invalid app", "invalid mac address"]
+        },
+        {
+          "file" : "app.csv",
+          "line" : 153,
+          "message" : ["invalid app"]
+        }
+     ]
+}
+</pre>
+
+Note: The header row is row 1. The first row of data is row 2.
+
+==Other Tips==
+
+
+===Using Libraries and External Code===
+#You are welcome to use open source code libraries where it makes sense. But you must make it clear what you have used and why. When in doubt, check with your project supervisor.
+#Some libraries that you might find useful are
+#*OpenCSV  (http://opencsv.sourceforge.net/): For easy importing of CSV files
+#*UploadBean (http://www.javazoom.net/jzservlets/servlets.html):  For easy uploading of zip files to the deployment server
+#*D3 (http://dciarletta.github.io/d3-floorplan/):  For heat map
+#*NVD3 (http://nvd3.org):  Re-usable charts for D3
+
+===Piracy===
+#Use only licensed software
+#Don’t upload non-project related materials or materials that you do not own the copyrights for to your subversion repository
+
+===GIT===
+You have two GIT repositories created for you:
+#http://violet.smu.edu.sg/repo/gXtY-scratch
+#*This repository is for you to "play around" and learn how to use GIT. It will be removed after 20 Sep.
+# http://violet.smu.edu.sg/repo/gXtY (capital G and capital T)
+#*This repository is the actual repository for you to place your project artifacts. This is the only official repository for SE. All artifacts produced for the course needs to be in this repository. Any submission on any other unofficial repositories will not be considered. You will need to have a standard directory structure (as stated below). These are the necessary directories; you can have more sub-folders if you choose to.
+
+To access your repository, please set your password first by logging in to http://violet.smu.edu.sg/git.
+
+Make sure to have the following directory structure. Otherwise, we might not find the right materials to mark even though you have properly committed on time.
+http://violet.smu.edu.sg/repo/gXtY
+
+<pre>
+|- documents        // all other documentations
+|- presentations    // all presentation slides must be stored here
+|- testing          // test plan, test cases, test results
+|- minutes
+  |- internal
+  |- supervisor
+|-app           	    // your app related sources & files
+  |--javadocs
+  |--sql
+  |--src
+  |--web
+    |--WEB-INF
+      |--lib
+ </pre>
+e.g. your team is g8t2, If you check out using this repository URL(http://violet.smu.edu.sg/repo/g8t2), you will see the following:
+
+
+<pre>
+|--documents
+|--presentations
+|- testing          // test plan, test cases, test results
+|--minutes
+  |--internal
+  |--supervisor
+|--app
+  |--sql
+  |--javadocs
+  |--src
+  |--web
+    |--WEB-INF
+      |--lib
+</pre>
+
+=== Questions ===
+#All questions should be posted on the eLearn discussion forums.
+#Do not email the instructors unless absolutely necessary.
