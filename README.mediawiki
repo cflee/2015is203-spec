@@ -386,7 +386,7 @@ Note: The location data is only required for implementing some of the green, red
 ===Login (Blue)===
 A valid user (as provided in demographics.csv) is allowed to log in with their email ID and password. All other functions are only accessible after logging in. Moreover, some functions can only be accessed when logged in as the administrator.
 
-Email ID refers to the part before the @ sign of the email (<email ID>@<sch>.smu.edu.sg). There is no need to provide any form of user management (creation, deletion, change password etc.).
+Email ID refers to the part before the @ sign of the email (&lt;email ID&gt;@&lt;sch&gt;.smu.edu.sg). There is no need to provide any form of user management (creation, deletion, change password etc.).
 
 As only SMU students are users of SMUA at this point, we use the terms ‘students’ and ‘users’ interchangeably throughout this document.
 
@@ -394,7 +394,7 @@ As only SMU students are users of SMUA at this point, we use the terms ‘studen
 
 ===Bootstrap (Blue)===
 
-You need to build an admin page to bootstrap the system, i.e. to initialize the SMUA system with the necessary historical app usage and demographics data for analysis. The admin page is only accessible by the administrator (username: admin) at the URL http://<host>/admin. The admin page need not be pretty but it has to be user friendly without the need for the administrator to understand JSON-formatted messages.
+You need to build an admin page to bootstrap the system, i.e. to initialize the SMUA system with the necessary historical app usage and demographics data for analysis. The admin page is only accessible by the administrator (username: admin) at the URL http://&lt;host&gt;/admin. The admin page need not be pretty but it has to be user friendly without the need for the administrator to understand JSON-formatted messages.
 
 You need to inform the teaching team of the following details when requested:
 #administrator password to login to your admin page to bootstrap or add new data
@@ -452,7 +452,7 @@ List of validations for demographics.csv
 |if the length of the password is less than 8 characters or it includes whitespace
 |-
 |"invalid email"
-|if email is not of the format xxx.<year>@<school>.smu.edu.sg where school is either business, accountancy, sis, economics, law, or socsc, and year is between 2011 to 2015 (both inclusive). xxx should contains only letters (a-z or A-Z), numbers or dot.
+|if email is not of the format xxx.&lt;year&gt;@&lt;school&gt;.smu.edu.sg where school is either business, accountancy, sis, economics, law, or socsc, and year is between 2011 to 2015 (both inclusive). xxx should contains only letters (a-z or A-Z), numbers or dot.
 |-
 |"invalid gender"
 |if gender is not either "M" or "F" (case-insensitive)
@@ -520,7 +520,7 @@ List of validations for app.csv
 |if the date & time is not of the correct format: YYYY-MM-DD HH:MM:SS
 |-
 |"duplicate row"
-|if there is already an existing record with the same values: <timestamp>, <mac-address>, the latest row (i.e. having the largest row number) will be loaded into the database and the previous row(s) will be discarded with this error message
+|if there is already an existing record with the same values: &lt;timestamp&gt;, &lt;mac-address&gt;, the latest row (i.e. having the largest row number) will be loaded into the database and the previous row(s) will be discarded with this error message
 |}
 
 ====Upload additional app usage & demographics data====
@@ -687,7 +687,7 @@ Note: location.csv can and will contain location updates for many MAC addresses 
 |if the date & time is not of the correct format: YYYY-MM-DD HH:MM:SS
 |-
 |"duplicate row"
-|if there is already an existing record with values: <timestamp>, <mac-address>. The latest row (i.e having the largest row number) will be loaded into the database and the previous row(s) will be discarded with this error message
+|if there is already an existing record with values: &lt;timestamp&gt;, &lt;mac-address&gt;. The latest row (i.e having the largest row number) will be loaded into the database and the previous row(s) will be discarded with this error message
 |}
 
 =====location-lookup.csv=====
@@ -701,7 +701,7 @@ This file maps the location ids (e.g., 211, 212) used in location.csv to semanti
 |the unique identifier for a location
 |-
 |semantic-place
-|the name of the semantic place in SIS-building. Should be of format "SMUSISL<level number><specific location>" or "SMUSISB<level number><specific location>"
+|the name of the semantic place in SIS-building. Should be of format "SMUSISL&lt;level number&gt;&lt;specific location&gt;" or "SMUSISB&lt;level number&gt;&lt;specific location&gt;"
 |}
 
 =====List of validations for the location-lookup.csv=====
@@ -916,7 +916,7 @@ Bootstrapping is done by sending a multi-part request (http://www.faqs.org/rfcs/
 </form>
 </pre>
 
-Upload of additional location and demographics data file is done in a similar way to the http://<host>/json/update.
+Upload of additional location and demographics data file is done in a similar way to the http://&lt;host&gt;/json/update.
 
 Note:
 #You must clear all existing data before bootstrapping.
