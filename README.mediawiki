@@ -35,7 +35,7 @@ __TOC__
 |
 |-
 !Project Management
-!50
+!55
 |-
 |
 #Pair programming
@@ -58,7 +58,7 @@ __TOC__
 #*Update your progress on a routine basis
 #*If your team would like to add functionalities, or if there is a need to drop any functionality, you should inform your supervisor as early as possible.
 #Metrics tracking
-#*Your team will need to continuously track schedule metrics and bug metrics (introduced in the lecture video on ‘metrics’ and corresponding slides).
+#*Your team will need to continuously track schedule metrics and bug metrics (introduced in the lecture video on ‘metrics’ and corresponding slides). pp metrics can be tracked optionally.
 #*Know why you are tracking these metrics.
 #*The pplog tool calculates the schedule metrics (along with other useful metric to improve your schedule). It is important that you still need to monitor those metrics and take necessary actions.
 #*Bug metrics should be calculated on your own based on your test cases.
@@ -79,15 +79,14 @@ __TOC__
 #Use the deployment servers
 #*Your app needs to be deployed and tested on deployment servers (The base deployment platform will be OpenShift. In addition, deployment to Google App Engine is highly recommended for ‘Black’ teams.)
 #*Everyone in the team needs to know how to deploy.
-#*Heuristic evaluation, In-class UAT, final UAT will be done with the deployed app.
+#*In-class UAT and final UAT will be done with the deployed app.
 |
 |-
 !Presentations (All done in-class)
-!20
+!15
 |-
 |
 #Week 7 (In class): Interim Review (also known as PM Review) Presentation
-#Week 9 (In the second supervisor meeting): Heuristic Evaluation
 #Week 12 (In class): User Acceptance Test
 #Week 14 (in class): Final Presentation
 
@@ -96,9 +95,8 @@ __TOC__
 #**If slides being presented are not the one in SVN, 0 mark.
 |
 3<br />
-3<br />
 4<br />
-10<br/>
+8<br/>
 <br/>
 <br/>
 <br/>
@@ -110,13 +108,13 @@ __TOC__
 |-
 |
 #Application fulfills the requirements given
-#Intuitive user interface
+#Intuitive and easy-to-use user interface
 
 |
 |}
 
 == Project Scope==
-#Your team will need to provide a set of functionalities. Every functionality described in the later section is part of the full project scope. However, your team is advised to do the suggested features only (we will suggest a proper scope based on the overall competency of your team). Your team can always do more if your team can confidently handle more features.
+#Your team will need to provide a set of functionalities. Every functionality described in the later section is part of the full project scope. However, your team is advised to do the suggested feature set only (as denoted by the colour of your group). Your team can always do more if your team can confidently handle more features.
 #*The suggested functionalities are what the customer has explicitly requested for. Therefore, please make sure that the suggested functionalities are finished and tested before progressing to additional functionalities.
 #*Additional features/functionalities cannot replace suggested features. Having broken suggested features is really bad project management. Also, dropping suggested functionalities, and providing additional functionalities is a definite NO-NO. Please don’t do that!
 #*In case your team needs to drop suggested features, please make sure your project supervisor is informed.
@@ -125,7 +123,7 @@ __TOC__
 #*Having working code is more important than beautiful design.
 #*Ease of use is more important than nice aesthetics.
 #A key part of the SE experience is understanding how to manage your schedule. As discussed in class, we want every team to have a sustainable pace where every team member still has adequate time for the other modules they need to do during the semester. In essence, SE should not be consuming all your time.
-#*Everything else being equal, implementing more features will be considered better. However, remember that the key of SE project lies in proper project management given a suggested scope.
+#*Remember that the most important grading criteria in SE is your project management. Thus, please do not try to do more than your team can achieve as that will impact your PM. However, all things being equal (in terms of project management), teams that satisfy more of the project scope will do better.
 #After understanding the project scope, the team’s technical competency, and schedule availability, your team may decide that it is not possible to finish all the suggested project requirements by the deadline. In such cases, you are allowed to drop functionalities to ensure that your team can maintain a sustainable pace during the semester. However, if you do plan to drop any functionalities (including the recommended features to your team), you must do the following
 #*You will need to convince your supervisor, at the earliest reasonable time, that dropping the functionality(s) is necessary for your team to maintain a sustainable pace for the rest of the semester. Note: it is very hard to convince a supervisor that a functionality is too hard to implement if your team has not started implementing any functionalities yet.
 #*If your supervisor agrees, you can go ahead and drop the functionality and adjust your schedule appropriately.
@@ -156,7 +154,7 @@ For the success of software projects and produce quality software, it is essenti
 #*Every team member should be a PM at least for one iteration which include an important project milestone (one of the PM review, UAT, final presentation, supervisor meetings)
 #Continuous Integration
 #*Your team is expected to integrate (and possibly test) all your software components frequently. Your codes should be uploaded to GIT after integration. A working copy of your application should be running on Openshift (and Google App Engine for ‘Black’ teams_.
-#Tracking of Two Metrics – schedule metric and bug metric
+#Tracking of Two Metrics – schedule metric and bug metric (PP metric is optional)
 
 == Presentation Requirements ==
 
@@ -194,14 +192,6 @@ Your presentation will need to include the following:
 #*No formal attire required.
 #*Participation will be judged based on the quality of the questions asked during the Q&A sessions.
 #*Read the additional slides (in eLearn) for additional information about presentation.
-
-===Heuristic Evaluation (Week 9, In the 2nd Supervisor Meeting)===
-#Show a user interface prototype of key functionalities
-#Prototype should be running from Openshift (http://app-2015is203gXtY.rhcloud.com) (and Google App Engine for the ‘Black’ teams)
-#Key Functionalities
-#*Basic App Usage Reports
-#*Top-k App Usage Reports
-#Note: Your application should use our data provided on week 9.
 
 ===User Acceptance Test (UAT) (Week 12, In-Class)===
 #We will test if your developed application will pass a set of usage tests. All functional aspects of the system can be tested.
@@ -258,9 +248,9 @@ Project scenarios: Various SMU organizations would like to understand online and
 
 It is well known that SIS students are good at designing and building web applications, so the university requested your team to build an SMU Analytics application (we call it SMUA, hereinafter). SMUA is a web application that can be used by any valid users to obtain useful statistics on the smartphone app usage and locations of SMU students. Users are allowed to select the type of analytics services (e.g., the most popular smartphone app used by SIS students, highly utilized spaces in SIS building, etc.), and SMUA will show the corresponding information in return in a user-friendly manner.
 
-In the remaining of this section, we will first provide the summary list of features that SMUA provides. Then, we specify more details on each requirement. Your team will be assigned with a team colour (i.e., one of {Blue, Cyan, White, Black}) determined by overall team capability, and the colour will indicate which functionalities will be suggested to your team.
+In the remaining of this section, we will first provide the summary list of features that SMUA requires followed by a detailed description of each feature. Note: each feature will be listed along with one of four colours {Blue, Green, Red, Black}. Each team will be provided a colour which lists the suggested feature set that your team should aim to develop. As stated earlier, this is just a recommendation. You can aim to do more (or even less), but please clear this with your supervisor first.
 
-The table below describes which functionalities are recommended for different team colours. As you may notice, each functionality will be associated with a colour (i.e., one of {Blue, Green, Red, Black}), and your team colour is the combination of the functionality colours that you are suggested to work on.
+The table below describes which functionalities are recommended for different team colours.
 
 {| class="wikitable"
 !Team Colour
@@ -318,12 +308,10 @@ The table below describes which functionalities are recommended for different te
 #Graphical UIs (Heatmap and Chart) (Red)
 #*The heatmap is graphically shown on SIS floor maps.
 #*The basic app usage reports and top-k app usage reports are graphically presented using charts.
-#Use of framework (Red)
+#Use of framework (Black)
 #*Your team is required to use a web framework (e.g., Struts, Stripes, Hibernate, Play) for the app development.
 #*All the team members will need to understand how to use the framework.
 #*Among various features of frameworks, you are required to use the MVC template provided by the framework along with the persistence layer. Use of other features is optional.
-#Dual deployment (Black)
-#*The application is deployed in the free tier of Google App Engine in addition to OpenShift.
 #Fast execution of queries (Black)
 #*Bootstrap of the given location data need to be finished in a designated time.
 #*All queries need to be finished in a designated time.
@@ -652,11 +640,11 @@ The report first needs to calculate and show the three values. You already know 
 ===Dual Interfaces (Web UI and Web Services) (Blue)===
 Your application needs to provide not only web UI (to allow a user to query your SMUA system) but also web services interfaces, i.e., JSON APIs (to allow other machines/third party app to query your SMUA system).
 
-Web UI needs to be easy to use and intuitive. The basic UI requirement is to show the results in nicely formatted tables, etc. Project will be tested using the latest version of Chrome with a display resolution of 1024 x 768.
+Web UI needs to be easy to use and intuitive. The basic UI requirement is to show the results in nicely formatted tables, etc. Project will be tested using the latest version of Chrome with a display resolution of 1920 x 1080 (1080p FullHD).
+
+* Since the resolution is quite high, we expect your team to use appropriately sized fonts (we don't like squinting) and minimise the use of scrollbars.
 
 You will also need to provide JSON APIs that allow all functionalities to be queried programmatically by other machines. Refer to a separate section later for the full JSON API requirements.
-
-
 
 ===Loading Location Data (Green)===
 
@@ -802,14 +790,10 @@ Now, your team will need to improve SMUA’s UI using graphical interfaces.
 
 
 
-===Use of framework (Red)===
+===Use of framework (Black)===
 Your team will use a web application framework (e.g., Struts, Stripes, Play, etc.) along with a persistence layer framework (Hibernate, Play, etc.) to develop SMUA. Using a framework will involve a learning curve at the beginning, but once you are familiar with it, it will actually save lots of time that would be spent on tedious work, and help you manage a clean and structured application architecture.
 
 Among many features provided by a framework, your team is required to use the MVC template provided by the framework along with properly using a persistence layer. Note that all the team members need to understand how to use the framework.
-
-===Dual deployment (Black)===
-The application (all functionalities) needs to be deployed in the free tier (not a trial or paid version) of Google App Engine in addition to OpenShift. For all the milestones, dual deployment needs to be considered. Please refer to the slides/labs for more details.
-
 
 ===Fast execution of queries (Black)===
 Users would like to have a faster application, which means that the application needs to return query results within a given time. Also, bootstrap of the large dataset needs to be finished in a designated time. Please try to use various techniques (indexing, batching, algorithm optimization, etc) to improve the latency of bootstrap and query processing! We will clarify the time requirements later.
