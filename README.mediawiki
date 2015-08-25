@@ -1033,5 +1033,5 @@ e.g. your team is g8t2, If you check out using this repository URL(http://violet
 </pre>
 
 === Questions ===
-#All questions should be posted on the eLearn discussion forums.
+#All questions should be posted on [https://lion.smu.edu.sg LION].
 #Do not email the instructors unless absolutely necessary.
