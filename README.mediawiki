@@ -720,11 +720,17 @@ Similar to app usage data, location data can be added to the application while i
 
 
 ===Deletion of Data (Green)===
-The app may be required to delete a subset of location data (for a certain user or a certain day) which cause undesirable bias to the analysis. Only the administrator is allowed to delete the data.
+The app may be required to delete a subset of location data which causes undesirable bias to the analysis. Only the administrator is allowed to delete data.
 
 The data deletion can be done in two different ways.
-#Using a location-delete.csv file that includes all the entries to be deleted: This file may be included in the zip file uploaded to bootstrap or add data. You will need to iterate through all the records in the location-delete.csv file, which follows the same format as location.csv. If the record is found in the database, you should delete that record from the database. If not, you can simply move on to the next record without producing an error. At the end, your app should show how many records are actually deleted and how many records are not found in the database. All the subsequent queries after the deletion need to be performed without the data deleted.
-#Using a web UI that shows deletion condition (user’s MAC address, start date, end date): All the data of the specified user between the start date and the end date (both inclusive) should be deleted from the database. Again, the subsequent queries need to be performed without the data deleted.
+
+====Using location-delete.csv====
+This file may be included in the zip file uploaded to bootstrap or add data, and should be processed after all the other files. You will need to process all the records in the location-delete.csv file using the same file format and validations as for location.csv. If a record is found in the database (both existing [if adding data] and newly loaded records from the current zip file) with matching timestamp and mac-address, delete the found record from the database. If no matching record is found, move on to the next record without producing an error.
+
+After all records are processed, display how many records were found and deleted from the database, and how many records did not lead to deletion from the database. All the subsequent queries after the deletion need to be performed without the data deleted.
+
+====Using web UI====
+Allow the administrator to specify a user’s MAC address, start date, and end date. All the data of the specified user between the start date and the end date (both inclusive) should be deleted from the database. Again, subsequent queries need to be performed without the data deleted.
 
 
 
