@@ -909,7 +909,7 @@ Use the [http://blue.smu.edu.sg/is203/jwt API] (updated 8 Oct). You will need th
 Bootstrapping is done by sending a multi-part request (http://www.faqs.org/rfcs/rfc1867.html) to the server. You can assume that the user is using a form to send the multi-part request:
 
 <pre>
- <form action="http://<host>/json/bootstrap"  method="post" enctype="multipart/form-data">
+<form action="http://<host>/json/bootstrap"  method="post" enctype="multipart/form-data">
 
   Filename:
   <input type="file" name="bootstrap-file" /><br />
