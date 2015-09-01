@@ -788,9 +788,9 @@ A user can see the density of people using smartphones for all semantic places o
 ===Social Activeness Report (Green)===
 This report shows the social activeness of the logged-in user for a specific day. As proxies to monitor social activeness, we use online social communication as well as physical grouping.
 
-#Using online social communication activities: The report shows the total use time of the apps in “Social” category. Also, show the breakdown of individual app use time as percentages of the total.
-#Using physical grouping: The report shows the total time the user spent in the SIS building, and the percentages of time spent in groups versus time spent alone while in the SIS building.
-#*It is considered that the person was in a group when they located with someone at the same semantic place for more than or equal to 5 minutes.
+#Using online social communication activities: The report shows the total usage time of the apps in “Social” category. Also, show the breakdown of individual app usage time as percentages of the total.
+#Using physical grouping: The report shows the total time the user spent in the SIS building, and the percentages of that time spent in groups versus time spent alone while in the SIS building.
+#*It is considered that the person was in a group when they are located with one or more other users at the same semantic place for &gt;= 5 minutes continuously.
 
 
 ===Advanced Smartphone Overuse Report (Red)===
