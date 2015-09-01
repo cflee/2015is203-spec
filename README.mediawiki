@@ -789,9 +789,7 @@ This report shows the social activeness of the logged-in user for a specific day
 
 
 ===Advanced Smartphone Overuse Report (Red)===
-This report shows the smartphone overuse of the logged-in user in more sophisticated ways, by considering the situations of smartphone use. In the basic overuse report, your team simply considered the duration and frequency of smartphone usage. In this advanced report, your team will consider the fact that the overuse is more serious when the user uses non-productive apps during classes, or when they are in a small group.
-
-Non-productive apps are defined as apps that are not in "Information" or "Education" app category.
+This report shows the smartphone overuse of the logged-in user in more sophisticated ways, by considering the situations of smartphone use. In the basic overuse report, your team simply considered the duration and frequency of smartphone usage. In this advanced report, your team will consider the fact that the overuse is more serious when the user uses non-productive apps during classes, or when they are in a small group. Non-productive apps are defined as apps that are not in "Information" or "Education" app category.
 
 Given a start date and end date (both inclusive), the logic first identifies the time periods when the user was in classes or was in a small group:
 #Consider that the user was in a class when the user was located inside the same seminar room for &gt;= one hour continuously.
