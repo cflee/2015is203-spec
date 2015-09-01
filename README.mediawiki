@@ -781,7 +781,7 @@ A user can see the density of people using smartphones for all semantic places o
 |}
 
 #Density should be aggregated per semantic place (e.g., a seminar_room1), not per location_id (e.g., 211).
-#When there exist more than two location updates for the same device during the 15-minute processing window, consider that the user is at the most recent location for the whole duration.
+#When there exist more than two location updates for the same device during the 15-minute processing window, consider that the user is at the most recent location for the whole duration. (For this report, ignore the earlier specification that users leave the building 5 minutes after their last location update.)
 #When a user reported app usage at least once during the 15-minute processing window, consider that the user has used smartphones.
 
 
