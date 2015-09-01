@@ -1037,5 +1037,5 @@ Make sure to have the following directory structure. Otherwise, we might not fin
 </pre>
 
 === Questions ===
-#All questions should be posted on [https://lion.smu.edu.sg LION].
+#All questions should be posted on [https://lion.smu.edu.sg LION], tagged with IS203.
 #Do not email the instructors unless absolutely necessary.
