@@ -351,6 +351,10 @@ For (1), use updates that are within the start date and end date, both inclusive
 
 For (2), use updates that are from 15 minutes before (inclusive) to the specified date and time (exclusive). E.g. if 2 Aug 12:00:00 pm is specified, use updates where 2015-08-02 11:45:00 &lt;= timestamp &lt; 2015-08-02 12:00:00.
 
+Some functionalities are defined to process data on an hourly basis. This means that for each hour during the specified day(s), you should consider only the app usage or location updates during that hour. When interpreting the "effective" period of each update (defined separately below for app usage data and location data), you must limit it to within the hour. For example, if a user's last location update for the hour is at hh:57:00, the user is taken to be only present for 3 min (hh:57:00 &lt;= timestamp &lt; hh+1:00:00) instead of the customary 5 minutes.
+
+Similarly, when processing data on a daily basis, for each day during the specified day(s), you should consider only the updates during the day, and limit each update to within the day.
+
 ===Understanding the app usage data===
 To implement app usage-based features of the SMUA system, it is very necessary to understand the characteristics of the provided app usage data and several relevant assumptions.
 
@@ -541,21 +545,31 @@ You can assume unique records for the additional demographics.csv.
 This functionality will allow a user to see four different app usage time reports for a given duration. The following subsections describe the request, response, and logic of each report in more detail. In all reports, you will need to consider all users who reported a valid data at least once during the given period.
 
 ====Breakdown by usage time category====
-Given a start date and end date (both inclusive), show the number of users that have an average daily smartphone usage time belonging to each of three categories: Intense User (5 hours &lt;= daily usage time), Normal User (1 &lt;= average daily usage time &lt; 5 hours), and Mild User (daily usage time &lt; 1 hour). For each category, show also the percentage of the total.
+Given a start date and end date (both inclusive), process data on a daily basis to show the number of users that have an average daily smartphone usage time belonging to each of three categories: Intense User (5 hours &lt;= daily usage time), Normal User (1 &lt;= average daily usage time &lt; 5 hours), and Mild User (daily usage time &lt; 1 hour). For each category, show also the percentage of the total.
 
-Daily smartphone usage time is the total time duration that the user used any app for the day (the daily value should be averaged when multiple days are involved).
+Daily smartphone usage time is the total time duration that the user used any app for the day. If multiple days are specified, the daily value should be averaged across the days.
+
+If there are no users in any of the three time categories (as defined above), it is still displayed with 0 users.
 
 ====Breakdown by usage time category and demographics====
-A more advanced version of the above report allows the user to show the further breakdown of the number of students in each usage time category by a combination of one or more of (year/gender/school) attributes, in that order. For example, a user can query to generate the above report that shows the further breakdown by gender first, then year, then school.
+A more advanced version of the above report allows the user to show the further breakdown of the number of students in each usage time category by a combination of one or more of (year/gender/school) attributes, in that order, given a start date and end date. For example, a user can query to generate the above report that shows the further breakdown by gender first, then year, then school. For each number of students per demographic attributes and time category, show also the percentage of the grand total (across all demographic attributes).
+
+If there are no users in a specific demographic combination, it is still displayed with 0 users. All possible values of the selected attribute (as defined in demographics.csv file validation) are displayed.
+
+For example, if year is selected, 2011, 2012, 2013, 2014 and 2015 are all displayed, regardless of whether there are any users with app usage during the selected time period.
 
 ====Breakdown by app category====
-Given a start date and end date (both inclusive), calculate total app usage time per app category (Books/Social/Education/Entertainment/…).
-For each app category, show the daily usage hours as well as the percentage of the total (i.e., compare the hours per category with the total hours).
+Given a start date and end date (both inclusive), process data on a daily basis to calculate average daily app usage time per app category (Books/Social/Education/Entertainment/…).
+For each app category, show the daily usage duration (in hours) as well as the percentage of the total (i.e., compare the duration per category with the total duration across all categories).
+
+If there is no usage in an app category (as defined in app-lookup.csv file validation), it is still displayed with 0 users.
 
 ====Diurnal pattern of app usage time====
-This report shows a diurnal pattern of the app usage given a specific day. Also, a user can narrow down the target users by providing one or more demographics filtering conditions (year/gender/school).  If filter(s) are specified, consider all users who match the filtering conditions and report data at least once during the specified day. If no filter is specified, simply consider all users who reported app usage data during the day.
+This report shows a diurnal pattern of the average app usage time given a specific day. Also, a user can (but does not has to) narrow down the target users by providing one or more demographics filtering conditions (year/gender/school).  If filter(s) are specified, consider all users who match the filtering conditions and report data at least once during the specified day. If no filter is specified, simply consider all users who reported app usage data during the day.
 
-For those users, aggregate app usage time per hour, averaged across all the target users, and output the average app usage time per user (in minutes) for every hour. The output should looks something like: 12 AM (inclusive) ~ 1AM (exclusive): 5 minutes, 1AM~2AM: 1 minutes, …. 5PM~6PM: 20 minutes, 11PM~12AM:   13 minutes.
+For those users, process app usage data on an hourly basis to compute app usage time per hour, averaged across all the target users, and output the average app usage time per user (in minutes) for every hour. The output should looks something like: 12 AM (inclusive) ~ 1AM (exclusive): 5 minutes, 1AM~2AM: 1 minutes, …. 5PM~6PM: 20 minutes, 11PM~12AM:   13 minutes.
+
+If there is no usage in a hourly window, it is still displayed with 0 minutes.
 
 
 
