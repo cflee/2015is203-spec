@@ -621,9 +621,11 @@ Given an app category, start date and end date (both inclusive) as user input, s
 ===Smartphone Overuse Report (Blue)===
 Given a start date and end date (both inclusive), this functionality generates personalized reports to allow a user to understand if they are unnecessarily overusing the smartphone. This report is generated based on the logged-in user’s data only. The user can use this quantified information to determine if behavioural changes are necessary.
 
-Whether or not the user is overusing the smartphone is determined by combination of three different metrics: (1) daily smartphone usage duration, (2) daily gaming duration, and (3) frequency of smartphone accesses.
+Whether or not the user is overusing the smartphone is determined by combination of three different metrics: (1) average daily smartphone usage duration, (2) average daily gaming duration, and (3) smartphone access frequency.
 
-The report first needs to calculate and show the three values. You already know how to calculate smartphone usage time, and gaming time – this time you just need to consider the logged-in user’s data only. Also, it calculates and outputs a combined overuse index based on the following table:
+The report first needs to calculate and show the above three metrics. Smartphone usage duration is time spent using any apps. Daily gaming duration is time spent using apps in the "Games" app category. Smartphone access frequency is defined earlier.
+
+Also, the report calculates and outputs a combined overuse index based on the following table:
 
 {| class="wikitable"
 |
@@ -631,25 +633,25 @@ The report first needs to calculate and show the three values. You already know 
 |Moderate
 |Light
 |-
-|Smartphone usage duration
+|Average daily smartphone usage duration
 |&gt;= 5 hours
 |&gt;=3 hours or &lt; 5 hours
 |&lt; 3 hours
 |-
-|Gaming duration
+|Average daily gaming duration
 |&gt;= 2 hours
 |&gt;=1 hours or &lt; 2 hours
 |&lt; 1 hours
 |-
-|Phone access frequency
+|Smartphone access frequency
 |More than 5
 |4 or 5
 |3 or less
 |}
 
-#The overuse index is set to ‘Overusing’ if any one or more criteria fall in ‘Severe’ category.
-#The index is set to ‘Normal’ only when all three criteria are in ‘Light’ category.
-#The index is set to ‘ToBeCautious’ for all the other cases.
+#The overuse index is set to ‘Overusing’ if one or more metrics fall in ‘Severe’ category.
+#The index is set to ‘Normal’ only when all three metrics are in ‘Light’ category.
+#The index is set to ‘ToBeCautious’ for all other cases.
 
 
 
