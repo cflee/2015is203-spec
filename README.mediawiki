@@ -570,7 +570,7 @@ If there is no usage in an app category (as defined in app-lookup.csv file valid
 ====Diurnal pattern of app usage time====
 This report shows a diurnal pattern of the average app usage time given a specific day. Also, a user can (but does not has to) narrow down the target users by providing one or more demographics filtering conditions (year/gender/school).  If filter(s) are specified, consider all users who match the filtering conditions and report data at least once during the specified day. If no filter is specified, simply consider all users who reported app usage data during the day.
 
-For those users, process app usage data on an hourly basis to compute app usage time per hour, averaged across all the target users, and output the average app usage time per user (in minutes) for every hour. The output should looks something like: 12 AM (inclusive) ~ 1AM (exclusive): 5 minutes, 1AM~2AM: 1 minutes, …. 5PM~6PM: 20 minutes, 11PM~12AM:   13 minutes.
+For those users, process app usage data on an hourly basis to compute app usage time per hour, averaged across all the target users, and output the average app usage time per user (in seconds) for every hour. The output should looks something like: 12 AM (inclusive) ~ 1AM (exclusive): 300 seconds, 1AM~2AM: 60 seconds, …. 5PM~6PM: 1200 seconds, 11PM~12AM: 1260 seconds.
 
 If there is no usage in a hourly window, it is still displayed with 0 minutes.
 
