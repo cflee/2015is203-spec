@@ -275,7 +275,7 @@ The table below describes which functionalities are recommended for different te
 #*All the reports are only accessible after logging in.
 #Bootstrap (Blue)
 #*The administrator can bootstrap the SMUA system with app usage and demographics data.
-#*The administrator can add additional data while the application is running.
+#*The administrator can add additional data.
 #Basic App Usage Report (Blue)
 #*A user can see the following app usage stats for any given duration:
 #**Breakdown by usage time category (e.g., High/Medium/Low)
@@ -294,10 +294,10 @@ The table below describes which functionalities are recommended for different te
 #*Web Services: Provide JSON APIs that allow all functionalities to be queried programmatically by other machines.
 #Loading Location Data (Green)
 #*The administrator can bootstrap the SMUA system with location data of students.
-#*The administrator should also be able to add new location data while the application is running.
+#*The administrator can add new location data.
 #Deletion of Data (Green)
 #*While loading location data for bootstrapping, the app may be required to delete a subset of data which could cause undesirable bias to the analysis.
-#*Also, the administrator is able to delete a subset of data (for a certain user over a certain period), using a web UI while the application is running.
+#*Also, the administrator is able to delete a subset of data (for a certain user over a certain period), using a web UI.
 #*All the subsequent queries after the deletion need to be performed without deleted data.
 #Smartphone Usage Heatmap (Green)
 #*A user can see the density of people using smartphones for a specified floor in the SIS building, given a particular date and time. (Output does not need to be in graphical form.)
@@ -623,7 +623,7 @@ Given an app category, start date and end date (both inclusive) as user input, s
 ===Smartphone Overuse Report (Blue)===
 Given a start date and end date (both inclusive), this functionality generates personalized reports to allow a user to understand if they are unnecessarily overusing the smartphone. This report is generated based on the logged-in user’s data only. The user can use this quantified information to determine if behavioural changes are necessary.
 
-Whether or not the user is overusing the smartphone is determined by combination of three different metrics: (1) average daily smartphone usage duration, (2) average daily gaming duration, and (3) smartphone access frequency.
+Whether or not the user is overusing the smartphone is determined by combination of three different metrics: (1) average daily smartphone usage duration, (2) average daily gaming duration, and (3) smartphone access frequency. These durations are processed on a daily basis and averaged across the days.
 
 The report first needs to calculate and show the above three metrics. Smartphone usage duration is time spent using any apps. Daily gaming duration is time spent using apps in the "Games" app category. Smartphone access frequency is defined earlier.
 
@@ -666,7 +666,7 @@ You will also need to provide JSON APIs that allow all functionalities to be que
 
 ===Loading Location Data (Green)===
 
-Now, your team is required to enhance SMUA to provide location-based analytics in combination with app usage stats. As a first step to do this, the administrator should be able to bootstrap the SMUA system with location data. Similar to the app usage data, the administrator should also be able to add new location data while the application is running.
+Now, your team is required to enhance SMUA to provide location-based analytics in combination with app usage stats. As a first step to do this, the administrator should be able to bootstrap the SMUA system with location data. Similar to the app usage data, the administrator should also be able to add new location data.
 
 ====Bootstrapping with location data====
 
@@ -733,7 +733,7 @@ A row is discarded if any of the fields is invalid but all the errors will be re
 |}
 
 ====Upload additional location data====
-Similar to app usage data, location data can be added to the application while it is running, without removing the existing location data. The new data should then be immediately available for queries. The same format and validations for location.csv are used. Duplicate row handling for location.csv is as outlined for app.csv earlier.
+Similar to app usage data, location data can be added to the application, without removing the existing location data. The new data should then be immediately available for queries. The same format and validations for location.csv are used. Duplicate row handling for location.csv is as outlined for app.csv earlier.
 
 
 
