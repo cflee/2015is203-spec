@@ -385,7 +385,7 @@ Note: The location data is only required for implementing some of the green, red
 #Different from app usage data, a large portion of location updates are not associated with identifiable users and their demographic information. Only a partial set of detected MAC addresses have matching demographic information in demographics.csv. You can assume that there will always only be one MAC address for each user.
 
 ===Display of the results===
-# For all the reports, percentage numbers need to be rounded to a nearest integer value.
+# For all the reports, percentage numbers need to be rounded to a nearest integer value, with ties rounding up.
 # For all the reports, time need to be shown in seconds. (It is okay to provide minutes or hours to be more user friendly, but make sure you have the number in seconds as well.)
 
 ==Detailed Logic Specification==
