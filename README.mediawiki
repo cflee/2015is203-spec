@@ -420,7 +420,7 @@ Bootstrap involves clearing all existing data in the database and replacing them
 #demographics.csv
 #app-lookup.csv
 #app.csv
-For each of the files, process them in order from the first row to the last. The header row is considered row 1, and the first data row is row 2. You may assume that the above three files will all be present and the header row is correct with all the necessary fields.
+For each of the files, process them in order from the first row to the last. The header row is considered row 1, and the first data row is row 2. You may assume that the above three files will all be present, the header row is correct with all the necessary fields, and each row has the same number of fields as the header row.
 
 Upon processing, each row is run through the common validations. If there are no errors, then it is run through the file-specific validations. If there are still no errors, then the data is added to the database. Errors are reported with the filename, row number, and error message(s). If a single line has multiple errors, output all the errors in the order specified.
 
