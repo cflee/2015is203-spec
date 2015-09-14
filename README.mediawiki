@@ -426,6 +426,8 @@ Upon processing, each row is run through the common validations. If there are no
 
 Additionally, if there is any whitespace at the start or end of each field, it must be removed before starting the common validations. For example if the email is “apple.hsu  “ (one or more whitespace characters at the end), the whitespace must be removed before storing it into the database.
 
+Existing data in the database is cleared regardless of whether there are any valid records in the data file to be added to the database.
+
 ====Common Validations for all data files====
 For all the fields, you need to check if the field is blank. An error is produced for each blank field, and output in the left-to-right order of the CSV fields. A row is discarded, with no need to do further file-specific validation listed below, if any of the fields is blank.
 
