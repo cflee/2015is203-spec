@@ -412,6 +412,8 @@ You need to inform the teaching team of the following details when requested:
 The admin page provides two functions: (1) bootstrap and (2) add data.
 In both cases, the system will show the list of errors (with filename, row number, and error message), as well as the number of records successfully loaded from each file. If there are multiple errors per row, all errors must be reported, in the specified order.
 
+See the "Using Libraries and External Code" section for a sample dataset.
+
 ====Bootstrap with app usage & demographics data====
 
 Bootstrap involves clearing all existing data in the database and replacing them with values supplied in the data file (example datafiles to be updated soon!). The bootstrap data file is a ZIP file containing the following three CSV files:
@@ -808,7 +810,7 @@ The overuse index is based on the percentage of class/small group time that is s
 
 ===Graphical UIs (Heatmap and Chart) (Red)===
 Now, your team will need to improve SMUA’s UI using graphical interfaces.
-#The heatmap needs to be graphically shown on SIS floor maps. See the section titled "libraries and external code" for links to maps of SIS as well as graphics libraries that can help you display the crowd density (and other features) in nice ways (e.g., overlaying the information on a floor map). For the purposes of display on web UI, assume that the mapping between the semantic places and location_ids is fixed. Also we will not add any new location ids or semantic places on the map. When the JSON APIs are tested, semantic place to location id mapping may change, and there may be new location ids or semantic place.
+#The heatmap needs to be graphically shown on SIS floor plans. See the section titled "Using Libraries and External Code" for SIS floor plans as well as graphics libraries that can help you display the crowd density (and other features) in nice ways (e.g., overlaying the information on a floor map). For the purposes of display on web UI, assume that the mapping between the semantic places and location_ids is fixed. Also we will not add any new location ids or semantic places on the map. When the JSON APIs are tested, semantic place to location id mapping may change, and there may be new location ids or semantic place.
 #The basic app usage report and top-k app usage reports need to be graphically presented using charts.
 
 
@@ -1004,6 +1006,9 @@ Note: The header row is row 1. The first row of data is row 2.
 #*UploadBean (http://www.javazoom.net/jzservlets/servlets.html):  For easy uploading of zip files to the deployment server
 #*D3 (http://dciarletta.github.io/d3-floorplan/):  For heat map
 #*NVD3 (http://nvd3.org):  Re-usable charts for D3
+#Resources we provide: <br/>(These are Google Drive links, login with your SMU Google Account)
+#*[https://drive.google.com/a/smu.edu.sg/file/d/0B5kvz-8sjLdPSjVrQUxrazUxWWs/view Sample data set (v1)] <br/>'''Note:''' This dataset is 3 hours worth of data. Your team may want to start with a small subset of data to facilitate testing of your application.
+#*[https://drive.google.com/a/smu.edu.sg/file/d/0B5kvz-8sjLdPVjVKV3UyLUwxckE/view SIS floor plans] including location IDs
 
 ===Piracy===
 #Use only licensed software
