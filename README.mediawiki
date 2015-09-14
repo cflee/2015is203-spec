@@ -416,7 +416,7 @@ See the "Using Libraries and External Code" section for a sample dataset.
 
 ====Bootstrap with app usage & demographics data====
 
-Bootstrap involves clearing all existing data in the database and replacing them with values supplied in the data file (example datafiles to be updated soon!). The bootstrap data file is a ZIP file containing the following three CSV files:
+Bootstrap involves clearing all existing data in the database and replacing them with values supplied in the data file. The bootstrap data file is a ZIP file containing the following three CSV files:
 #demographics.csv
 #app-lookup.csv
 #app.csv
