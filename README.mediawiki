@@ -893,8 +893,6 @@ Note that strings are case-sensitive.
 ==== Whitespace ====
 * JSON generally ignores any whitespace around or between syntactic elements (values and punctuation), but not within a string value.
 
-JSON format for each functionality is specified in detail below.
-
 ===Common Validations for JSON requests ===
 For all the input fields, you need to check
 # if the mandatory field is missing
