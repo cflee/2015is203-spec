@@ -927,15 +927,20 @@ Note:
 * Sort all common validation error messages in ascending '''alphabetical order'''.
 * For fields marked "(optional)", it is not necessary to check if they are missing. However, if they are present and blank, then the "blank [field]" error is still triggered as usual.
 
-===Function-Specific Validations(Updating otw)===
-==== General Definitions ====
+===Function-Specific Input/Output and Validations(Updating otw)===
+==== General Validation Definitions ====
 ===== Dates/Times =====
-Dates are typically validated with the rule "a proper date format(YYYY-MM-DD) and a valid date". The format implies that the date string must be 10 char long and including all leading zeros, like "2015-05-01". Also, dates like "2015-02-29" and "2015-13-32" are invalid.
+Dates are validated with the rule "a proper date format(YYYY-MM-DD) and a valid date". The format implies that the date string must be 10 char long and including all leading zeros, like "2015-05-01". Also, dates like "2015-02-29" and "2015-13-32" are invalid.
 
-Times are typically validated with the rule "a proper time format(HH:MM:SS) and a valid time". The format implies that the time string must be 8 char log and including all leading zeros, like "08:03:05". Also, times like "24:60" are invalid.
+Times are validated with the rule "a proper time format(HH:MM:SS) and a valid time". The format implies that the time string must be 8 char long and including all leading zeros, like "08:03:05". Also, times like "24:60" are invalid.
 
-===== Demographics =====
+===== Demographics / Mac Address =====
 For valid years/genders/schools, use the definitions in the validation for demographics.csv.
+
+A mac address is valid only if it is a SHA-1 hash value (40 digit hexadecimal number) and is found inside demographics.csv.
+
+===== Token =====
+For every JSON web service (apart from authenticate), you need to verify that the token is valid (i.e. the JWTUtility.verify() method returns a non-null string and does not throw any exceptions).
 
 ===== App Categories =====
 For valid app categories, use the definitions in the validation for app-lookup.csv.
@@ -980,7 +985,6 @@ If authentication is successful, a JSON web token is returned:
 Use the [http://blue.smu.edu.sg/is203/jwt API] (updated 8 Oct 2014). You will need the following jar files [http://blue.smu.edu.sg/is203/jwt/lib/is203-jwt-v2.jar is203-jwt-v2.jar], [http://blue.smu.edu.sg/is203/jwt/lib/json-smart-1.2.jar json-smart-1.2.jar], [http://blue.smu.edu.sg/is203/jwt/lib/nimbus-jose-jwt-2.26.1.jar nimbus-jose-jwt-2.26.1.jar]. The process is as follows:
 #After checking that the username and password pair is valid, generate a token using the JWTUtility.sign() method. The sharedSecret parameter is a string of length 16 that you choose, and will need to share with the teaching team.
 #Ensure that your sharedSecret is not easily guessable: otherwise other people will be able to generate their own username=admin token and randomly bootstrap your system while you are testing it!
-#For every JSON web service, you need to verify that the token is valid (i.e. the JWTUtility.verify() method returns a non-null string and does not throw any exceptions).
 
 ====Bootstrap====
 Request:
