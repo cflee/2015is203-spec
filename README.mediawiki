@@ -1792,20 +1792,19 @@ An example output will be returned as below:
 The results array is sorted by rank ascending, school a-z.
 
 ====Smartphone Overuse Report====
-
 Request:
 <pre>
-http://<host>/json/overuse-report?token=[tokenValue]
+http://<host>/json/overuse-report?token=[tokenValue]&startdate=[startdate]&enddate=[enddate]&macaddress=[macaddress]
 </pre>
 
 Request Parameters and Possible Errors:
 {| class="wikitable"
 |startdate
-|the date should be in a proper date format (YYYY-MM-DD), where YYYY-MM-DD is a valid day.
+|the startdate should be in a proper date format(YYYY-MM-DD) and a valid date.
 |"invalid startdate"
 |-
 |enddate
-|the date should be in a proper date format (YYYY-MM-DD), where YYYY-MM-DD is a valid day.
+|the enddate should be in a proper date format(YYYY-MM-DD) and a valid date.
 |"invalid enddate"
 |-
 |macaddress
@@ -1814,6 +1813,7 @@ Request Parameters and Possible Errors:
 |}
 
 Response:
+
 If the overuse report are calculated successfully, the following response is returned:
 
 For example, for the request as below:
@@ -1825,24 +1825,24 @@ An example output will be returned as follows:
 
 <pre>
 {
-    "status": "success",
-    "results": {
-        "overuse-index": "Overusing",
-        "metrics": [
-            {
-                "usagemetric": "Severe",
-                "usagetime": 5.7,
-            },
-            {
-                "gamingmetric": "Moderate",
-                "gamingtime": 1.7,
-            },
-            {
-                "accessfrequencymetric": "Moderate",
-                "accessfrequency": 4,
-            }
-        ]
-    }
+  "status": "success",
+  "results": {
+    "overuse-index": "Overusing",
+    "metrics": [
+      {
+        "usagemetric": "Severe",
+        "usagetime": 5.7
+      },
+      {
+        "gamingmetric": "Moderate",
+        "gamingtime": 1.7
+      },
+      {
+        "accessfrequencymetric": "Moderate",
+        "accessfrequency": 4
+      }
+    ]
+  }
 }
 </pre>
 
