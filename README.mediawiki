@@ -597,14 +597,14 @@ If there are no users in a specific demographic combination, it is still display
 Given a start date and end date (both inclusive), process data on a daily basis to calculate average daily app usage time per app category (Books/Social/Education/Entertainment/…).
 For each app category, show the daily usage duration (in hours) as well as the percentage of the total (i.e., compare the duration per category with the total duration across all categories).
 
-If there is no usage in an app category (as defined in app-lookup.csv file validation), it is still displayed with 0 users.
+If there is no usage in an app category (as defined in app-lookup.csv file validation), it is still displayed with 0 duration.
 
 ====Diurnal pattern of app usage time====
 This report shows a diurnal pattern of the average app usage time given a specific day. Also, a user can (but does not has to) narrow down the target users by providing one or more demographics filtering conditions (year/gender/school).  If filter(s) are specified, consider all users who match the filtering conditions and report data at least once during the specified day. If no filter is specified, simply consider all users who reported app usage data during the day.
 
 For those users, process app usage data on an hourly basis to compute app usage time per hour, averaged across all the target users, and output the average app usage time per user (in seconds) for every hour. The output should looks something like: 12 AM (inclusive) ~ 1AM (exclusive): 300 seconds, 1AM~2AM: 60 seconds, …. 5PM~6PM: 1200 seconds, 11PM~12AM: 1260 seconds.
 
-If there is no usage in a hourly window, it is still displayed with 0 minutes.
+If there is no usage in a hourly window, it is still displayed with 0 duration.
 
 
 ===Top-k App Usage Report (Blue)===
