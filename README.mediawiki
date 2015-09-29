@@ -548,11 +548,12 @@ In addition to the bootstrap capabilities listed above, the admin page should ha
 
 These files are of the same format as the app.csv and demographics.csv files used for bootstrapping. Use the same validations listed for these data file(s).
 
-For the additional app.csv,
-#You will need to check for duplicate entries against the existing records in the database. If there are duplicates, discard the one in the additional file uploaded. If there are multiple duplicates in the additional file, discard all of them.
-#If there are duplicate records within the additional file uploaded, apply the same rule as bootstrap (use the last record and discard the earlier records).
-#Use the same error message ("duplicate row") for the above two scenarios, but the row number will be the row number of the record in the additional file uploaded.
-You can assume unique records for the additional demographics.csv.
+For the additional app.csv's "duplicate row" handling:
+#If there are row(s) in the file that are duplicates with an existing valid record in the database, then all the duplicate row(s) in the file are discarded.
+#If there are row(s) in the file that duplicate with each other, and are not duplicates with any existing valid record in the database, then the bootstrap rules are followed: all earlier rows are discarded, and the final row is loaded into the database.
+#In both cases, when discarding a row, use the same error message ("duplicate row"). Note that existing valid records in the database are never discarded, so the rows discarded always belong to the app.csv file in the just-uploaded zip file!
+
+You can assume unique records for the additional demographics.csv, i.e. unique both within the just-uploaded demographics.csv file, as well as with the existing valid records in the database.
 
 ===Basic App Usage Report (Blue)===
 This functionality will allow a user to see four different app usage time reports for a given duration. The following subsections describe the request, response, and logic of each report in more detail. In all reports, you will need to consider all users who reported a valid data at least once during the given period.
