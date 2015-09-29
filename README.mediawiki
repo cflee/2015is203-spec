@@ -1853,7 +1853,7 @@ Request Parameters and Possible Errors:
 |"invalid date"
 |-
 |time
-|the time is should be in a proper time format(HH:MM:SS) anda valid time.
+|the time is should be in a proper time format(HH:MM:SS) and a valid time.
 |"invalid time"
 |}
 
@@ -2061,7 +2061,7 @@ Make sure to have the following directory structure. Otherwise, we might not fin
 |- minutes
   |- internal
   |- supervisor
-|-app           	    // your app related sources & files
+|-app               // your app related sources & files
   |--javadocs
   |--sql
   |--src
