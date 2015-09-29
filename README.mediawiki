@@ -1861,7 +1861,7 @@ To be updated.
 ====Smartphone Usage Heatmap====
 Request:
 <pre>
-http://<host>/json/usage-heatmap?token=[tokenValue]
+http://<host>/json/usage-heatmap?token=[tokenValue]&floor=[floor]&date=[date]&time=[time]
 </pre>
 
 Request Parameters and Possible Errors:
@@ -1884,6 +1884,7 @@ Request Parameters and Possible Errors:
 |}
 
 Response:
+
 If the heatmap is calculated successfully, the following response is returned:
 
 For example, for the request below:
@@ -1895,48 +1896,48 @@ An example output will be returned as follows:
 
 <pre>
 {
-    "status": "success",
-    "heatmap": [
-        {
-            "semantic-place": "SMUSISL2LOBBY",
-            "num-people-using-phone": 10,
-            "density": 3
-        },
-        {
-            "semantic-place": "SMUSISL2SR2-1",
-            "num-people-using-phone": 1,
-            "density": 1
-        },
-        {
-            "semantic-place": "SMUSISL2SR2-2",
-            "num-people-using-phone": 8,
-            "density": 2
-        },
-        {
-            "semantic-place": "SMUSISL2SR2-3",
-            "num-people-using-phone": 14,
-            "density": 4
-        },
-        {
-            "semantic-place": "SMUSISL2SR2-4",
-            "num-people": 0,
-            "crowd-density": 0
-        },
-        {
-            "semantic-places": "SMUSISL2STUDYAREA1",
-            "number-people": 7,
-            "crowd-density": 2,
-        },
-        {
-            "semantic-place": "SMUSISL2STUDYAREA2",
-            "num-people": 21,
-            "crowd-density": 5
-        }
-    ]
+  "status": "success",
+  "heatmap": [
+    {
+      "semantic-place": "SMUSISL2LOBBY",
+      "num-people-using-phone": 10,
+      "density": 3
+    },
+    {
+      "semantic-place": "SMUSISL2SR2-1",
+      "num-people-using-phone": 1,
+      "density": 1
+    },
+    {
+      "semantic-place": "SMUSISL2SR2-2",
+      "num-people-using-phone": 8,
+      "density": 2
+    },
+    {
+      "semantic-place": "SMUSISL2SR2-3",
+      "num-people-using-phone": 14,
+      "density": 4
+    },
+    {
+      "semantic-place": "SMUSISL2SR2-4",
+      "num-people-using-phone": 0,
+      "density": 0
+    },
+    {
+      "semantic-places": "SMUSISL2STUDYAREA1",
+      "num-people-using-phone": 7,
+      "density": 2
+    },
+    {
+      "semantic-place": "SMUSISL2STUDYAREA2",
+      "num-people-using-phone": 21,
+      "density": 5
+    }
+  ]
 }
 </pre>
 
-Note: sort output by semantic-place (alphabetical order a-z)
+The heatmap array is sorted by semantic-place a-z.
 
 ====Social Activeness Report====
 
