@@ -934,6 +934,9 @@ Dates are typically validated with the rule "a proper date format(YYYY-MM-DD) an
 ===== Times =====
 Times are typically validated with the rule "a proper time format(HH:MM:SS) and a valid time". The format implies that the time string must be 8 char log and including all leading zeros, like "08:03:05". Also, times like "24:60" are invalid.
 
+===== Demographics =====
+For valid years/genders/schools, use the definitions in the validation for demographics.csv.
+
 ==== Authenticate ====
 Request:
 <pre>
@@ -1570,8 +1573,6 @@ Request Parameters and Possible Errors
 |the value is not one of valid schools or NA, where NA means no filter specified.
 |"invalid school filter"
 |}
-
-The valid years/genders/schools are as defined in the validation for demographics.csv.
 
 Response:
 If the breakdown is calculated successfully, the following response is returned:
