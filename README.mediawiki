@@ -1939,16 +1939,15 @@ An example output will be returned as follows:
 The heatmap array is sorted by semantic-place a-z.
 
 ====Social Activeness Report====
-
 Request:
 <pre>
-http://<host>/json/social-activeness-report?token=[tokenValue]
+http://<host>/json/social-activeness-report?token=[tokenValue]&date=[date]&macaddress=[macaddress]
 </pre>
 
 Request Parameters and Possible Errors:
 {| class="wikitable"
 |date
-|the date should be in a proper date format (YYYY-MM-DD), where YYYY-MM-DD is a valid day.
+|the date should be in a proper date format(YYYY-MM-DD) and a valid date.
 |"invalid date"
 |-
 |macaddress
@@ -1957,6 +1956,7 @@ Request Parameters and Possible Errors:
 |}
 
 Response:
+
 If the overuse report are calculated successfully, the following response is returned:
 
 For example, for the request as below:
@@ -1968,29 +1968,31 @@ An example output will be returned as follows:
 
 <pre>
 {
-    "status": "success",
-    "results": {
-        "total-socialapp-usetime": 3.1,
-        "individual-socialapp-usetime": [
-            {
-                "appname": "FaceBook"
-                "percent": 20
-            }
-            {
-                "appname": "WhatsApp"
-                "percent": 70
-            }
-            {
-                "appname": "Twitter"
-                "percent": 10
-            }
-        ]
-        "total-time-spent-in-sis": 5.0
-        "group-percent": 60
-        "solo-percent": 40
-    }
+  "status": "success",
+  "results": {
+    "total-socialapp-usetime": 3.1,
+    "individual-socialapp-usetime": [
+      {
+        "appname": "FaceBook",
+        "percent": 20
+      },
+      {
+        "appname": "Twitter",
+        "percent": 10
+      },
+      {
+        "appname": "WhatsApp",
+        "percent": 70
+      }
+    ],
+    "total-time-spent-in-sis": 5.0,
+    "group-percent": 60,
+    "solo-percent": 40
+  }
 }
 </pre>
+
+The individual-socialapp-usetime array is sorted by appname a-z.
 
 ====Advanced Smartphone Overuse Report ====
 
