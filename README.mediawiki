@@ -1575,6 +1575,7 @@ Request Parameters and Possible Errors
 |}
 
 Response:
+
 If the breakdown is calculated successfully, the following response is returned:
 
 For an example request:
