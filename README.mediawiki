@@ -951,6 +951,7 @@ Request '''POST''' Parameters and Possible Errors:
 Note that validation for this service is special: if both username and password fail validation, the error message "invalid username/password" is only included once in the response!
 
 Response:
+
 If authentication is successful, a JSON web token is returned:
 
 <pre>
