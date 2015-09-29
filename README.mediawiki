@@ -928,10 +928,9 @@ Note:
 
 ===Function-Specific Validations(Updating otw)===
 ==== General Definitions ====
-===== Dates =====
+===== Dates/Times =====
 Dates are typically validated with the rule "a proper date format(YYYY-MM-DD) and a valid date". The format implies that the date string must be 10 char long and including all leading zeros, like "2015-05-01". Also, dates like "2015-02-29" and "2015-13-32" are invalid.
 
-===== Times =====
 Times are typically validated with the rule "a proper time format(HH:MM:SS) and a valid time". The format implies that the time string must be 8 char log and including all leading zeros, like "08:03:05". Also, times like "24:60" are invalid.
 
 ===== Demographics =====
