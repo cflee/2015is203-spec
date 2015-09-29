@@ -967,72 +967,102 @@ Use the [http://blue.smu.edu.sg/is203/jwt API] (updated 8 Oct 2014). You will ne
 #For every JSON web service, you need to verify that the token is valid (i.e. the JWTUtility.verify() method returns a non-null string and does not throw any exceptions).
 
 ====Bootstrap====
-Bootstrapping is done by sending a multi-part request (http://www.faqs.org/rfcs/rfc1867.html) to the server. You can assume that the user is using a form to send the multi-part request:
+Request:
+<pre>
+http://<host>/json/bootstrap
+</pre>
+
+Bootstrapping is done by sending a HTTP multipart/form-data POST request (http://www.faqs.org/rfcs/rfc1867.html) to the server. You can assume that the request is sent with these fields:
+
+Request '''POST''' Parameters:
+{| class="wikitable"
+!field
+!description
+|-
+|token
+|a valid token
+|-
+|bootstrap-file
+|a zip file
+|}
+
+While you may assume that the bootstrap-file is present, can be unzipped, etc., the common validations must still be applied for token: missing token, blank token, invalid token. As usual, if any of these common validations fail, return those error messages and no further processing is required.
+
+You can simulate the above POST parameters by using this HTML snippet:
 
 <pre>
 <form action="http://<host>/json/bootstrap"  method="post" enctype="multipart/form-data">
-
-  Filename:
+  File:
   <input type="file" name="bootstrap-file" /><br />
   <input type='text' name='token' value='eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0MDk3MTIxNTMsImlhdCI6MTQwOTcwODU1M30.h66rOPHh992gpEPtErfqBP3Hrfkh_nNxYwPG0gcAuCc' />
+  <!-- substitute the above value with a valid token -->
   <input type="submit" value="Bootstrap" />
 </form>
 </pre>
 
-Upload of additional location and demographics data file is done in a similar way to the http://&lt;host&gt;/json/update.
+Response:
 
-Note:
-#You must clear all existing data before bootstrapping.
-#If the bootstrapping is successful, the following response is returned. The num-record-loaded array is sorted by filename.
+If the bootstrapping is successful, the following response is returned.
 
 <pre>
 {
   "status": "success",
-  "num-record-loaded":
-     [
-        { "demographics.csv": 539 },
-        { "app-lookup.csv": 270 },
-        { "app.csv": 22578}
-     ]
+  "num-record-loaded": [
+    { "app-lookup.csv": 270 },
+    { "app.csv": 22578 },
+    { "demographics.csv": 539 }
+  ]
 }
 </pre>
 
-Note: "num-record-loaded" indicates the number of records loaded(i.e. processed) successfully (no error) into your system for each of file in the zipped file.
+The num-record-loaded array is sorted by filename (alphabtical a-z). num-record-loaded indicates, for each file, the number of records successfully loaded/processed with no errors into the system.
 
-#If the bootstrap is unsuccessful, return the following message with the appropriate errors (the full list of errors are listed below). The errors are ordered by file (alphabetical), then by line number. Within each array of error messages, the messages are also ordered.
-#*For missing field validations, follow the left-to-right order of the CSV field list specified for each file.
-#*For other validations, follow the order specified in the lists provided above.
+If the bootstrap is unsuccessful, the following response is returned.
+
 <pre>
 {
   "status": "error",
-  "num-record-loaded":
-     [
-        { "demographics.csv": 539 },
-        { "app-lookup.csv": 270 },
-        { "app.csv": 22578}
-     ],
-  "error":
-     [
-        {
-          "file" : "demographics.csv",
-          "line" : 452,
-          "message" : ["invalid email"]
-        },
-        {
-          "file" : "app.csv",
-          "line" : 5,
-          "message" : ["invalid app", "invalid mac address"]
-        },
-        {
-          "file" : "app.csv",
-          "line" : 153,
-          "message" : ["invalid app"]
-        }
-     ]
+  "num-record-loaded": [
+    { "app-lookup.csv": 270 },
+    { "app.csv": 22578 },
+    { "demographics.csv": 539 }
+   ],
+  "error": [
+    {
+      "file": "app.csv",
+      "line": 5,
+      "message": ["invalid app", "no matching mac address", "invalid timestamp"]
+    },
+    {
+      "file": "app-lookup.csv",
+      "line": 153,
+      "message": ["invalid app id"]
+    },
+    {
+      "file": "app-lookup.csv",
+      "line": 155,
+      "message": ["blank app-id", "blank app-name", "blank app-category"]
+    },
+    {
+      "file": "demographics.csv",
+      "line": 452,
+      "message": ["invalid email"]
+    }
+  ]
 }
 </pre>
 
-Note: The header row is row 1. The first row of data is row 2.
+Compared to the successful case, an additional error array is included. The error array is sorted by filename (alphabetical a-z), then by line number (ascending). For each file, line numbers start from 1 for the header row, and 2 for the first row of data. Within each message array, the messages are ordered as follows:
+*For missing field validations, follow the left-to-right order of the CSV field list specified for each file.
+*For other validations, follow the order specified in the file-specific validation lists provided above.
+
+====Upload additional data====
+Request:
+<pre>
+http://<host>/json/update
+</pre>
+
+Request and response formats are similar to Bootstrap, as defined above, and following the rules specified in the Detailed Logic Specification section.
 
 ====Basic App Usage Report====
 =====Breakdown by usage time category=====
