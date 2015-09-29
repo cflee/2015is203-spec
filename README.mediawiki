@@ -642,13 +642,13 @@ There is no need to return the result with 0 entries. For instance, in the above
 For the below three top-k app usage reports, the user must select a single school/app category for filtering. In other words, there is no 'all schools' or 'all app categories' option.
 
 ====Top-k most used apps (given a school)====
-Given a certain school, start date and end date (both inclusive) as user input, show the top-k apps with most app usage time by students in that school.
+Given a certain school, start date and end date (both inclusive) as user input, show the top-k apps with most app usage time by students in that school. Display the rank, app name, and app usage time.
 
 ====Top-k students with most app usage (given an app category)====
-Given an app category, start date and end date (both inclusive) as user input, show the top-k students with most usage time in that app category. Report the app usage time (in hours) together with the rank, student name and mac address.
+Given an app category, start date and end date (both inclusive) as user input, show the top-k students with most usage time in that app category. Display the rank, student name, mac address and app usage time (in hours).
 
 ====Top-k schools with most app usage (given an app category)====
-Given an app category, start date and end date (both inclusive) as user input, show the top-k schools with the most app usage time in the specified category.
+Given an app category, start date and end date (both inclusive) as user input, show the top-k schools with the most app usage time in the specified category. Display the rank, school, and app usage time.
 
 
 
