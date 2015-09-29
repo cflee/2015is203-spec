@@ -1847,13 +1847,12 @@ An example output will be returned as follows:
 </pre>
 
 ====Loading Location Data====
-
 Request:
 <pre>
-http://<host>/json/location-upload?token=[tokenValue]
+http://<host>/json/location-upload
 </pre>
 
-The expected output will be similar to bootstrap.
+The expected request and response will be similar to bootstrap.
 
 ====Deletion of Location Data====
 
