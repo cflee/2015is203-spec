@@ -1687,7 +1687,7 @@ http://<host>/json/top-k-most-used-students?token=[tokenValue]&startdate=[startd
 Request Parameters and Possible Errors:
 {| class="wikitable"
 |k (optional)
-|an integer range from 1 to 10 with a default value of 3 (i.e., if not specified, k should be 3).
+|an integer range from 1 to 10 (both inclusive) with a default value of 3 (i.e., if not specified, k should be 3).
 |"invalid k"
 |-
 |startdate (required)
