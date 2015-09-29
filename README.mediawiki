@@ -687,7 +687,7 @@ Also, the report calculates and outputs a combined overuse index based on the fo
 #The index is set to ‘Normal’ only when all three metrics are in ‘Light’ category.
 #The index is set to ‘ToBeCautious’ for all other cases.
 
-As the final output, report the the overuse index value (i.e., one of {Overusing, Normal, ToBeCautious}) along with values for the three metrics (i.e., one of {Severe, Moderate, Light}).
+As the final output, report the the overuse index value (i.e., one of {Overusing, Normal, ToBeCautious}) along with both the actual numerical value and category (i.e., one of {Severe, Moderate, Light}) for the three metrics.
 
 ===Dual Interfaces (Web UI and Web Services) (Blue)===
 Your application needs to provide not only web UI (to allow a user to query your SMUA system) but also web services interfaces, i.e., JSON APIs (to allow other machines/third party app to query your SMUA system).
