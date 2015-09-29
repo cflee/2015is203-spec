@@ -1541,7 +1541,7 @@ An example output will be as below:
 =====Diurnal pattern of app usage time=====
 Request:
 <pre>
-http://<host>/json/basic-diurnalpatter-report?token=[tokenValue]
+http://<host>/json/basic-diurnalpattern-report?startdate=[startdate]&enddate=[enddate]&yearfilter=[yearfilter]&genderfilter=[genderfilter]&schoolfilter=[schoolfilter]&token=[tokenValue]
 </pre>
 
 Request Parameters and Possible Errors
@@ -1571,6 +1571,8 @@ Request Parameters and Possible Errors
 |"invalid school filter"
 |}
 
+The valid years/genders/schools are as defined in the validation for demographics.csv.
+
 Response:
 If the breakdown is calculated successfully, the following response is returned:
 
@@ -1583,24 +1585,26 @@ An example output will be as below:
 
 <pre>
 {
-    "status": "success",
-    "breakdown": [
-        {
-            "duration": "12:00-01:00"
-            "usagetime": 300
-        },
-        {
-            "duration": "01:00-02:00"
-            "usagetime": 60
-        },
-        {
-            "duration": "02:00-03:00"
-            "usagetime": 0
-        }
-        ...
-    ]
+  "status": "success",
+  "breakdown": [
+    {
+      "duration": "00:00-01:00",
+      "usagetime": 300
+    },
+    {
+      "duration": "01:00-02:00",
+      "usagetime": 60
+    },
+    {
+      "duration": "02:00-03:00",
+      "usagetime": 0
+    },
+    ...
+  ]
 }
 </pre>
+
+Usagetime is in seconds.
 
 ====Top-k App Usage Report====
 =====Top-k most used apps=====
