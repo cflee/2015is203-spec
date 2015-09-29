@@ -1485,7 +1485,7 @@ An example output will be as below:
 
 Request:
 <pre>
-http://<host>/json/basic-appcategory-report?token=[tokenValue]
+http://<host>/json/basic-appcategory-report?startdate=[startdate]&enddate=[enddate]&token=[tokenValue]
 </pre>
 
 Request Parameters and Possible Errors
@@ -1504,6 +1504,7 @@ Request Parameters and Possible Errors
 |}
 
 Response:
+
 If the breakdown is calculated successfully, the following response is returned:
 
 For an example request:
@@ -1515,25 +1516,25 @@ An example output will be as below:
 
 <pre>
 {
-    "status": "success",
-    "breakdown": [
-        {
-            "category_name": "Books"
-            "category_hours": 0.1
-            "category_percent": 2
-        },
-        {
-            "category_name": "Social"
-            "category_hours": 1
-            "category_percent": 20
-        },
-        {
-            "category_name": "Books"
-            "category_hours": 0.5
-            "category_percent": 10
-        }
-        ...
-    ]
+  "status": "success",
+  "breakdown": [
+    {
+      "category_name": "Books",
+      "category_hours": 0.1,
+      "category_percent": 2
+    },
+    {
+      "category_name": "Social",
+      "category_hours": 1,
+      "category_percent": 20
+    },
+    {
+      "category_name": "Education",
+      "category_hours": 0.5,
+      "category_percent": 10
+    },
+    ...
+  ]
 }
 </pre>
 
