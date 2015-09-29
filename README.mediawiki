@@ -871,7 +871,7 @@ For example:
 http://<host>/json/usage-heatmap?floor=2&date=2014-03-29&time=12:30:00&token=eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0MDk3MTIxNTMsImlhdCI6MTQwOTcwODU1M30.h66rOPHh992gpEPtErfqBP3Hrfkh_nNxYwPG0gcAuCc
 </pre>
 
-===JSON Basic===
+===JSON Basics===
 Below are some clarification about the JSON language. When in doubt, refer to the [http://json.org/ JSON Specification]
 * If unsure, test it out with the json checker provided [https://github.com/yllee/jsonchecker JSON Checker]
 
