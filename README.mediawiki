@@ -12,7 +12,7 @@ __TOC__
 #Technical documents (By week 7)
 #*Your team will need to create and update the following technical documents. The latest version of all documents must be updated in GIT repository in pdf format.
 #**Use case diagrams for all functions (one or two sentences for each use case).
-#**Sequence diagrams (SD) for key functions.
+#**Sequence diagrams (SD) for key functions (login, basic app usage report, and top-k app usage report).
 #**Class diagram(s) for your design (major components).
 #**Logical diagram (with physical data types). [ [http://blue.smu.edu.sg/is203/example-logical-diagram.pdf sample] ]
 #Meeting minutes
@@ -25,7 +25,9 @@ __TOC__
 #*You must have a test plan and test cases.
 #*The test plan and test cases must be updated every iteration to match the functionalities produced during that iteration.
 #*Each of your test cases should be linked to one or more requirement IDs.
-#*Up-to-date test plan and test cases needs to be in the GIT repository.
+#*Up-to-date test plan and test cases needs to be in the GIT repository, and updated regularly in Git (in the correct subdirectory) whenever the updates are done
+#*Test cases must cover everything (UI, input validation, logic, data integrity in the database, etc.)
+#*At the end of every iteration, you must re-run all previous test cases (i.e. do regression testing). Evidence of testing should be committed to Git
 #Metrics documents
 #*You must track schedule and bug metrics and take corresponding action if required.
 #*The metric numbers and actions taken need to be updated in the corresponding documents. Actions should be as specific as possible. The up-to-date documents need to be in GIT repository.
@@ -53,9 +55,11 @@ __TOC__
 #*Everyone does a bit of everything is the Optimal case. We like it!
 #*Everyone must have an opportunity to be a PM during a graded week, which include 3 supervisor meetings (week 5/6, 9, 11), PM review (week 7), UAT (week 12), and final presentation (week 14)
 #Schedule
-#*Create a schedule before the start of any project work.
+#*Create a schedule before the start of any project work, and scheduled all the way to the end of the project.
+#*The schedule should be iterative, with iterations usually not more than 2-weeks
 #*Track your schedule, and adjust when you are behind (or early). The schedule metric given in the lecture video/slides must be used.
 #*Update your progress on a routine basis
+#*Anything that is needed specifically for your project should be scheduled. E.g. internal meetings, testing, debugging, coaching. Omit team bonding, lunch, dinner, etc.
 #*If your team would like to add functionalities, or if there is a need to drop any functionality, you should inform your supervisor as early as possible.
 #Metrics tracking
 #*Your team will need to continuously track schedule metrics and bug metrics (introduced in the lecture video on ‘metrics’ and corresponding slides). pp metrics can be tracked optionally.
@@ -128,6 +132,9 @@ __TOC__
 #*You will need to convince your supervisor, at the earliest reasonable time, that dropping the functionality(s) is necessary for your team to maintain a sustainable pace for the rest of the semester. Note: it is very hard to convince a supervisor that a functionality is too hard to implement if your team has not started implementing any functionalities yet.
 #*If your supervisor agrees, you can go ahead and drop the functionality and adjust your schedule appropriately.
 #*We will not penalize your team (PM-grading wise) for dropping functionalities if you do it for the right reasons, with the full knowledge and blessings of your supervisor, and early in the semester.
+
+== Project Deadline==
+# The project deadline is 15 November 11.59pm (The deadline is also specified in the week-1 slides). This is a hard deadline, and teams should not push anything to the GIT repo after the deadline.
 
 == Project Process ==
 For the success of software projects and produce quality software, it is essential to have and follow a good process throughout the project. For this SE project, your team is required to adopt combination of an iterative process and an agile process that includes the following practices.
@@ -221,17 +228,18 @@ You will be given 10 minutes for your final presentation followed by 10-minutes 
 #*Any team conflicts/issues/problems and how your team resolved it. Be sensitive. This is not a finger pointing session.
 #*Something particularly interesting about your team members that you did not know before SE.
 #Some notes about final presentation:
-#*Final presentation slides must be committed to GIT before the project deadline (15 Nov 11.59pm)
+#*Presentation slides must be committed to GIT before the the project deadline.
 #*You must use the slides committed during presentation.
 #*Everybody has to be present and punctual, and have to stay for the entire presentation slot
 #*You are allowed to choose your presenters. However, all team members are strongly encouraged to present.
 
 == Meeting with Supervisors ==
-#Your team will meet up with your supervisor for one 30 minute meeting every two weeks. These meetings will allow us to review your team’s progress from week to week, provide feedback, identify and track problems to help the team stay on track. The supervisor meetings will be scheduled as below (We will provide detailed dates and time once we identify teams’ possible meeting slots)
-#*Supervisor meeting 1: week 5/6
+#Your team will meet up with your supervisor for one 30 minute meeting every two weeks. These meetings will allow us to review your team’s progress from week to week, provide feedback, identify and track problems to help the team stay on track. The supervisor meetings will be scheduled as below (We will provide detailed dates and time once we identify teams’ possible meeting slots).
+#*Supervisor meeting 1: week 6
 #*Supervisor meeting 2: week 9
 #*Supervisor meeting 3: week 11
 #*For week 7/8, your supervisor will provide feedback through the PM review presentation.
+#*Meeting times are available at https://docs.google.com/spreadsheets/d/1hNEvfenfjgj1gdtm8rXBdcKqwnydkalnH7cLIeKZTuU/edit#gid=753987708.
 #All members must attend every supervisor meeting.
 #Your team must have a prepared agenda for each meeting (slides are useful for this) and must be prepared to discuss. Your current PM should lead the meeting. However, everyone should know what is going on and be ready to answer questions if asked.
 #Progress for the past two weeks.
@@ -298,7 +306,7 @@ The table below describes which functionalities are recommended for different te
 #Deletion of Data (Green)
 #*While loading location data for bootstrapping, the app may be required to delete a subset of data which could cause undesirable bias to the analysis.
 #*Also, the administrator is able to delete a subset of data (for a certain user over a certain period), using a web UI.
-#*All the subsequent queries after the deletion need to be performed without deleted data.
+#*All the subsequent queries after the deletion must return the results without including the deleted data.
 #Smartphone Usage Heatmap (Green)
 #*A user can see the density of people using smartphones for a specified floor in the SIS building, given a particular date and time. (Output does not need to be in graphical form.)
 #Social Activeness Report (Green)
@@ -412,7 +420,7 @@ You need to inform the teaching team of the following details when requested:
 The admin page provides two functions: (1) bootstrap and (2) add data.
 In both cases, the system will show the list of errors (with filename, row number, and error message), as well as the number of records successfully loaded from each file. If there are multiple errors per row, all errors must be reported, in the specified order.
 
-See the "Using Libraries and External Code" section for a sample dataset.
+See the "Sample Data" section for a sample dataset.
 
 ====Bootstrap with app usage & demographics data====
 
@@ -420,7 +428,7 @@ Bootstrap involves clearing all existing data in the database and replacing them
 #demographics.csv
 #app-lookup.csv
 #app.csv
-For each of the files, process them in order from the first row to the last. The header row is considered row 1, and the first data row is row 2. You may assume that the above three files will all be present and the header row is correct with all the necessary fields.
+For each of the files, process them in order from the first row to the last. The header row is considered row 1, and the first data row is row 2. You may assume that the above three files will all be present, the header row is correct with all the necessary fields, and each row has the same number of fields as the header row.
 
 Upon processing, each row is run through the common validations. If there are no errors, then it is run through the file-specific validations. If there are still no errors, then the data is added to the database. Errors are reported with the filename, row number, and error message(s). If a single line has multiple errors, output all the errors in the order specified.
 
@@ -531,7 +539,7 @@ List of validations for app.csv
 |if the date & time is not of the correct format: YYYY-MM-DD HH:MM:SS
 |-
 |"duplicate row"
-|if there is already an existing record with the same values: &lt;timestamp&gt;, &lt;mac-address&gt;, the latest row (i.e. having the largest row number) will be loaded into the database and the previous row(s) will be discarded with this error message
+|if there is already an existing valid record with the same values: &lt;timestamp&gt;, &lt;mac-address&gt;, the latest row (i.e. having the largest row number) will be loaded into the database and the previous row(s) will be discarded with this error message
 |}
 
 ====Upload additional app usage & demographics data====
@@ -561,7 +569,28 @@ A more advanced version of the above report allows the user to show the further 
 
 If there are no users in a specific demographic combination, it is still displayed with 0 users. All possible values of the selected attribute (as defined in demographics.csv file validation) are displayed.
 
-For example, if year is selected, 2011, 2012, 2013, 2014 and 2015 are all displayed, regardless of whether there are any users with app usage during the selected time period.
+'''Example 1''': If year is selected, 2011, 2012, 2013, 2014 and 2015 are all displayed, regardless of whether there are any users with app usage during the selected time period. The below is an example output:
+
+* 2011: 20(20%) --> Intense User: 5(5%), Normal User: 10(10%), Mild User: 5(5%)
+* 2012: 20(20%) --> Intense User: 5(5%), Normal User: 7(7%),   Mild User: 8(8%)
+* 2013: 20(20%) --> Intense User: 5(5%), Normal User: 15(15%), Mild User: 0(0%)
+* 2014: 40(40%) --> Intense User: 0(0%), Normal User: 0(0%),   Mild User: 20(20%)
+* 2015: 0(0%)   --> Intense User: 0(0%), Normal User: 0(0%),   Mild User: 0(0%)
+
+'''Example 2''': If gender and year is selected, an example output will look like below:
+
+*Male: 50(50%):
+**2011: 10(10%) --> Intense User: 5(5%), Normal User: 2(2%), Mild User: 3(3%)
+**2012: 10(10%) --> Intense User: 0(0%), Normal User: 0(0%), Mild User: 10(10%)
+**2013: 10(10%) --> Intense User: 1(1%), Normal User: 1(1%), Mild User: 8(8%)
+**2014: 10(10%) --> Intense User: 2(2%), Normal User: 2(2%), Mild User: 6(6%)
+**2015: 10(10%) --> Intense User: 0(0%), Normal User: 0(0%), Mild User: 10(10%)
+*Female: 50(50%)
+**2011: 5(5%)   --> Intense User: 0(0%), Normal User: 1(1%), Mild User: 4(4%)
+**2012: 10(10%) --> Intense User: 0(0%), Normal User: 0(0%), Mild User: 10(10%)
+**2013: 10(10%) --> Intense User: 1(1%), Normal User: 1(1%), Mild User: 8(8%)
+**2014: 10(10%) --> Intense User: 2(2%), Normal User: 2(2%), Mild User: 6(6%)
+**2015: 15(15%) --> Intense User: 0(0%), Normal User: 5(5%), Mild User: 10(10%)
 
 ====Breakdown by app category====
 Given a start date and end date (both inclusive), process data on a daily basis to calculate average daily app usage time per app category (Books/Social/Education/Entertainment/…).
@@ -615,7 +644,7 @@ For the below three top-k app usage reports, the user must select a single schoo
 Given a certain school, start date and end date (both inclusive) as user input, show the top-k apps with most app usage time by students in that school.
 
 ====Top-k students with most app usage (given an app category)====
-Given an app category, start date and end date (both inclusive) as user input, show the top-k students with most usage time in that app category.
+Given an app category, start date and end date (both inclusive) as user input, show the top-k students with most usage time in that app category. Report the app usage time (in hours) together with the rank, student name and mac address.
 
 ====Top-k schools with most app usage (given an app category)====
 Given an app category, start date and end date (both inclusive) as user input, show the top-k schools with the most app usage time in the specified category.
@@ -656,6 +685,8 @@ Also, the report calculates and outputs a combined overuse index based on the fo
 #The overuse index is set to ‘Overusing’ if one or more metrics fall in ‘Severe’ category.
 #The index is set to ‘Normal’ only when all three metrics are in ‘Light’ category.
 #The index is set to ‘ToBeCautious’ for all other cases.
+
+As the final output, report the the overuse index value (i.e., one of {Overusing, Normal, ToBeCautious}) along with values for the three metrics (i.e., one of {Severe, Moderate, Light}).
 
 ===Dual Interfaces (Web UI and Web Services) (Blue)===
 Your application needs to provide not only web UI (to allow a user to query your SMUA system) but also web services interfaces, i.e., JSON APIs (to allow other machines/third party app to query your SMUA system).
@@ -743,11 +774,11 @@ Similar to app usage data, location data can be added to the application, withou
 The app may be required to delete a subset of location data (for a certain user or a certain day) which cause undesirable bias to the analysis. Only the administrator is allowed to delete the data.
 
 The data deletion can be done in two different ways.
-#Using a location-delete.csv file that includes all the entries to be deleted: This file may be included in the zip file uploaded to bootstrap or add data. You will need to iterate through all the records in the location-delete.csv file, which follows the same format as location.csv. If the record is found in the database, you should delete that record from the database. If not, you can simply move on to the next record without producing an error. At the end, your app should show how many records are valid and actually deleted, and how many records are valid but not found in the database. All the subsequent queries after the deletion need to be performed without the data deleted.
+#Using a location-delete.csv file that includes all the entries to be deleted: This file may be included in the zip file uploaded to bootstrap or add data, resulting in up to 6 files for bootstrap. You will need to iterate through all the records in the location-delete.csv file, which follows the same format as location.csv. If the record is found in the database, you should delete that record from the database. If not, you can simply move on to the next record without producing an error. At the end, your app should show how many records are valid and actually deleted, and how many records are valid but not found in the database. Subsequent queries after the deletion must return results without including the deleted data.
 #* Some records in the location-delete.csv may have timestamp and mac-address only (with empty location-id). As (timestamp, mac-address) is already unique identifier, the matching record in the database needs to be deleted.
 #* Before starting the deletion, common validations and file-specific validations (same as for location.csv) need to be applied over location-delete.csv.
 #* You can safely assume that there is no duplicate rows in location-delete.csv.
-#Using a web UI that accepts user input of the deletion condition (user’s MAC address, start date, and end date): All the data of the specified user between the start date and the end date (both inclusive) should be deleted from the database. Again, the subsequent queries need to be performed without the data deleted.
+#Using a web UI that accepts user input of the deletion condition (user’s MAC address, start date, and end date): All the data of the specified user between the start date and the end date (both inclusive) should be deleted from the database. Again, the subsequent queries need to be performed without including the data deleted.
 
 ===Smartphone Usage Heatmap (Green)===
 A user can see the density of people using smartphones for all semantic places on a specified floor in the SIS building, given a particular date and time; use the location data reported for 15 minutes prior to the specified date and time – For example, if the input is 3PM for September 1st, use the data reported between 2:45PM (inclusive) to 3PM (exclusive) on the date. The crowd density should be shown in a user-friendly way.
@@ -788,7 +819,8 @@ This report shows the social activeness of the logged-in user for a specific day
 #Using online social communication activities: The report shows the total usage time of the apps in “Social” category. Also, show the breakdown of individual app usage time as percentages of the total.
 #Using physical grouping: The report shows the total time the user spent in the SIS building, and the percentages of that time spent in groups versus time spent alone while in the SIS building.
 #*It is considered that the person was in a group when they are located with one or more other users at the same semantic place for &gt;= 5 minutes continuously.
-
+#*Note: A user is considered "socially active" only when the user is collocated with the same friend for more than 5 minutes continuously. When the user was collocated with a friend A for 2 minutes only and then collocated with another friend B for 3 minutes only, the user is *not* socially active for the 5-minute duration.
+#*Another example: Assume the user was collocated with a friend A between 3:00PM and 3:06PM (continuously), and with a friend B between 3:03PM and 3:10PM (continuously). In this case, the user is considered socially active from 3:00PM to 3:10PM!
 
 ===Advanced Smartphone Overuse Report (Red)===
 This report shows the smartphone overuse of the logged-in user in more sophisticated ways, by considering the situations of smartphone use. In the basic overuse report, your team simply considered the duration and frequency of smartphone usage. In this advanced report, your team will consider the fact that the overuse is more serious when the user uses non-productive apps during classes, or when they are in a small group. Non-productive apps are defined as apps that are not in "Information" or "Education" app category.
@@ -810,10 +842,8 @@ The overuse index is based on the percentage of class/small group time that is s
 
 ===Graphical UIs (Heatmap and Chart) (Red)===
 Now, your team will need to improve SMUA’s UI using graphical interfaces.
-#The heatmap needs to be graphically shown on SIS floor plans. See the section titled "Using Libraries and External Code" for SIS floor plans as well as graphics libraries that can help you display the crowd density (and other features) in nice ways (e.g., overlaying the information on a floor map). For the purposes of display on web UI, assume that the mapping between the semantic places and location_ids is fixed. Also we will not add any new location ids or semantic places on the map. When the JSON APIs are tested, semantic place to location id mapping may change, and there may be new location ids or semantic place.
+#The heatmap needs to be graphically shown on SIS floor plans. See the section titled "Sample Data" for SIS floor plans as well as graphics libraries that can help you display the crowd density (and other features) in nice ways (e.g., overlaying the information on a floor map). For the purposes of display on web UI, assume that the mapping between the semantic places and location_ids is fixed. Also we will not add any new location ids or semantic places on the map. When the JSON APIs are tested, semantic place to location id mapping may change, and there may be new location ids or semantic place.
 #The basic app usage report and top-k app usage reports need to be graphically presented using charts.
-
-
 
 ===Use of framework (Black)===
 Your team will use a web application framework (e.g., Struts, Stripes, Play, etc.) along with a persistence layer framework (Hibernate, Play, etc.) to develop SMUA. Using a framework will involve a learning curve at the beginning, but once you are familiar with it, it will actually save lots of time that would be spent on tedious work, and help you manage a clean and structured application architecture.
@@ -996,6 +1026,952 @@ Note: "num-record-loaded" indicates the number of records loaded(i.e. processed)
 
 Note: The header row is row 1. The first row of data is row 2.
 
+====Basic App Usage Report====
+=====Breakdown by usage time category=====
+Request:
+<pre>
+http://<host>/json/basic-usetime-report?token=[tokenValue]
+</pre>
+
+Request Parameters and Possible Errors:
+{| class="wikitable"
+!field
+!description
+!error message
+|-
+|startdate
+|the startdate should be in a proper date format(YYYY-MM-DD) and a valid date.
+|"invalid startdate"
+|-
+|enddate
+|the enddate should be in a proper date format(YYYY-MM-DD) and a valid date.
+|"invalid enddate"
+|}
+
+Response:
+If the breakdown is calculated successfully, the following response is returned:
+
+For an example request below,
+<pre>
+http://<host>/json/basic-usetime-report?startdate=2015-01-01&enddate=2015-01-03&token=[tokenValue]
+</pre>
+
+an output will look like below:
+
+<pre>
+{
+    "status": "success",
+    "breakdown": [
+        {
+            "intense_count": 100
+            "intense_percent": 10
+        },
+        {
+            "normal_count": 700
+            "normal_percent": 70
+        },
+        {
+            "mild_count": 200
+            "mild_percent": 20
+        }
+    ]
+}
+</pre>
+
+=====Breakdown by usage time category and demographics=====
+
+Request:
+<pre>
+http://<host>/json/basic-usetime-report?token=[tokenValue]
+</pre>
+
+Request Parameters and Possible Errors:
+{| class="wikitable"
+!field
+!description
+!error message
+|-
+|startdate
+|the startdate should be in a proper date format(YYYY-MM-DD) and a valid date.
+|"invalid startdate"
+|-
+|enddate
+|the startdate should be in a proper date format(YYYY-MM-DD) and a valid date.
+|"invalid enddate"
+|-
+|order
+|the order must be a comma-separated list that specify the order of the fields entered (year, gender, school). Only the values year, gender and school are allowed.
+|"invalid order"
+|}
+
+Response:
+If the breakdown is calculated successfully, the following response is returned:
+
+For an example request below:
+<pre>
+http://<host>/json/basic-usetime-report?startdate=2015-01-01&enddate=2015-01-03&order=year&token=[tokenValue]
+</pre>
+
+An example output will be returned as below:
+
+<pre>
+{
+	"status": "success",
+	"breakdown": [
+		{
+			"year": 2011,
+			"count": 20,
+			"percent": 20,
+			"breakdown": [
+				{
+            				"intense_count": 5
+            				"intense_percent": 5
+        			},
+        			{
+            				"normal_count": 10
+            				"normal_percent": 10
+        			},
+        			{
+            				"mild_count": 5
+            				"mild_percent": 5
+        			}
+			]
+		},
+		{
+			"year": 2012,
+			"count": 20,
+			"percent": 20,
+			"breakdown": [
+				{
+            				"intense_count": 5
+            				"intense_percent": 5
+        			},
+        			{
+            				"normal_count": 7
+            				"normal_percent": 7
+        			},
+        			{
+            				"mild_count": 8
+            				"mild_percent": 8
+        			}
+			]
+		},
+		{
+			"year": 2013,
+			"count": 20,
+			"percent": 20,
+			"breakdown": [
+				{
+            				"intense_count": 5
+            				"intense_percent": 5
+        			},
+        			{
+            				"normal_count": 15
+            				"normal_percent": 15
+        			},
+        			{
+            				"mild_count": 0
+            				"mild_percent": 0
+        			}
+			]
+		},
+		{
+			"year": 2014,
+			"count": 40,
+			"percent": 40,
+			"breakdown": [
+				{
+            				"intense_count": 0
+            				"intense_percent": 0
+        			},
+        			{
+            				"normal_count": 0
+            				"normal_percent": 0
+        			},
+        			{
+            				"mild_count": 40
+            				"mild_percent": 40
+        			}
+			]
+		},
+		{
+			"year": 2015,
+			"count": 0,
+			"percent": 0,
+			"breakdown": [
+				{
+            				"intense_count": 0
+            				"intense_percent": 0
+        			},
+        			{
+            				"normal_count": 0
+            				"normal_percent": 0
+        			},
+        			{
+            				"mild_count": 0
+            				"mild_percent": 0
+        			}
+			]
+		}
+    	]
+}
+</pre>
+
+For another example request:
+<pre>
+http://<host>/json/basic-usetime-report?startdate=2015-01-05&enddate=2015-01-05&order=gender,year&token=[tokenValue]
+</pre>
+
+An example output will be as below:
+<pre>
+{
+	"status": "success",
+	“breakdown”: [
+		{
+			“gender”: “M”,
+			“count”: 50,
+			“percent”: 50,
+			"breakdown": [
+				{
+					"year": 2011,
+					"count": 10,
+					"percent": 10,
+					"breakdown": [
+						{
+							"intense_count": 5
+							"intense_percent": 5
+						},
+ 						{
+							"normal_count": 2
+							"normal_percent": 2
+						},
+        					{
+            						"mild_count": 3
+            						"mild_percent": 3
+        					}
+					]
+				},
+				{
+					"year": 2012,
+					"count": 10,
+					"percent": 10,
+					"breakdown": [
+						{
+            						"intense_count": 0
+            						"intense_percent": 0
+        					},
+        					{
+            						"normal_count": 0
+            						"normal_percent": 0
+        					},
+        					{
+            						"mild_count": 10
+            						"mild_percent": 10
+        					}
+					]
+				},
+				{
+					"year": 2013,
+					"count": 10,
+					"percent": 10,
+					"breakdown": [
+						{
+            						"intense_count": 1
+            						"intense_percent": 1
+        					},
+        					{
+            						"normal_count": 1
+            						"normal_percent": 1
+        					},
+        					{
+            						"mild_count": 8
+            						"mild_percent": 8
+        					}
+					]
+				},
+				{
+					"year": 2014,
+					"count": 10,
+					"percent": 10,
+					"breakdown": [
+						{
+            						"intense_count": 2
+            						"intense_percent": 2
+        					},
+        					{
+            						"normal_count": 2
+            						"normal_percent": 2
+        					},
+        					{
+            						"mild_count": 6
+            						"mild_percent": 6
+        					}
+					]
+				},
+				{
+					"year": 2015,
+					"count": 10,
+					"percent": 10,
+					"breakdown": [
+						{
+            						"intense_count": 0
+            						"intense_percent": 0
+        					},
+        					{
+            						"normal_count": 0
+            						"normal_percent": 0
+        					},
+        					{
+            						"mild_count": 10
+            						"mild_percent": 10
+        					}
+					]
+				}
+			]
+		},
+		{
+			“gender”: “F”,
+			“count”: 50,
+			“percent”: 50,
+			"breakdown": [
+				{
+					"year": 2011,
+					"count": 5,
+					"percent": 5,
+					"breakdown": [
+						{
+            						"intense_count": 0
+            						"intense_percent": 0
+        					},
+        					{
+            						"normal_count": 1
+            						"normal_percent": 1
+        					},
+        					{
+            						"mild_count": 4
+            						"mild_percent": 4
+        					}
+					]
+				},
+				{
+					"year": 2012,
+					"count": 10,
+					"percent": 10,
+					"breakdown": [
+						{
+            						"intense_count": 0
+            						"intense_percent": 0
+        					},
+        					{
+            						"normal_count": 0
+            						"normal_percent": 0
+        					},
+        					{
+            						"mild_count": 10
+            						"mild_percent": 10
+        					}
+					]
+				},
+				{
+					"year": 2013,
+					"count": 10,
+					"percent": 100,
+					"breakdown": [
+						{
+            						"intense_count": 1
+            						"intense_percent": 1
+        					},
+        					{
+            						"normal_count": 1
+            						"normal_percent": 1
+        					},
+        					{
+            						"mild_count": 8
+            						"mild_percent": 8
+        					}
+					]
+				},
+				{
+					"year": 2014,
+					"count": 10,
+					"percent": 10,
+					"breakdown": [
+						{
+            						"intense_count": 2
+            						"intense_percent": 2
+        					},
+        					{
+            						"normal_count": 2
+            						"normal_percent": 2
+        					},
+        					{
+            						"mild_count": 6
+            						"mild_percent": 6
+        					}
+					]
+				},
+				{
+					"year": 2015,
+					"count":15,
+					"percent": 15,
+					"breakdown": [
+						{
+            						"intense_count": 0
+            						"intense_percent": 0
+        					},
+        					{
+            						"normal_count": 5
+            						"normal_percent": 5
+        					},
+        					{
+            						"mild_count": 10
+            						"mild_percent": 10
+        					}
+					]
+				}
+    			]
+		}
+	]
+}
+
+</pre>
+
+=====Breakdown by app category=====
+
+Request:
+<pre>
+http://<host>/json/basic-appcategory-report?token=[tokenValue]
+</pre>
+
+Request Parameters and Possible Errors
+{| class="wikitable"
+!field
+!description
+!error message
+|-
+|startdate
+|the startdate should be in a proper date format(YYYY-MM-DD) and a valid date.
+|"invalid startdate"
+|-
+|enddate
+|the enddate should be in a proper date format(YYYY-MM-DD) and a valid date.
+|"invalid enddate"
+|}
+
+Response:
+If the breakdown is calculated successfully, the following response is returned:
+
+For an example request:
+<pre>
+http://<host>/json/basic-appcategory-report?startdate=2015-01-01&enddate=2015-01-03&token=[tokenValue]
+</pre>
+
+An example output will be as below:
+
+<pre>
+{
+    "status": "success",
+    "breakdown": [
+        {
+            "category_name": "Books"
+            "category_hours": 0.1
+            "category_percent": 2
+        },
+        {
+            "category_name": "Social"
+            "category_hours": 1
+            "category_percent": 20
+        },
+        {
+            "category_name": "Books"
+            "category_hours": 0.5
+            "category_percent": 10
+        }
+        ...
+    ]
+}
+</pre>
+
+=====Diurnal pattern of app usage time=====
+Request:
+<pre>
+http://<host>/json/basic-diurnalpatter-report?token=[tokenValue]
+</pre>
+
+Request Parameters and Possible Errors
+{| class="wikitable"
+!field
+!description
+!error message
+|-
+|startdate
+|the startdate should be in a proper date format(YYYY-MM-DD) and a valid date.
+|"invalid startdate"
+|-
+|enddate
+|the enddate should be in a proper date format(YYYY-MM-DD) and a valid date.
+|"invalid enddate"
+|-
+|yearfilter
+|the value is not one of valid years or NA, where NA means no filter specified.
+|"invalid year filter"
+|-
+|genderfilter
+|the value is not one of valid genders or NA, where NA means no filter specified.
+|"invalid gender filter"
+|-
+|schoolfilter
+|the value is not one of valid schools or NA, where NA means no filter specified.
+|"invalid school filter"
+|}
+
+Response:
+If the breakdown is calculated successfully, the following response is returned:
+
+For an example request:
+<pre>
+http://<host>/json/basic-diurnalpattern-report?startdate=2015-01-05&enddate=2015-01-10&yearfilter=2015&genderfilter=NA&schoolfilter=NA&token=[tokenValue]
+</pre>
+
+An example output will be as below:
+
+<pre>
+{
+    "status": "success",
+    "breakdown": [
+        {
+            "duration": "12:00-01:00"
+            "usagetime": 300
+        },
+        {
+            "duration": "01:00-02:00"
+            "usagetime": 60
+        },
+        {
+            "duration": "02:00-03:00"
+            "usagetime": 0
+        }
+        ...
+    ]
+}
+</pre>
+
+====Top-k App Usage Report====
+=====Top-k most used apps=====
+Request:
+<pre>
+http://<host>/json/top-k-most-used-apps?token=[tokenValue]
+</pre>
+
+Request Parameters and Possible Errors:
+{| class="wikitable"
+|k (optional)
+|an integer range from 1 to 10 with a default value of 3 (i.e., if not specified, k should be 3).
+|"invalid k"
+|-
+|startdate (required)
+|the startdate should be in a proper date format(YYYY-MM-DD) and a valid date.
+|"invalid startdate"
+|-
+|enddate (required)
+|the enddate should be in a proper date format(YYYY-MM-DD) and a valid date.
+|"invalid enddate"
+|-
+|school(required)
+|the school should be one of the valid schools.
+|"invalid date"
+|}
+
+Response:
+If the top-k most used apps are calculated successfully, the following response is returned:
+(sort by rank, app name).
+
+For an example request:
+<pre>
+http://<host>/json/top-k-most-used-apps?token=[tokenValue]&k=3&startdate=2015-09-27&enddate=2015-10-03&school=sis
+</pre>
+
+An example output will be returned as below:
+
+<pre>
+{
+    "status": "success",
+    "results": [
+        {
+            "rank": 1,
+            "appname": "Facebook",
+            "usagetime": 0.7
+        },
+        {
+            "rank": 1,
+            "appname": "WhatsApp",
+            "usagetime": 0.7
+        },
+        {
+            "rank": 3,
+            "appname": "Chrome",
+            "usagetime": 0.4
+        }
+    ]
+}
+</pre>
+
+=====Top-k students with most app usage=====
+
+Request:
+<pre>
+http://<host>/json/top-k-most-used-students?token=[tokenValue]
+</pre>
+
+request queries parameters:
+{| class="wikitable"
+|k (optional)
+|an integer range from 1 to 10 with a default value of 3 (i.e., if not specified, k should be 3).
+|"invalid k"
+|-
+|startdate (required)
+|the date should be in a proper date format (YYYY-MM-DD), where YYYY-MM-DD is a valid day.
+|"invalid date"
+|-
+|enddate (required)
+|the date should be in a proper date format (YYYY-MM-DD), where YYYY-MM-DD is a valid day.
+|"invalid date"
+|-
+|appcategory(required)
+|the appcategory should be one of the valid application categories.
+|"invalid app category"
+|}
+
+Response:
+If the top-k most used students are calculated successfully, the following response is returned: (sort by rank, student name).
+
+For the example request below,
+<pre>
+http://<host>/json/top-k-most-used-students?token=[tokenValue]&k=2&startdate=2015-09-27&enddate=2015-09-27&appcategory=social
+</pre>
+
+An example output will be returned as below:
+
+<pre>
+{
+    "status": "success",
+    "results": [
+        {
+            "rank": 1,
+            "name": "Brandon TAN",
+            "mac-adddress": "0bcaef7b08dd8539205383b2918df6e9446746f0",
+            "usagetime": 0.7
+        },
+        {
+            "rank": 2,
+            "name": "Jason TAN",
+            "mac-address": "124b2e06a5789138a77e307e607ac57057251bea"
+            "usagetime": 0.4
+        }
+    ]
+}
+</pre>
+
+=====Top-k schools with most app usage=====
+
+Request:
+<pre>
+http://<host>/json/top-k-most-used-schools?token=[tokenValue]
+</pre>
+
+Request Parameters and Possible Errors:
+{| class="wikitable"
+|k (optional)
+|an integer range from 1 to 10 with a default value of 3 (i.e., if not specified, k should be 3).
+|"invalid k"
+|-
+|startdate (required)
+|the date should be in a proper date format (YYYY-MM-DD), where YYYY-MM-DD is a valid day.
+|"invalid date"
+|-
+|enddate (required)
+|the date should be in a proper date format (YYYY-MM-DD), where YYYY-MM-DD is a valid day.
+|"invalid date"
+|-
+|appcategory(required)
+|the appcategory should be one of the valid application categories.
+|"invalid app category"
+|}
+
+Response:
+If the top-k most used students are calculated successfully, the following response is returned: (sort by rank, student name).
+
+For the example request below:
+<pre>
+http://<host>/json/top-k-most-used-schools?token=[tokenValue]&k=2&startdate=2015-09-27&enddate=2015-09-28&appcategory=books
+</pre>
+
+An example output will be returned as below:
+
+<pre>
+{
+    "status": "success",
+    "results": [
+        {
+            "rank": 1,
+            "school": "sis",
+            "usagetime": 4.1
+        },
+        {
+            "rank": 2,
+            "school": "socsc",
+            "usagetime": 3.8
+        }
+    ]
+}
+</pre>
+
+====Smartphone Overuse Report====
+
+Request:
+<pre>
+http://<host>/json/overuse-report?token=[tokenValue]
+</pre>
+
+Request Parameters and Possible Errors:
+{| class="wikitable"
+|startdate
+|the date should be in a proper date format (YYYY-MM-DD), where YYYY-MM-DD is a valid day.
+|"invalid startdate"
+|-
+|enddate
+|the date should be in a proper date format (YYYY-MM-DD), where YYYY-MM-DD is a valid day.
+|"invalid enddate"
+|-
+|macaddress
+|the mac address of the logged-in user. should be a proper mac-address(SHA-1 value), 40 characters long, and is found inside demographics.csv
+|"invalid macaddress"
+|}
+
+Response:
+If the overuse report are calculated successfully, the following response is returned:
+
+For example, for the request as below:
+<pre>
+http://<host>/json/overuse-report?token=[tokenValue]&startdate=2015-09-27&enddate=2015-10-03&macaddress=0bcaef7b08dd8539205383b2918df6e9446746f0
+</pre>
+
+An example output will be returned as follows:
+
+<pre>
+{
+    "status": "success",
+    "results": {
+        "overuse-index": "Overusing",
+        "metrics": [
+            {
+                "usagemetric": "Severe",
+                "usagetime": 5.7,
+            },
+            {
+                "gamingmetric": "Moderate",
+                "gamingtime": 1.7,
+            },
+            {
+                "accessfrequencymetric": "Moderate",
+                "accessfrequency": 4,
+            }
+        ]
+    }
+}
+</pre>
+
+====Loading Location Data====
+
+Request:
+<pre>
+http://<host>/json/location-upload?token=[tokenValue]
+</pre>
+
+The expected output will be similar to bootstrap.
+
+====Deletion of Location Data====
+
+To be updated.
+
+====Smartphone Usage Heatmap====
+Request:
+<pre>
+http://<host>/json/usage-heatmap?token=[tokenValue]
+</pre>
+
+Request Parameters and Possible Errors:
+{| class="wikitable"
+!field
+!description
+!error message
+|-
+|floor
+|the floor is not a number between 0 (inclusive) to 5 (inclusive). 0 means basement.
+|"invalid floor"
+|-
+|date
+|the date should be in a proper date format(YYYY-MM-DD) and a valid date.
+|"invalid date"
+|-
+|time
+|the time is should be in a proper time format(HH:MM:SS) anda valid time.
+|"invalid time"
+|}
+
+Response:
+If the heatmap is calculated successfully, the following response is returned:
+
+For example, for the request below:
+<pre>
+http://<host>/json/usage-heatmap?token=[tokenValue]&floor=2&date=2014-03-29&time=12:30:00
+</pre>
+
+An example output will be returned as follows:
+
+<pre>
+{
+    "status": "success",
+    "heatmap": [
+        {
+            "semantic-place": "SMUSISL2LOBBY",
+            "num-people-using-phone": 10,
+            "density": 3
+        },
+        {
+            "semantic-place": "SMUSISL2SR2-1",
+            "num-people-using-phone": 1,
+            "density": 1
+        },
+        {
+            "semantic-place": "SMUSISL2SR2-2",
+            "num-people-using-phone": 8,
+            "density": 2
+        },
+        {
+            "semantic-place": "SMUSISL2SR2-3",
+            "num-people-using-phone": 14,
+            "density": 4
+        },
+        {
+            "semantic-place": "SMUSISL2SR2-4",
+            "num-people": 0,
+            "crowd-density": 0
+        },
+        {
+            "semantic-places": "SMUSISL2STUDYAREA1",
+            "number-people": 7,
+            "crowd-density": 2,
+        },
+        {
+            "semantic-place": "SMUSISL2STUDYAREA2",
+            "num-people": 21,
+            "crowd-density": 5
+        }
+    ]
+}
+</pre>
+
+Note: sort output by semantic-place (alphabetical order a-z)
+
+====Social Activeness Report====
+
+Request:
+<pre>
+http://<host>/json/social-activeness-report?token=[tokenValue]
+</pre>
+
+Request Parameters and Possible Errors:
+{| class="wikitable"
+|date
+|the date should be in a proper date format (YYYY-MM-DD), where YYYY-MM-DD is a valid day.
+|"invalid date"
+|-
+|macaddress
+|the mac address of the logged-in user. should be a proper mac-address(SHA-1 value), 40 characters long, and is found inside demographics.csv
+|"invalid macaddress"
+|}
+
+Response:
+If the overuse report are calculated successfully, the following response is returned:
+
+For example, for the request as below:
+<pre>
+http://<host>/json/overuse-report?token=[tokenValue]&date=2015-09-27&macaddress=0bcaef7b08dd8539205383b2918df6e9446746f0
+</pre>
+
+An example output will be returned as follows:
+
+<pre>
+{
+    "status": "success",
+    "results": {
+        "total-socialapp-usetime": 3.1,
+        "individual-socialapp-usetime": [
+            {
+                "appname": "FaceBook"
+                "percent": 20
+            }
+            {
+                "appname": "WhatsApp"
+                "percent": 70
+            }
+            {
+                "appname": "Twitter"
+                "percent": 10
+            }
+        ]
+        "total-time-spent-in-sis": 5.0
+        "group-percent": 60
+        "solo-percent": 40
+    }
+}
+</pre>
+
+====Advanced Smartphone Overuse Report ====
+
+Request:
+<pre>
+http://<host>/json/advanced-overuse-report?token=[tokenValue]
+</pre>
+
+Request Parameters and Possible Errors:
+{| class="wikitable"
+|startdate
+|the date should be in a proper date format (YYYY-MM-DD), where YYYY-MM-DD is a valid day.
+|"invalid startdate"
+|-
+|enddate
+|the date should be in a proper date format (YYYY-MM-DD), where YYYY-MM-DD is a valid day.
+|"invalid enddate"
+|-
+|macaddress
+|the mac address of the logged-in user. should be a proper mac-address(SHA-1 value), 40 characters long, and is found inside demographics.csv
+|"invalid macaddress"
+|}
+
+Response:
+If the overuse report are calculated successfully, the following response is returned:
+
+For example, for the request as below:
+<pre>
+http://<host>/json/overuse-report?token=[tokenValue]&startdate=2015-09-27&enddate=2015-10-03&macaddress=0bcaef7b08dd8539205383b2918df6e9446746f0
+</pre>
+
+An example output will be returned as follows:
+
+<pre>
+{
+    "status": "success",
+    "results": {
+        "overuse-index": "Overusing",
+        "total-class-hours": 6.0
+        "total-smallgroup-hours": 3.0
+        "non-productive-app-hours": 1.5
+    }
+}
+</pre>
+
 ==Other Tips==
 
 
@@ -1006,7 +1982,9 @@ Note: The header row is row 1. The first row of data is row 2.
 #*UploadBean (http://www.javazoom.net/jzservlets/servlets.html):  For easy uploading of zip files to the deployment server
 #*D3 (http://dciarletta.github.io/d3-floorplan/):  For heat map
 #*NVD3 (http://nvd3.org):  Re-usable charts for D3
-#Resources we provide: <br/>(These are Google Drive links, login with your SMU Google Account)
+
+===Sample Data===
+These are Google Drive links, login with your SMU Google Account!
 #*[https://drive.google.com/a/smu.edu.sg/file/d/0B5kvz-8sjLdPSjVrQUxrazUxWWs/view Sample data set (v1)] <br/>'''Note:''' This dataset is 3 hours worth of data. Your team may want to start with a small subset of data to facilitate testing of your application.
 #*[https://drive.google.com/a/smu.edu.sg/file/d/0B5kvz-8sjLdPVjVKV3UyLUwxckE/view SIS floor plans] including location IDs
 
@@ -1014,19 +1992,32 @@ Note: The header row is row 1. The first row of data is row 2.
 #Use only licensed software
 #Don’t upload non-project related materials or materials that you do not own the copyrights for to your subversion repository
 
+===Presentation Guidelines===
+
+# You need to make sure your slides are consistent, even if they are prepared by various members of the team.
+# Test it on a seminar room projector (and even better the projectors of the room your presentation is going to be in). Certain colour combinations are bad for contrast. For example, white fonts on light blue background. Certain colours (such as yellow) might also appear differently when projected.
+# Use legible fonts. Some teams used font sizes 14 or below.  These sizes are really meant to be read off your laptop screen -- they are incredibly small when projected. Please make sure of the entire slide as well. You don't need to leave lots of white space on it. Use the space to make things larger and more legible.
+# For all presentations, our guideline is simple. We will not grade (i.e., you get 0 for that part) anything we cannot read on the projector screen. We will also be sitting at the back of the classroom.
+# Note: we will also not provide any additional presentation time. We will not grade any portion that has not been presented after your allocated time has expired.
+# Do not show raw data and/or your Git and/or PPlog portal, excel, word, or other project documents. Some teams even go to the extent of pasting excel or project screen shots (which are stretched out of proportion and completely unreadable). You have to summarize your raw data into presentable forms that we can understand easily. Graphs, figures, and animations work really well for this (as long as the presentation points required for that presentation are followed properly).
+# Please try to present the required items in the order that they are specified in the milestone requirements section above. For example, if the PM review asks you to present your schedule and then your metrics, please do it in that order.
+# The PM is responsible for ensuring a well-run presentation -- i.e., the slides are well done and the presentation has been practiced. We expect the PM to be able to answer any questions related to the slides shown during the presentation. However, we can ask any team member specific questions (on any project related topic including coding, and project management) if we feel it is necessary.
+
 ===GIT===
 You have two GIT repositories created for you:
-#http://green.smu.edu.sg/is203-scratch/GXTY
+#http://green.smu.edu.sg/is203-scratch/is203-scratch_gXtY
 #*This repository is for you to "play around" and learn how to use GIT. It will be removed after 20 Sep.
-# http://green.smu.edu.sg/is203-scratch/GXTY
+#http://green.smu.edu.sg/is203/is203_gXtY
 #*This repository is the actual repository for you to place your project artifacts. This is the only official repository for SE. All artifacts produced for the course needs to be in this repository. Any submission on any other unofficial repositories will not be considered. You will need to have a standard directory structure (as stated below). These are the necessary directories; you can have more sub-folders if you choose to.
-
-To access your repository, please set your password first by logging in to http://violet.smu.edu.sg/git.
 
 Make sure to have the following directory structure. Otherwise, we might not find the right materials to mark even though you have properly committed on time.
 
 <pre>
 |- documents        // all other documentations
+|- metrics
+  |- sm.docx (or xlxs) (for feature boxing teams) *OR* tm.docx (or xlxs) (for time boxing teams)
+  |- bm.docx (or xlxs)
+  |- ppm.docx (or xlxs) // optional
 |- presentations    // all presentation slides must be stored here
 |- testing          // test plan, test cases, test results
 |- minutes
