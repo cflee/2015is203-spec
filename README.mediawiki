@@ -633,7 +633,7 @@ The ‘ranks’ are the various entries that make up the lists used for reportin
 |Calendar
 |}
 
-If you were asked to return the top-3 (top-k where k = 3) most popular app names, you would output ranks 1 (with two tied entries) and 3 from this table. Within each rank, the entries need to be sorted lexicographically.
+If you were asked to return the top-3 (top-k where k = 3) most popular app names, you would output ranks 1 (with two tied entries) and 3 from this table. Within each rank, the entries' app name/student name/school need to be sorted in ascending alphabetical order.
 
 If you were asked to return the top-5, you would output the rank 1, 3, and 4 (with every tied entry). Note that in the above example, a total of six apps (from Facebook to SBS Transit) will be returned as all tied entries must be returned for the 4th rank.
 
