@@ -933,20 +933,22 @@ Request:
 http://<host>/json/authenticate
 </pre>
 
-request post parameters:
+Request '''POST''' Parameters and Possible Errors:
 {| class="wikitable"
 !field
 !description
 !error message
 |-
 |username
-|the user's username
+|the user's username should match a record in the database
 |"invalid username/password"
 |-
 |password
-| the user's password
+|the user's password should match this particular user's record
 |"invalid username/password"
 |}
+
+Note that validation for this service is special: if both username and password fail validation, the error message "invalid username/password" is only included once in the response!
 
 Response:
 If authentication is successful, a JSON web token is returned:
@@ -958,9 +960,10 @@ If authentication is successful, a JSON web token is returned:
 }
 </pre>
 
-Use the [http://blue.smu.edu.sg/is203/jwt API] (updated 8 Oct). You will need the following jar files [http://blue.smu.edu.sg/is203/jwt/lib/is203-jwt-v2.jar is203-jwt-v2.jar],[http://blue.smu.edu.sg/is203/jwt/lib/json-smart-1.2.jar json-smart-1.2.jar],[http://blue.smu.edu.sg/is203/jwt/lib/nimbus-jose-jwt-2.26.1.jar nimbus-jose-jwt-2.26.1.jar]. The process is as follows:
-#Upon check that the username & password pair is valid, generate a token using the sign method. You will need a sharedSecret (This is a random string of length 16 that you need to share with the instructional team).
-#For every JSON web service, you need to verify that the token is valid (i.e. the verify method returns true and does not throw any exceptions).
+Use the [http://blue.smu.edu.sg/is203/jwt API] (updated 8 Oct 2014). You will need the following jar files [http://blue.smu.edu.sg/is203/jwt/lib/is203-jwt-v2.jar is203-jwt-v2.jar], [http://blue.smu.edu.sg/is203/jwt/lib/json-smart-1.2.jar json-smart-1.2.jar], [http://blue.smu.edu.sg/is203/jwt/lib/nimbus-jose-jwt-2.26.1.jar nimbus-jose-jwt-2.26.1.jar]. The process is as follows:
+#After checking that the username and password pair is valid, generate a token using the JWTUtility.sign() method. The sharedSecret parameter is a string of length 16 that you choose, and will need to share with the teaching team.
+#Ensure that your sharedSecret is not easily guessable: otherwise other people will be able to generate their own username=admin token and randomly bootstrap your system while you are testing it!
+#For every JSON web service, you need to verify that the token is valid (i.e. the JWTUtility.verify() method returns a non-null string and does not throw any exceptions).
 
 ====Bootstrap====
 Bootstrapping is done by sending a multi-part request (http://www.faqs.org/rfcs/rfc1867.html) to the server. You can assume that the user is using a form to send the multi-part request:
