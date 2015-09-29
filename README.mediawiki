@@ -937,6 +937,9 @@ Times are typically validated with the rule "a proper time format(HH:MM:SS) and 
 ===== Demographics =====
 For valid years/genders/schools, use the definitions in the validation for demographics.csv.
 
+===== App Categories =====
+For valid app categories, use the definitions in the validation for app-lookup.csv.
+
 ==== Authenticate ====
 Request:
 <pre>
@@ -1676,33 +1679,33 @@ An example output will be returned as below:
 The results array is sorted by rank ascending, app name a-z.
 
 =====Top-k students with most app usage=====
-
 Request:
 <pre>
-http://<host>/json/top-k-most-used-students?token=[tokenValue]
+http://<host>/json/top-k-most-used-students?token=[tokenValue]&startdate=[startdate]&enddate=[enddate]&appcategory=[appcategory]
 </pre>
 
-request queries parameters:
+Request Parameters and Possible Errors:
 {| class="wikitable"
 |k (optional)
 |an integer range from 1 to 10 with a default value of 3 (i.e., if not specified, k should be 3).
 |"invalid k"
 |-
 |startdate (required)
-|the date should be in a proper date format (YYYY-MM-DD), where YYYY-MM-DD is a valid day.
-|"invalid date"
+|the startdate should be in a proper date format(YYYY-MM-DD) and a valid date.
+|"invalid startdate"
 |-
 |enddate (required)
-|the date should be in a proper date format (YYYY-MM-DD), where YYYY-MM-DD is a valid day.
-|"invalid date"
+|the enddate should be in a proper date format(YYYY-MM-DD) and a valid date.
+|"invalid enddate"
 |-
-|appcategory(required)
+|appcategory (required)
 |the appcategory should be one of the valid application categories.
 |"invalid app category"
 |}
 
 Response:
-If the top-k most used students are calculated successfully, the following response is returned: (sort by rank, student name).
+
+If the top-k most used students are calculated successfully, the following response is returned:
 
 For the example request below,
 <pre>
@@ -1713,23 +1716,25 @@ An example output will be returned as below:
 
 <pre>
 {
-    "status": "success",
-    "results": [
-        {
-            "rank": 1,
-            "name": "Brandon TAN",
-            "mac-adddress": "0bcaef7b08dd8539205383b2918df6e9446746f0",
-            "usagetime": 0.7
-        },
-        {
-            "rank": 2,
-            "name": "Jason TAN",
-            "mac-address": "124b2e06a5789138a77e307e607ac57057251bea"
-            "usagetime": 0.4
-        }
-    ]
+  "status": "success",
+  "results": [
+    {
+      "rank": 1,
+      "name": "Brandon TAN",
+      "mac-adddress": "0bcaef7b08dd8539205383b2918df6e9446746f0",
+      "usagetime": 0.7
+    },
+    {
+      "rank": 2,
+      "name": "Jason TAN",
+      "mac-address": "124b2e06a5789138a77e307e607ac57057251bea",
+      "usagetime": 0.4
+    }
+  ]
 }
 </pre>
+
+The results array is sorted by rank ascending, and student name a-z.
 
 =====Top-k schools with most app usage=====
 
