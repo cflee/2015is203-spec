@@ -1612,13 +1612,13 @@ Usagetime is in seconds.
 =====Top-k most used apps=====
 Request:
 <pre>
-http://<host>/json/top-k-most-used-apps?token=[tokenValue]
+http://<host>/json/top-k-most-used-apps?startdate=[startdate]&enddate=[enddate]&school=[school]&token=[tokenValue]
 </pre>
 
 Request Parameters and Possible Errors:
 {| class="wikitable"
 |k (optional)
-|an integer range from 1 to 10 with a default value of 3 (i.e., if not specified, k should be 3).
+|an integer range from 1 to 10 (both inclusive) with a default value of 3 (i.e., if not specified, k should be 3).
 |"invalid k"
 |-
 |startdate (required)
@@ -1629,14 +1629,14 @@ Request Parameters and Possible Errors:
 |the enddate should be in a proper date format(YYYY-MM-DD) and a valid date.
 |"invalid enddate"
 |-
-|school(required)
+|school (required)
 |the school should be one of the valid schools.
-|"invalid date"
+|"invalid school"
 |}
 
 Response:
+
 If the top-k most used apps are calculated successfully, the following response is returned:
-(sort by rank, app name).
 
 For an example request:
 <pre>
@@ -1647,26 +1647,33 @@ An example output will be returned as below:
 
 <pre>
 {
-    "status": "success",
-    "results": [
-        {
-            "rank": 1,
-            "appname": "Facebook",
-            "usagetime": 0.7
-        },
-        {
-            "rank": 1,
-            "appname": "WhatsApp",
-            "usagetime": 0.7
-        },
-        {
-            "rank": 3,
-            "appname": "Chrome",
-            "usagetime": 0.4
-        }
-    ]
+  "status": "success",
+  "results": [
+    {
+      "rank": 1,
+      "appname": "Facebook",
+      "usagetime": 0.7
+    },
+    {
+      "rank": 1,
+      "appname": "WhatsApp",
+      "usagetime": 0.7
+    },
+    {
+      "rank": 3,
+      "appname": "Chrome",
+      "usagetime": 0.4
+    },
+    {
+      "rank": 3,
+      "appname": "Telegram",
+      "usagetime": 0.4
+    }
+  ]
 }
 </pre>
+
+The results array is sorted by rank ascending, app name a-z.
 
 =====Top-k students with most app usage=====
 
