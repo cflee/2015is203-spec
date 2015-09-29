@@ -863,12 +863,12 @@ Requests use a simple REST-style HTTP GET/POST. The format of a request is as fo
 <pre>
 http://<host>/json/<service>?token=tokenValue&paramA=valueA&paramB=valueB
 </pre>
-The request queries parameter may vary across different services.
+The request query parameters may vary across different services.
 For this project, all requests (except for the authenticate service) require the sending of the token obtained via the authenticate service.
 
 For example:
 <pre>
-http://<host>/json/heatmap?floor=2&date=2014-03-29T12:30:00&token=eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0MDk3MTIxNTMsImlhdCI6MTQwOTcwODU1M30.h66rOPHh992gpEPtErfqBP3Hrfkh_nNxYwPG0gcAuCc
+http://<host>/json/usage-heatmap?floor=2&date=2014-03-29&time=12:30:00&token=eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0MDk3MTIxNTMsImlhdCI6MTQwOTcwODU1M30.h66rOPHh992gpEPtErfqBP3Hrfkh_nNxYwPG0gcAuCc
 </pre>
 
 ===JSON Basic===
