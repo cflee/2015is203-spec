@@ -1120,7 +1120,7 @@ an output will look like below:
 
 Request:
 <pre>
-http://<host>/json/basic-usetime-report?token=[tokenValue]
+http://<host>/json/basic-usetime-report?startdate=[startDate]&enddate=[enddate]&order=[order]&token=[tokenValue]
 </pre>
 
 Request Parameters and Possible Errors:
@@ -1138,11 +1138,12 @@ Request Parameters and Possible Errors:
 |"invalid enddate"
 |-
 |order
-|the order must be a comma-separated list that specify the order of the fields entered (year, gender, school). Only the values year, gender and school are allowed.
+|the order must be a comma-separated list that specify the order of the fields entered (year, gender, school). Only the values year, gender and school are allowed. Each value may only appear at most once.
 |"invalid order"
 |}
 
 Response:
+
 If the breakdown is calculated successfully, the following response is returned:
 
 For an example request below:
@@ -1154,104 +1155,104 @@ An example output will be returned as below:
 
 <pre>
 {
-	"status": "success",
-	"breakdown": [
-		{
-			"year": 2011,
-			"count": 20,
-			"percent": 20,
-			"breakdown": [
-				{
-            				"intense_count": 5
-            				"intense_percent": 5
-        			},
-        			{
-            				"normal_count": 10
-            				"normal_percent": 10
-        			},
-        			{
-            				"mild_count": 5
-            				"mild_percent": 5
-        			}
-			]
-		},
-		{
-			"year": 2012,
-			"count": 20,
-			"percent": 20,
-			"breakdown": [
-				{
-            				"intense_count": 5
-            				"intense_percent": 5
-        			},
-        			{
-            				"normal_count": 7
-            				"normal_percent": 7
-        			},
-        			{
-            				"mild_count": 8
-            				"mild_percent": 8
-        			}
-			]
-		},
-		{
-			"year": 2013,
-			"count": 20,
-			"percent": 20,
-			"breakdown": [
-				{
-            				"intense_count": 5
-            				"intense_percent": 5
-        			},
-        			{
-            				"normal_count": 15
-            				"normal_percent": 15
-        			},
-        			{
-            				"mild_count": 0
-            				"mild_percent": 0
-        			}
-			]
-		},
-		{
-			"year": 2014,
-			"count": 40,
-			"percent": 40,
-			"breakdown": [
-				{
-            				"intense_count": 0
-            				"intense_percent": 0
-        			},
-        			{
-            				"normal_count": 0
-            				"normal_percent": 0
-        			},
-        			{
-            				"mild_count": 40
-            				"mild_percent": 40
-        			}
-			]
-		},
-		{
-			"year": 2015,
-			"count": 0,
-			"percent": 0,
-			"breakdown": [
-				{
-            				"intense_count": 0
-            				"intense_percent": 0
-        			},
-        			{
-            				"normal_count": 0
-            				"normal_percent": 0
-        			},
-        			{
-            				"mild_count": 0
-            				"mild_percent": 0
-        			}
-			]
-		}
-    	]
+  "status": "success",
+  "breakdown": [
+    {
+      "year": 2011,
+      "count": 20,
+      "percent": 20,
+      "breakdown": [
+        {
+          "intense_count": 5,
+          "intense_percent": 5
+        },
+        {
+          "normal_count": 10,
+          "normal_percent": 10
+        },
+        {
+          "mild_count": 5,
+          "mild_percent": 5
+        }
+      ]
+    },
+    {
+      "year": 2012,
+      "count": 20,
+      "percent": 20,
+      "breakdown": [
+        {
+          "intense_count": 5,
+          "intense_percent": 5
+        },
+        {
+          "normal_count": 7,
+          "normal_percent": 7
+        },
+        {
+          "mild_count": 8,
+          "mild_percent": 8
+        }
+      ]
+    },
+    {
+      "year": 2013,
+      "count": 20,
+      "percent": 20,
+      "breakdown": [
+        {
+          "intense_count": 5,
+          "intense_percent": 5
+        },
+        {
+          "normal_count": 15,
+          "normal_percent": 15
+        },
+        {
+          "mild_count": 0,
+          "mild_percent": 0
+        }
+      ]
+    },
+    {
+      "year": 2014,
+      "count": 40,
+      "percent": 40,
+      "breakdown": [
+        {
+          "intense_count": 0,
+          "intense_percent": 0
+        },
+        {
+          "normal_count": 0,
+          "normal_percent": 0
+        },
+        {
+          "mild_count": 40,
+          "mild_percent": 40
+        }
+      ]
+    },
+    {
+      "year": 2015,
+      "count": 0,
+      "percent": 0,
+      "breakdown": [
+        {
+          "intense_count": 0,
+          "intense_percent": 0
+        },
+        {
+          "normal_count": 0,
+          "normal_percent": 0
+        },
+        {
+          "mild_count": 0,
+          "mild_percent": 0
+        }
+      ]
+    }
+  ]
 }
 </pre>
 
@@ -1263,215 +1264,214 @@ http://<host>/json/basic-usetime-report?startdate=2015-01-05&enddate=2015-01-05&
 An example output will be as below:
 <pre>
 {
-	"status": "success",
-	“breakdown”: [
-		{
-			“gender”: “M”,
-			“count”: 50,
-			“percent”: 50,
-			"breakdown": [
-				{
-					"year": 2011,
-					"count": 10,
-					"percent": 10,
-					"breakdown": [
-						{
-							"intense_count": 5
-							"intense_percent": 5
-						},
- 						{
-							"normal_count": 2
-							"normal_percent": 2
-						},
-        					{
-            						"mild_count": 3
-            						"mild_percent": 3
-        					}
-					]
-				},
-				{
-					"year": 2012,
-					"count": 10,
-					"percent": 10,
-					"breakdown": [
-						{
-            						"intense_count": 0
-            						"intense_percent": 0
-        					},
-        					{
-            						"normal_count": 0
-            						"normal_percent": 0
-        					},
-        					{
-            						"mild_count": 10
-            						"mild_percent": 10
-        					}
-					]
-				},
-				{
-					"year": 2013,
-					"count": 10,
-					"percent": 10,
-					"breakdown": [
-						{
-            						"intense_count": 1
-            						"intense_percent": 1
-        					},
-        					{
-            						"normal_count": 1
-            						"normal_percent": 1
-        					},
-        					{
-            						"mild_count": 8
-            						"mild_percent": 8
-        					}
-					]
-				},
-				{
-					"year": 2014,
-					"count": 10,
-					"percent": 10,
-					"breakdown": [
-						{
-            						"intense_count": 2
-            						"intense_percent": 2
-        					},
-        					{
-            						"normal_count": 2
-            						"normal_percent": 2
-        					},
-        					{
-            						"mild_count": 6
-            						"mild_percent": 6
-        					}
-					]
-				},
-				{
-					"year": 2015,
-					"count": 10,
-					"percent": 10,
-					"breakdown": [
-						{
-            						"intense_count": 0
-            						"intense_percent": 0
-        					},
-        					{
-            						"normal_count": 0
-            						"normal_percent": 0
-        					},
-        					{
-            						"mild_count": 10
-            						"mild_percent": 10
-        					}
-					]
-				}
-			]
-		},
-		{
-			“gender”: “F”,
-			“count”: 50,
-			“percent”: 50,
-			"breakdown": [
-				{
-					"year": 2011,
-					"count": 5,
-					"percent": 5,
-					"breakdown": [
-						{
-            						"intense_count": 0
-            						"intense_percent": 0
-        					},
-        					{
-            						"normal_count": 1
-            						"normal_percent": 1
-        					},
-        					{
-            						"mild_count": 4
-            						"mild_percent": 4
-        					}
-					]
-				},
-				{
-					"year": 2012,
-					"count": 10,
-					"percent": 10,
-					"breakdown": [
-						{
-            						"intense_count": 0
-            						"intense_percent": 0
-        					},
-        					{
-            						"normal_count": 0
-            						"normal_percent": 0
-        					},
-        					{
-            						"mild_count": 10
-            						"mild_percent": 10
-        					}
-					]
-				},
-				{
-					"year": 2013,
-					"count": 10,
-					"percent": 100,
-					"breakdown": [
-						{
-            						"intense_count": 1
-            						"intense_percent": 1
-        					},
-        					{
-            						"normal_count": 1
-            						"normal_percent": 1
-        					},
-        					{
-            						"mild_count": 8
-            						"mild_percent": 8
-        					}
-					]
-				},
-				{
-					"year": 2014,
-					"count": 10,
-					"percent": 10,
-					"breakdown": [
-						{
-            						"intense_count": 2
-            						"intense_percent": 2
-        					},
-        					{
-            						"normal_count": 2
-            						"normal_percent": 2
-        					},
-        					{
-            						"mild_count": 6
-            						"mild_percent": 6
-        					}
-					]
-				},
-				{
-					"year": 2015,
-					"count":15,
-					"percent": 15,
-					"breakdown": [
-						{
-            						"intense_count": 0
-            						"intense_percent": 0
-        					},
-        					{
-            						"normal_count": 5
-            						"normal_percent": 5
-        					},
-        					{
-            						"mild_count": 10
-            						"mild_percent": 10
-        					}
-					]
-				}
-    			]
-		}
-	]
+  "status": "success",
+  "breakdown": [
+    {
+      "gender": "M",
+      "count": 50,
+      "percent": 50,
+      "breakdown": [
+        {
+          "year": 2011,
+          "count": 10,
+          "percent": 10,
+          "breakdown": [
+            {
+              "intense_count": 5,
+              "intense_percent": 5
+            },
+            {
+              "normal_count": 2,
+              "normal_percent": 2
+            },
+            {
+              "mild_count": 3,
+              "mild_percent": 3
+            }
+          ]
+        },
+        {
+          "year": 2012,
+          "count": 10,
+          "percent": 10,
+          "breakdown": [
+            {
+              "intense_count": 0,
+              "intense_percent": 0
+            },
+            {
+              "normal_count": 0,
+              "normal_percent": 0
+            },
+            {
+              "mild_count": 10,
+              "mild_percent": 10
+            }
+          ]
+        },
+        {
+          "year": 2013,
+          "count": 10,
+          "percent": 10,
+          "breakdown": [
+            {
+              "intense_count": 1,
+              "intense_percent": 1
+            },
+            {
+              "normal_count": 1,
+              "normal_percent": 1
+            },
+            {
+              "mild_count": 8,
+              "mild_percent": 8
+            }
+          ]
+        },
+        {
+          "year": 2014,
+          "count": 10,
+          "percent": 10,
+          "breakdown": [
+            {
+              "intense_count": 2,
+              "intense_percent": 2
+            },
+            {
+              "normal_count": 2,
+              "normal_percent": 2
+            },
+            {
+              "mild_count": 6,
+              "mild_percent": 6
+            }
+          ]
+        },
+        {
+          "year": 2015,
+          "count": 10,
+          "percent": 10,
+          "breakdown": [
+            {
+              "intense_count": 0,
+              "intense_percent": 0
+            },
+            {
+              "normal_count": 0,
+              "normal_percent": 0
+            },
+            {
+              "mild_count": 10,
+              "mild_percent": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "gender": "F",
+      "count": 50,
+      "percent": 50,
+      "breakdown": [
+        {
+          "year": 2011,
+          "count": 5,
+          "percent": 5,
+          "breakdown": [
+            {
+              "intense_count": 0,
+              "intense_percent": 0
+            },
+            {
+              "normal_count": 1,
+              "normal_percent": 1
+            },
+            {
+              "mild_count": 4,
+              "mild_percent": 4
+            }
+          ]
+        },
+        {
+          "year": 2012,
+          "count": 10,
+          "percent": 10,
+          "breakdown": [
+            {
+              "intense_count": 0,
+              "intense_percent": 0
+            },
+            {
+              "normal_count": 0,
+              "normal_percent": 0
+            },
+            {
+              "mild_count": 10,
+              "mild_percent": 10
+            }
+          ]
+        },
+        {
+          "year": 2013,
+          "count": 10,
+          "percent": 100,
+          "breakdown": [
+            {
+              "intense_count": 1,
+              "intense_percent": 1
+            },
+            {
+              "normal_count": 1,
+              "normal_percent": 1
+            },
+            {
+              "mild_count": 8,
+              "mild_percent": 8
+            }
+          ]
+        },
+        {
+          "year": 2014,
+          "count": 10,
+          "percent": 10,
+          "breakdown": [
+            {
+              "intense_count": 2,
+              "intense_percent": 2
+            },
+            {
+              "normal_count": 2,
+              "normal_percent": 2
+            },
+            {
+              "mild_count": 6,
+              "mild_percent": 6
+            }
+          ]
+        },
+        {
+          "year": 2015,
+          "count": 15,
+          "percent": 15,
+          "breakdown": [
+            {
+              "intense_count": 0,
+              "intense_percent": 0
+            },
+            {
+              "normal_count": 5,
+              "normal_percent": 5
+            },
+            {
+              "mild_count": 10,
+              "mild_percent": 10
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
-
 </pre>
 
 =====Breakdown by app category=====
