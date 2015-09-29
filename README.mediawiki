@@ -1994,11 +1994,10 @@ An example output will be returned as follows:
 
 The individual-socialapp-usetime array is sorted by appname a-z.
 
-====Advanced Smartphone Overuse Report ====
-
+====Advanced Smartphone Overuse Report====
 Request:
 <pre>
-http://<host>/json/advanced-overuse-report?token=[tokenValue]
+http://<host>/json/advanced-overuse-report?token=[tokenValue]&startdate=[startdate]&enddate=[enddate]&macaddress=[macaddress]
 </pre>
 
 Request Parameters and Possible Errors:
@@ -2017,24 +2016,25 @@ Request Parameters and Possible Errors:
 |}
 
 Response:
-If the overuse report are calculated successfully, the following response is returned:
+
+If the advanced overuse report is calculated successfully, the following response is returned:
 
 For example, for the request as below:
 <pre>
-http://<host>/json/overuse-report?token=[tokenValue]&startdate=2015-09-27&enddate=2015-10-03&macaddress=0bcaef7b08dd8539205383b2918df6e9446746f0
+http://<host>/json/advanced-overuse-report?token=[tokenValue]&startdate=2015-09-27&enddate=2015-10-03&macaddress=0bcaef7b08dd8539205383b2918df6e9446746f0
 </pre>
 
 An example output will be returned as follows:
 
 <pre>
 {
-    "status": "success",
-    "results": {
-        "overuse-index": "Overusing",
-        "total-class-hours": 6.0
-        "total-smallgroup-hours": 3.0
-        "non-productive-app-hours": 1.5
-    }
+  "status": "success",
+  "results": {
+    "overuse-index": "Overusing",
+    "total-class-hours": 6.0,
+    "total-smallgroup-hours": 3.0,
+    "non-productive-app-hours": 1.5
+  }
 }
 </pre>
 
