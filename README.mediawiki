@@ -430,12 +430,12 @@ Bootstrap involves clearing all existing data in the database and replacing them
 #app.csv
 For each of the files, process them in order from the first row to the last. The header row is considered row 1, and the first data row is row 2. You may assume that the above three files will all be present, the header row is correct with all the necessary fields, and each row has the same number of fields as the header row.
 
-Upon processing, each row is run through the common validations. If there are no errors, then it is run through the file-specific validations. If there are still no errors, then the data is added to the database. Errors are reported with the filename, row number, and error message(s). If a single line has multiple errors, output all the errors in the order specified.
+Upon processing, each row is run through the common validations. If there are no errors, then it is run through the file-specific validations. If there are still no errors, then the data is added to the database. Errors are reported with the filename, row number, and error message(s). If a single row has multiple errors, output all the errors in the order specified.
 
 Additionally, if there is any whitespace at the start or end of each field, it must be removed before starting the common validations. For example if the email is “apple.hsu  “ (one or more whitespace characters at the end), the whitespace must be removed before storing it into the database.
 
 ====Common Validations for all data files====
-For all the fields, you need to check if the field is blank. An error is produced for each blank field, and output in the left-to-right order of the CSV fields. A row is discarded, with no need to do further file-specific validation listed below, if any of the fields is blank.
+For all the fields, you need to check if the field is blank. An error message "blank [field]" is produced for each blank field, and output in the left-to-right order of the CSV fields. A row is discarded, with no need to do further file-specific validation listed below, if any of the fields is blank.
 
 ====File-specific Validations====
 If one or more fields fail the file-specific validations, the row is discarded, but all the errors are returned. Errors are output in the order they are listed in the tables below.
@@ -551,7 +551,7 @@ These files are of the same format as the app.csv and demographics.csv files use
 For the additional app.csv,
 #You will need to check for duplicate entries against the existing records in the database. If there are duplicates, discard the one in the additional file uploaded. If there are multiple duplicates in the additional file, discard all of them.
 #If there are duplicate records within the additional file uploaded, apply the same rule as bootstrap (use the last record and discard the earlier records).
-#Use the same error message ("duplicate row") for the above two scenarios, but the line number will be the line number of the record in the additional file uploaded.
+#Use the same error message ("duplicate row") for the above two scenarios, but the row number will be the row number of the record in the additional file uploaded.
 You can assume unique records for the additional demographics.csv.
 
 ===Basic App Usage Report (Blue)===
