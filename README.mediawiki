@@ -1414,7 +1414,7 @@ An example output will be as below:
         {
           "year": 2013,
           "count": 10,
-          "percent": 100,
+          "percent": 10,
           "breakdown": [
             {
               "intense_count": 1,
