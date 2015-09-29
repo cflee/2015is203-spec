@@ -858,7 +858,7 @@ Users would like to have a faster application, which means that the application 
 ===Overview===
 SMUA uses a RESTful API using JSON. All JSON API requests result in a status value. The two status values are success and error.
 
-Requests use a simple REST-style HTTP GET/POST. To invoke the API, include a non-empty r value in the URL. The format of a request is as follows:
+Requests use a simple REST-style HTTP GET/POST. The format of a request is as follows:
 
 <pre>
 http://<host>/json/<service>?token=tokenValue&paramA=valueA&paramB=valueB
