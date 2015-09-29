@@ -1737,33 +1737,32 @@ An example output will be returned as below:
 The results array is sorted by rank ascending, and student name a-z.
 
 =====Top-k schools with most app usage=====
-
 Request:
 <pre>
-http://<host>/json/top-k-most-used-schools?token=[tokenValue]
+http://<host>/json/top-k-most-used-schools?token=[tokenValue]&startdate=[startdate]&enddate=[enddate]&appcategory=[appcategory]
 </pre>
 
 Request Parameters and Possible Errors:
 {| class="wikitable"
 |k (optional)
-|an integer range from 1 to 10 with a default value of 3 (i.e., if not specified, k should be 3).
+|an integer range from 1 to 10 (both inclusive) with a default value of 3 (i.e., if not specified, k should be 3).
 |"invalid k"
 |-
 |startdate (required)
-|the date should be in a proper date format (YYYY-MM-DD), where YYYY-MM-DD is a valid day.
-|"invalid date"
+|the startdate should be in a proper date format(YYYY-MM-DD) and a valid date.
+|"invalid startdate"
 |-
 |enddate (required)
-|the date should be in a proper date format (YYYY-MM-DD), where YYYY-MM-DD is a valid day.
-|"invalid date"
+|the enddate should be in a proper date format(YYYY-MM-DD) and a valid date.
+|"invalid enddate"
 |-
-|appcategory(required)
+|appcategory (required)
 |the appcategory should be one of the valid application categories.
 |"invalid app category"
 |}
 
 Response:
-If the top-k most used students are calculated successfully, the following response is returned: (sort by rank, student name).
+If the top-k most used students are calculated successfully, the following response is returned:
 
 For the example request below:
 <pre>
@@ -1774,21 +1773,23 @@ An example output will be returned as below:
 
 <pre>
 {
-    "status": "success",
-    "results": [
-        {
-            "rank": 1,
-            "school": "sis",
-            "usagetime": 4.1
-        },
-        {
-            "rank": 2,
-            "school": "socsc",
-            "usagetime": 3.8
-        }
-    ]
+  "status": "success",
+  "results": [
+    {
+      "rank": 1,
+      "school": "sis",
+      "usagetime": 4.1
+    },
+    {
+      "rank": 2,
+      "school": "socsc",
+      "usagetime": 3.8
+    }
+  ]
 }
 </pre>
+
+The results array is sorted by rank ascending, school a-z.
 
 ====Smartphone Overuse Report====
 
