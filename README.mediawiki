@@ -924,7 +924,7 @@ Note:
 * The error messages are "blank [field]", "invalid [field]" or "missing [field]", where the field name is as specified below in each function.
 * If there is any missing/blank fields or invalid token, you can return the error and do not have to perform any other field validity checks or any other logical validations.
 * All missing/blank field or invalid token errors must be returned.
-* Sort all common validation error messages in '''alphabetical order''' (a-z).
+* Sort all common validation error messages in ascending '''alphabetical order'''.
 * For fields marked "(optional)", it is not necessary to check if they are missing. However, if they are present and blank, then the "blank [field]" error is still triggered as usual.
 
 ===Function-Specific Validations(Updating otw)===
@@ -939,6 +939,9 @@ For valid years/genders/schools, use the definitions in the validation for demog
 
 ===== App Categories =====
 For valid app categories, use the definitions in the validation for app-lookup.csv.
+
+==== General Sorting Definitions ====
+When strings are specified to be sorted in ascending order, that is in case-sensitive ascending lexicographic ordering.
 
 ==== Authenticate ====
 Request:
@@ -1028,7 +1031,7 @@ If the bootstrapping is successful, the following response is returned.
 }
 </pre>
 
-The num-record-loaded array is sorted by filename (alphabtical a-z). num-record-loaded indicates, for each file, the number of records successfully loaded/processed with no errors into the system.
+The num-record-loaded array is sorted by filename (ascending alphabetical order). num-record-loaded indicates, for each file, the number of records successfully loaded/processed with no errors into the system.
 
 If the bootstrap is unsuccessful, the following response is returned.
 
@@ -1065,7 +1068,7 @@ If the bootstrap is unsuccessful, the following response is returned.
 }
 </pre>
 
-Compared to the successful case, an additional error array is included. The error array is sorted by filename (alphabetical a-z), then by line number (ascending). For each file, line numbers start from 1 for the header row, and 2 for the first row of data. Within each message array, the messages are ordered as follows:
+Compared to the successful case, an additional error array is included. The error array is sorted by filename (ascending alphabetical order), then by line number (ascending). For each file, line numbers start from 1 for the header row, and 2 for the first row of data. Within each message array, the messages are ordered as follows:
 *For missing field validations, follow the left-to-right order of the CSV field list specified for each file.
 *For other validations, follow the order specified in the file-specific validation lists provided above.
 
@@ -1676,7 +1679,7 @@ An example output will be returned as below:
 }
 </pre>
 
-The results array is sorted by rank ascending, app name a-z.
+The results array is sorted by rank ascending, app name ascending.
 
 =====Top-k students with most app usage=====
 Request:
@@ -1734,7 +1737,7 @@ An example output will be returned as below:
 }
 </pre>
 
-The results array is sorted by rank ascending, and student name a-z.
+The results array is sorted by rank ascending, and student name ascending.
 
 =====Top-k schools with most app usage=====
 Request:
@@ -1789,7 +1792,7 @@ An example output will be returned as below:
 }
 </pre>
 
-The results array is sorted by rank ascending, school a-z.
+The results array is sorted by rank ascending, school ascending.
 
 ====Smartphone Overuse Report====
 Request:
@@ -1937,7 +1940,7 @@ An example output will be returned as follows:
 }
 </pre>
 
-The heatmap array is sorted by semantic-place a-z.
+The heatmap array is sorted by semantic-place ascending.
 
 ====Social Activeness Report====
 Request:
@@ -1993,7 +1996,7 @@ An example output will be returned as follows:
 }
 </pre>
 
-The individual-socialapp-usetime array is sorted by appname a-z.
+The individual-socialapp-usetime array is sorted by appname ascending.
 
 ====Advanced Smartphone Overuse Report====
 Request:
