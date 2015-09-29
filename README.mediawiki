@@ -921,10 +921,11 @@ The returned response should be:
 </pre>
 
 Note:
-* The error messages are "blank [parameter]", "invalid [parameter]" or "missing [parameter]", where the parameter name is as specified below in each function.
+* The error messages are "blank [field]", "invalid [field]" or "missing [field]", where the field name is as specified below in each function.
 * If there is any missing/blank fields or invalid token, you can return the error and do not have to perform any other field validity checks or any other logical validations.
 * All missing/blank field or invalid token errors must be returned.
-* Sort all error messages in '''alphabetical order''' (a-z).
+* Sort all common validation error messages in '''alphabetical order''' (a-z).
+* For fields marked "(optional)", it is not necessary to check if they are missing. However, if they are present and blank, then the "blank [field]" error is still triggered as usual.
 
 ===Function-Specific Validations(Updating otw)===
 ==== General Definitions ====
