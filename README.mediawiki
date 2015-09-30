@@ -947,7 +947,7 @@ For every JSON web service (apart from authenticate), you need to verify that th
 For valid app categories, use the definitions in the validation for app-lookup.csv.
 
 ==== General Sorting Definitions ====
-When strings are specified to be sorted in ascending order, that is in case-sensitive ascending lexicographic ordering.
+When strings are specified to be sorted in ascending order, that is in ascending lexicographic ordering, based on each character's Unicode value.
 
 ==== Authenticate ====
 Request:
