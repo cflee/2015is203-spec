@@ -1139,16 +1139,16 @@ an output will look like below:
     "status": "success",
     "breakdown": [
         {
-            "intense_count": 100
-            "intense_percent": 10
+            "intense-count": 100
+            "intense-percent": 10
         },
         {
-            "normal_count": 700
-            "normal_percent": 70
+            "normal-count": 700
+            "normal-percent": 70
         },
         {
-            "mild_count": 200
-            "mild_percent": 20
+            "mild-count": 200
+            "mild-percent": 20
         }
     ]
 }
@@ -1203,16 +1203,16 @@ An example output will be returned as below:
       "percent": 20,
       "breakdown": [
         {
-          "intense_count": 5,
-          "intense_percent": 5
+          "intense-count": 5,
+          "intense-percent": 5
         },
         {
-          "normal_count": 10,
-          "normal_percent": 10
+          "normal-count": 10,
+          "normal-percent": 10
         },
         {
-          "mild_count": 5,
-          "mild_percent": 5
+          "mild-count": 5,
+          "mild-percent": 5
         }
       ]
     },
@@ -1222,16 +1222,16 @@ An example output will be returned as below:
       "percent": 20,
       "breakdown": [
         {
-          "intense_count": 5,
-          "intense_percent": 5
+          "intense-count": 5,
+          "intense-percent": 5
         },
         {
-          "normal_count": 7,
-          "normal_percent": 7
+          "normal-count": 7,
+          "normal-percent": 7
         },
         {
-          "mild_count": 8,
-          "mild_percent": 8
+          "mild-count": 8,
+          "mild-percent": 8
         }
       ]
     },
@@ -1241,16 +1241,16 @@ An example output will be returned as below:
       "percent": 20,
       "breakdown": [
         {
-          "intense_count": 5,
-          "intense_percent": 5
+          "intense-count": 5,
+          "intense-percent": 5
         },
         {
-          "normal_count": 15,
-          "normal_percent": 15
+          "normal-count": 15,
+          "normal-percent": 15
         },
         {
-          "mild_count": 0,
-          "mild_percent": 0
+          "mild-count": 0,
+          "mild-percent": 0
         }
       ]
     },
@@ -1260,16 +1260,16 @@ An example output will be returned as below:
       "percent": 40,
       "breakdown": [
         {
-          "intense_count": 0,
-          "intense_percent": 0
+          "intense-count": 0,
+          "intense-percent": 0
         },
         {
-          "normal_count": 0,
-          "normal_percent": 0
+          "normal-count": 0,
+          "normal-percent": 0
         },
         {
-          "mild_count": 40,
-          "mild_percent": 40
+          "mild-count": 40,
+          "mild-percent": 40
         }
       ]
     },
@@ -1279,16 +1279,16 @@ An example output will be returned as below:
       "percent": 0,
       "breakdown": [
         {
-          "intense_count": 0,
-          "intense_percent": 0
+          "intense-count": 0,
+          "intense-percent": 0
         },
         {
-          "normal_count": 0,
-          "normal_percent": 0
+          "normal-count": 0,
+          "normal-percent": 0
         },
         {
-          "mild_count": 0,
-          "mild_percent": 0
+          "mild-count": 0,
+          "mild-percent": 0
         }
       ]
     }
@@ -1317,16 +1317,16 @@ An example output will be as below:
           "percent": 10,
           "breakdown": [
             {
-              "intense_count": 5,
-              "intense_percent": 5
+              "intense-count": 5,
+              "intense-percent": 5
             },
             {
-              "normal_count": 2,
-              "normal_percent": 2
+              "normal-count": 2,
+              "normal-percent": 2
             },
             {
-              "mild_count": 3,
-              "mild_percent": 3
+              "mild-count": 3,
+              "mild-percent": 3
             }
           ]
         },
@@ -1336,16 +1336,16 @@ An example output will be as below:
           "percent": 10,
           "breakdown": [
             {
-              "intense_count": 0,
-              "intense_percent": 0
+              "intense-count": 0,
+              "intense-percent": 0
             },
             {
-              "normal_count": 0,
-              "normal_percent": 0
+              "normal-count": 0,
+              "normal-percent": 0
             },
             {
-              "mild_count": 10,
-              "mild_percent": 10
+              "mild-count": 10,
+              "mild-percent": 10
             }
           ]
         },
@@ -1355,16 +1355,16 @@ An example output will be as below:
           "percent": 10,
           "breakdown": [
             {
-              "intense_count": 1,
-              "intense_percent": 1
+              "intense-count": 1,
+              "intense-percent": 1
             },
             {
-              "normal_count": 1,
-              "normal_percent": 1
+              "normal-count": 1,
+              "normal-percent": 1
             },
             {
-              "mild_count": 8,
-              "mild_percent": 8
+              "mild-count": 8,
+              "mild-percent": 8
             }
           ]
         },
@@ -1374,16 +1374,16 @@ An example output will be as below:
           "percent": 10,
           "breakdown": [
             {
-              "intense_count": 2,
-              "intense_percent": 2
+              "intense-count": 2,
+              "intense-percent": 2
             },
             {
-              "normal_count": 2,
-              "normal_percent": 2
+              "normal-count": 2,
+              "normal-percent": 2
             },
             {
-              "mild_count": 6,
-              "mild_percent": 6
+              "mild-count": 6,
+              "mild-percent": 6
             }
           ]
         },
@@ -1393,16 +1393,16 @@ An example output will be as below:
           "percent": 10,
           "breakdown": [
             {
-              "intense_count": 0,
-              "intense_percent": 0
+              "intense-count": 0,
+              "intense-percent": 0
             },
             {
-              "normal_count": 0,
-              "normal_percent": 0
+              "normal-count": 0,
+              "normal-percent": 0
             },
             {
-              "mild_count": 10,
-              "mild_percent": 10
+              "mild-count": 10,
+              "mild-percent": 10
             }
           ]
         }
@@ -1419,16 +1419,16 @@ An example output will be as below:
           "percent": 5,
           "breakdown": [
             {
-              "intense_count": 0,
-              "intense_percent": 0
+              "intense-count": 0,
+              "intense-percent": 0
             },
             {
-              "normal_count": 1,
-              "normal_percent": 1
+              "normal-count": 1,
+              "normal-percent": 1
             },
             {
-              "mild_count": 4,
-              "mild_percent": 4
+              "mild-count": 4,
+              "mild-percent": 4
             }
           ]
         },
@@ -1438,16 +1438,16 @@ An example output will be as below:
           "percent": 10,
           "breakdown": [
             {
-              "intense_count": 0,
-              "intense_percent": 0
+              "intense-count": 0,
+              "intense-percent": 0
             },
             {
-              "normal_count": 0,
-              "normal_percent": 0
+              "normal-count": 0,
+              "normal-percent": 0
             },
             {
-              "mild_count": 10,
-              "mild_percent": 10
+              "mild-count": 10,
+              "mild-percent": 10
             }
           ]
         },
@@ -1457,16 +1457,16 @@ An example output will be as below:
           "percent": 10,
           "breakdown": [
             {
-              "intense_count": 1,
-              "intense_percent": 1
+              "intense-count": 1,
+              "intense-percent": 1
             },
             {
-              "normal_count": 1,
-              "normal_percent": 1
+              "normal-count": 1,
+              "normal-percent": 1
             },
             {
-              "mild_count": 8,
-              "mild_percent": 8
+              "mild-count": 8,
+              "mild-percent": 8
             }
           ]
         },
@@ -1476,16 +1476,16 @@ An example output will be as below:
           "percent": 10,
           "breakdown": [
             {
-              "intense_count": 2,
-              "intense_percent": 2
+              "intense-count": 2,
+              "intense-percent": 2
             },
             {
-              "normal_count": 2,
-              "normal_percent": 2
+              "normal-count": 2,
+              "normal-percent": 2
             },
             {
-              "mild_count": 6,
-              "mild_percent": 6
+              "mild-count": 6,
+              "mild-percent": 6
             }
           ]
         },
@@ -1495,16 +1495,16 @@ An example output will be as below:
           "percent": 15,
           "breakdown": [
             {
-              "intense_count": 0,
-              "intense_percent": 0
+              "intense-count": 0,
+              "intense-percent": 0
             },
             {
-              "normal_count": 5,
-              "normal_percent": 5
+              "normal-count": 5,
+              "normal-percent": 5
             },
             {
-              "mild_count": 10,
-              "mild_percent": 10
+              "mild-count": 10,
+              "mild-percent": 10
             }
           ]
         }
@@ -1554,19 +1554,19 @@ An example output will be as below:
   "status": "success",
   "breakdown": [
     {
-      "category_name": "Books",
-      "category_duration": 10,
-      "category_percent": 2
+      "category-name": "Books",
+      "category-duration": 10,
+      "category-percent": 2
     },
     {
-      "category_name": "Social",
-      "category_duration": 100,
-      "category_percent": 20
+      "category-name": "Social",
+      "category-duration": 100,
+      "category-percent": 20
     },
     {
-      "category_name": "Education",
-      "category_duration": 50,
-      "category_percent": 10
+      "category-name": "Education",
+      "category-duration": 50,
+      "category-percent": 10
     },
     ...
   ]
@@ -1624,27 +1624,27 @@ An example output will be as below:
   "status": "success",
   "breakdown": [
     {
-      "duration": "00:00-01:00",
-      "usagetime": 300
+      "period": "00:00-01:00",
+      "duration": 300
     },
     {
-      "duration": "01:00-02:00",
-      "usagetime": 60
+      "period": "01:00-02:00",
+      "duration": 60
     },
     {
-      "duration": "02:00-03:00",
-      "usagetime": 0
+      "period": "02:00-03:00",
+      "duration": 0
     },
     ...
     {
-    	"duration": "23:00-00:00",
-    	"usagetime": 0
+      "period": "23:00-00:00",
+      "duration": 0
     }
   ]
 }
 </pre>
 
-Usagetime is in seconds. The breakdown array is sorted by duration ascending, i.e. "00:00-01:00" is first and "23:00-00:00" is last.
+The breakdown array is sorted by period ascending, i.e. "00:00-01:00" is first and "23:00-00:00" is last.
 
 ====Top-k App Usage Report====
 =====Top-k most used apps=====
@@ -1689,23 +1689,23 @@ An example output will be returned as below:
   "results": [
     {
       "rank": 1,
-      "appname": "Facebook",
-      "usagetime": 70
+      "app-name": "Facebook",
+      "duration": 70
     },
     {
       "rank": 1,
-      "appname": "WhatsApp",
-      "usagetime": 70
+      "app-name": "WhatsApp",
+      "duration": 70
     },
     {
       "rank": 3,
-      "appname": "Chrome",
-      "usagetime": 40
+      "app-name": "Chrome",
+      "duration": 40
     },
     {
       "rank": 3,
-      "appname": "Telegram",
-      "usagetime": 40
+      "app-name": "Telegram",
+      "duration": 40
     }
   ]
 }
@@ -1757,13 +1757,13 @@ An example output will be returned as below:
       "rank": 1,
       "name": "Brandon TAN",
       "mac-adddress": "0bcaef7b08dd8539205383b2918df6e9446746f0",
-      "usagetime": 70
+      "duration": 70
     },
     {
       "rank": 2,
       "name": "Jason TAN",
       "mac-address": "124b2e06a5789138a77e307e607ac57057251bea",
-      "usagetime": 40
+      "duration": 40
     }
   ]
 }
@@ -1813,12 +1813,12 @@ An example output will be returned as below:
     {
       "rank": 1,
       "school": "sis",
-      "usagetime": 41
+      "duration": 41
     },
     {
       "rank": 2,
       "school": "socsc",
-      "usagetime": 38
+      "duration": 38
     }
   ]
 }
@@ -1865,15 +1865,15 @@ An example output will be returned as follows:
     "overuse-index": "Overusing",
     "metrics": [
       {
-        "usagemetric": "Severe",
-        "usagetime": 57
+        "usage-category": "Severe",
+        "usage-duration": 57
       },
       {
-        "gamingmetric": "Moderate",
-        "gamingtime": 17
+        "gaming-category": "Moderate",
+        "gaming-duration": 17
       },
       {
-        "accessfrequencymetric": "Moderate",
+        "accessfrequency-category": "Moderate",
         "accessfrequency": 4.23
       }
     ]
@@ -1938,37 +1938,37 @@ An example output will be returned as follows:
     {
       "semantic-place": "SMUSISL2LOBBY",
       "num-people-using-phone": 10,
-      "density": 3
+      "crowd-density": 3
     },
     {
       "semantic-place": "SMUSISL2SR2-1",
       "num-people-using-phone": 1,
-      "density": 1
+      "crowd-density": 1
     },
     {
       "semantic-place": "SMUSISL2SR2-2",
       "num-people-using-phone": 8,
-      "density": 2
+      "crowd-density": 2
     },
     {
       "semantic-place": "SMUSISL2SR2-3",
       "num-people-using-phone": 14,
-      "density": 4
+      "crowd-density": 4
     },
     {
       "semantic-place": "SMUSISL2SR2-4",
       "num-people-using-phone": 0,
-      "density": 0
+      "crowd-density": 0
     },
     {
       "semantic-places": "SMUSISL2STUDYAREA1",
       "num-people-using-phone": 7,
-      "density": 2
+      "crowd-density": 2
     },
     {
       "semantic-place": "SMUSISL2STUDYAREA2",
       "num-people-using-phone": 21,
-      "density": 5
+      "crowd-density": 5
     }
   ]
 }
@@ -2008,18 +2008,18 @@ An example output will be returned as follows:
 {
   "status": "success",
   "results": {
-    "total-socialapp-usetime": 310,
-    "individual-socialapp-usetime": [
+    "total-social-app-usage-duration": 310,
+    "individual-social-app-usage": [
       {
-        "appname": "FaceBook",
+        "app-name": "FaceBook",
         "percent": 20
       },
       {
-        "appname": "Twitter",
+        "app-name": "Twitter",
         "percent": 10
       },
       {
-        "appname": "WhatsApp",
+        "app-name": "WhatsApp",
         "percent": 70
       }
     ],
@@ -2070,7 +2070,7 @@ An example output will be returned as follows:
   "results": {
     "overuse-index": "Overusing",
     "total-class-duration": 60,
-    "total-smallgroup-duration": 30,
+    "total-small-group-duration": 30,
     "non-productive-app-duration": 15
   }
 }
