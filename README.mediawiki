@@ -9,7 +9,7 @@ __TOC__
 !10
 |-
 |
-#Technical documents (By week 7)
+#Technical documents (By week 7: 4 Oct 11.59pm)
 #*Your team will need to create and update the following technical documents. The latest version of all documents must be updated in GIT repository in pdf format.
 #**Use case diagrams for all functions (one or two sentences for each use case).
 #**Sequence diagrams (SD) for key functions (login, basic app usage report, and top-k app usage report).
