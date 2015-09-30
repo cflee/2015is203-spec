@@ -397,6 +397,14 @@ Note: The location data is only required for implementing some of the green, red
 # For all the reports, durations need to be shown in seconds. (It is okay to provide minutes or hours to be more user friendly, but make sure you have the number in seconds as well.)
 # For smartphone access frequency, round to nearest 2 decimal places, with ties rounding up.
 
+===Parsing CSV files===
+The CSV files for the bootstrap / upload additional data functions will follow the [https://tools.ietf.org/html/rfc4180#section-2 RFC 4180 section 2 format], with a few notes:
+
+*While point 3 says that header line is optional in CSV format, the project requirements state that "[you] may assume [...] the header row is correct with all the necessary fields", and that still stands.
+*While point 4 says not to ignore surrounding whitespace that's part of the field, that's part of the CSV format when parsing it into individual fields, and the project's requirement to trim whitespace from fields before validation still stands.
+
+Note especially point 5 on quoting. As quotes are optional, 2048 and "2048" should be treated the same, and the field regarded as a string of length 4. If it is meant to be a string of length 6 surrounded by double quotes, it would have been """2048""" in the file instead.
+
 ==Detailed Logic Specification==
 
 
