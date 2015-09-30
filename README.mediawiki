@@ -1290,7 +1290,7 @@ An example output will be as below:
   "status": "success",
   "breakdown": [
     {
-      "gender": "M",
+      "gender": "F",
       "count": 50,
       "percent": 50,
       "breakdown": [
@@ -1392,7 +1392,7 @@ An example output will be as below:
       ]
     },
     {
-      "gender": "F",
+      "gender": "M",
       "count": 50,
       "percent": 50,
       "breakdown": [
@@ -1496,6 +1496,8 @@ An example output will be as below:
   ]
 }
 </pre>
+
+The outer breakdown array is sorted in ascending order (year) or ascending alphabetical order (gender/school). The innermost breakdown array is sorted in this order: intense, normal, then mild category data.
 
 =====Breakdown by app category=====
 
