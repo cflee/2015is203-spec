@@ -473,6 +473,9 @@ This file stores the list of students who can log into SMUA along with their dem
 
 List of validations for demographics.csv
 {| class="wikitable"
+!Field
+!Description
+|-
 |"invalid mac address"
 |if the value is not a SHA-1 hash value (a hexadecimal number, 40 digits long)
 |-
@@ -736,8 +739,11 @@ Note: location.csv can and will contain location updates for many MAC addresses 
 |the unique identifier for the location; location-id is not an (x,y) coordinate. We will provide a floor map that shows the mapping between location ids and actual locations on the map
 |}
 
-=====List of validations for the location.csv=====
+List of validations for location.csv
 {| class="wikitable"
+!Field
+!Description
+|-
 |"invalid location"
 |if the location-id is not one of the valid location-id in the location-lookup file
 |-
@@ -765,9 +771,12 @@ This file maps the location ids (e.g., 211, 212) used in location.csv to semanti
 |the name of the semantic place in SIS-building. Should be of format "SMUSISL&lt;level number&gt;&lt;specific location&gt;" or "SMUSISB&lt;level number&gt;&lt;specific location&gt;"
 |}
 
-=====List of validations for the location-lookup.csv=====
+List of validations for the location-lookup.csv
 A row is discarded if any of the fields is invalid but all the errors will be returned.
 {| class="wikitable"
+!Field
+!Description
+|-
 |"invalid location id"
 |if the location-id is not a valid positive non-zero integer value.
 |-
