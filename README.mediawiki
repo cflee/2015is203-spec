@@ -1864,6 +1864,8 @@ An example output will be returned as follows:
 }
 </pre>
 
+The metrics array is sorted in this order: usage, gaming, then access frequency.
+
 ====Loading Location Data====
 Request:
 <pre>
