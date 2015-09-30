@@ -394,7 +394,7 @@ Note: The location data is only required for implementing some of the green, red
 
 ===Display of the results===
 # For all the reports, percentage numbers need to be rounded to a nearest integer value, with ties rounding up.
-# For all the reports, durations need to be shown in seconds. (It is okay to provide minutes or hours to be more user friendly, but make sure you have the number in seconds as well.)
+# For all the reports, durations need to be shown in seconds, rounded to the nearest integer value, with ties rounding up. (It is okay to provide minutes or hours to be more user friendly, but make sure you have the number in seconds as well.)
 # For smartphone access frequency, round to nearest 2 decimal places, with ties rounding up.
 
 ===Parsing CSV files===
