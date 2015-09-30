@@ -857,7 +857,7 @@ Users would like to have a faster application, which means that the application 
 ==Web Service Requirements==
 
 ===Overview===
-SMUA uses a RESTful API using JSON. All JSON API requests result in a status value. The two status values are success and error.
+SMUA provides an API using the JSON format. All API responses are an JSON object, and include a 'status' value. The two possible status values are success and error.
 
 Requests use a simple REST-style HTTP GET/POST. The format of a request is as follows:
 
@@ -867,16 +867,11 @@ http://<host>/json/<service>?token=tokenValue&paramA=valueA&paramB=valueB
 The request query parameters may vary across different services.
 For this project, all requests (except for the authenticate service) require the sending of the token obtained via the authenticate service.
 
-For example:
-<pre>
-http://<host>/json/usage-heatmap?floor=2&date=2014-03-29&time=12:30:00&token=eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0MDk3MTIxNTMsImlhdCI6MTQwOTcwODU1M30.h66rOPHh992gpEPtErfqBP3Hrfkh_nNxYwPG0gcAuCc
-</pre>
-
-Note that in any GET or POST request, the order of parameters in query string or request body is unimportant. Therefore, '?date=2014-03-29&time=12:30:00' and '?time=12:30:00&date=2014-03-29' are equivalent.
+Note that as defined in the HTTP specification, in any GET or POST request, the order of parameters in query string or request body is unimportant. Therefore, '?date=2014-03-29&time=12:30:00' and '?time=12:30:00&date=2014-03-29' are equivalent.
 
 ===JSON Basics===
-Below are some clarification about the JSON language. When in doubt, refer to the [http://json.org/ JSON Specification]
-* If unsure, test it out with the json checker provided [https://github.com/yllee/jsonchecker JSON Checker]
+Below are some clarification about the JSON language. When in doubt, refer to the [http://json.org/ JSON Specification].
+If still unsure, test it out with the json checker provided: [https://github.com/yllee/jsonchecker JSON Checker].
 
 ==== JSON Values ====
 A JSON values can be a/an
@@ -923,32 +918,45 @@ The returned response should be:
 
 Note:
 * The error messages are "blank [field]", "invalid [field]" or "missing [field]", where the field name is as specified below in each function.
-* If there is any missing/blank fields or invalid token, you can return the error and do not have to perform any other field validity checks or any other logical validations.
+* If there are any common validation errors (missing/blank fields or invalid token), you must return the error and should not perform any other field validity checks, any other logical validations, or any other processing.
 * All missing/blank field or invalid token errors must be returned.
-* Sort all common validation error messages in ascending '''alphabetical order'''.
+* Sort all common validation error messages in ascending order.
 * For fields marked "(optional)", it is not necessary to check if they are missing. However, if they are present and blank, then the "blank [field]" error is still triggered as usual.
 
-===Function-Specific Input/Output and Validations(Updating otw)===
-==== General Validation Definitions ====
-===== Dates/Times =====
+=== General Input Definitions ===
 Dates are validated with the rule "a proper date format(YYYY-MM-DD) and a valid date". The format implies that the date string must be 10 char long and including all leading zeros, like "2015-05-01". Also, dates like "2015-02-29" and "2015-13-32" are invalid.
 
 Times are validated with the rule "a proper time format(HH:MM:SS) and a valid time". The format implies that the time string must be 8 char long and including all leading zeros, like "08:03:05". Also, times like "24:60" are invalid.
 
-===== Demographics / Mac Address =====
-For valid years/genders/schools, use the definitions in the validation for demographics.csv.
+Valid years/genders/schools are those as defined in the validation for demographics.csv.
 
-A mac address is valid only if it is a SHA-1 hash value (40 digit hexadecimal number) and is found inside demographics.csv.
+Valid app categories are those as defined in the validation for app-lookup.csv.
 
-===== Token =====
-For every JSON web service (apart from authenticate), you need to verify that the token is valid (i.e. the JWTUtility.verify() method returns a non-null string and does not throw any exceptions).
+Mac address is valid only if it is a SHA-1 hash value (40 digit hexadecimal number) and is found inside demographics.csv.
 
-===== App Categories =====
-For valid app categories, use the definitions in the validation for app-lookup.csv.
+'order' parameter only allows the values 'year', 'gender' and 'school' separated by a single comma, and each of these values may only appear at most once. For instance, "year,year" and "year,,gender" are invalid.
 
-==== General Sorting Definitions ====
-When strings are specified to be sorted in ascending order, that is in ascending lexicographic ordering, based on each character's Unicode value.
+'''Note:''' For all input parameters (except token), you must accept the parameters in a case-insensitive way! For instance, both "m" and "M" must be accepted for gender without error and return the same results.
 
+=== General Output Definitions ===
+For all output, the case sensitivity is as defined here:
+
+*Name: same case as given in demographics.csv
+*Gender: capital "M" or "F"
+*School: all lowercase
+*MAC Address: all lowercase
+*appcategory: all lowercase
+
+As JSON strings are case-sensitive, your web services' output must exactly match these rules.
+
+Sorting order for arrays is defined with each function. When strings are specified to be sorted in ascending order, they should be sorted in ascending lexicographic ordering, based on each character's Unicode value.
+
+See also the earlier section, "Display of the results".
+
+=== Token ===
+For every JSON web service (except authenticate), you need to verify that the token is valid: the JWTUtility.verify() method must return a non-null string and not throw any exceptions.
+
+===Function-Specific Input/Output and Validations===
 ==== Authenticate ====
 Request:
 <pre>
