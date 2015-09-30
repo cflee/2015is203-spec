@@ -394,7 +394,16 @@ Note: The location data is only required for implementing some of the green, red
 
 ===Display of the results===
 # For all the reports, percentage numbers need to be rounded to a nearest integer value, with ties rounding up.
-# For all the reports, time need to be shown in seconds. (It is okay to provide minutes or hours to be more user friendly, but make sure you have the number in seconds as well.)
+# For all the reports, durations need to be shown in seconds. (It is okay to provide minutes or hours to be more user friendly, but make sure you have the number in seconds as well.)
+# For smartphone access frequency, round to nearest 2 decimal places, with ties rounding up.
+
+===Parsing CSV files===
+The CSV files for the bootstrap / upload additional data functions will follow the [https://tools.ietf.org/html/rfc4180#section-2 RFC 4180 section 2 format], with a few notes:
+
+*While point 3 says that header line is optional in CSV format, the project requirements state that "[you] may assume [...] the header row is correct with all the necessary fields", and that still stands.
+*While point 4 says not to ignore surrounding whitespace that's part of the field, that's part of the CSV format when parsing it into individual fields, and the project's requirement to trim whitespace from fields before validation still stands.
+
+Note especially point 5 on quoting. As quotes are optional, 2048 and "2048" should be treated the same, and the field regarded as a string of length 4. If it is meant to be a string of length 6 surrounded by double quotes, it would have been """2048""" in the file instead.
 
 ==Detailed Logic Specification==
 
@@ -430,12 +439,12 @@ Bootstrap involves clearing all existing data in the database and replacing them
 #app.csv
 For each of the files, process them in order from the first row to the last. The header row is considered row 1, and the first data row is row 2. You may assume that the above three files will all be present, the header row is correct with all the necessary fields, and each row has the same number of fields as the header row.
 
-Upon processing, each row is run through the common validations. If there are no errors, then it is run through the file-specific validations. If there are still no errors, then the data is added to the database. Errors are reported with the filename, row number, and error message(s). If a single line has multiple errors, output all the errors in the order specified.
+Upon processing, each row is run through the common validations. If there are no errors, then it is run through the file-specific validations. If there are still no errors, then the data is added to the database. Errors are reported with the filename, row number, and error message(s). If a single row has multiple errors, output all the errors in the order specified.
 
 Additionally, if there is any whitespace at the start or end of each field, it must be removed before starting the common validations. For example if the email is “apple.hsu  “ (one or more whitespace characters at the end), the whitespace must be removed before storing it into the database.
 
 ====Common Validations for all data files====
-For all the fields, you need to check if the field is blank. An error is produced for each blank field, and output in the left-to-right order of the CSV fields. A row is discarded, with no need to do further file-specific validation listed below, if any of the fields is blank.
+For all the fields, you need to check if the field is blank. An error message "blank [field]" is produced for each blank field, and output in the left-to-right order of the CSV fields. A row is discarded, with no need to do further file-specific validation listed below, if any of the fields is blank.
 
 ====File-specific Validations====
 If one or more fields fail the file-specific validations, the row is discarded, but all the errors are returned. Errors are output in the order they are listed in the tables below.
@@ -464,6 +473,9 @@ This file stores the list of students who can log into SMUA along with their dem
 
 List of validations for demographics.csv
 {| class="wikitable"
+!Field
+!Description
+|-
 |"invalid mac address"
 |if the value is not a SHA-1 hash value (a hexadecimal number, 40 digits long)
 |-
@@ -548,11 +560,12 @@ In addition to the bootstrap capabilities listed above, the admin page should ha
 
 These files are of the same format as the app.csv and demographics.csv files used for bootstrapping. Use the same validations listed for these data file(s).
 
-For the additional app.csv,
-#You will need to check for duplicate entries against the existing records in the database. If there are duplicates, discard the one in the additional file uploaded. If there are multiple duplicates in the additional file, discard all of them.
-#If there are duplicate records within the additional file uploaded, apply the same rule as bootstrap (use the last record and discard the earlier records).
-#Use the same error message ("duplicate row") for the above two scenarios, but the line number will be the line number of the record in the additional file uploaded.
-You can assume unique records for the additional demographics.csv.
+For the additional app.csv's "duplicate row" handling:
+#If there are row(s) in the file that are duplicates with an existing valid record in the database, then all the duplicate row(s) in the file are discarded.
+#If there are row(s) in the file that duplicate with each other, and are not duplicates with any existing valid record in the database, then the bootstrap rules are followed: all earlier rows are discarded, and the final row is loaded into the database.
+#In both cases, when discarding a row, use the same error message ("duplicate row"). Note that existing valid records in the database are never discarded, so the rows discarded always belong to the app.csv file in the just-uploaded zip file!
+
+You can assume unique records for the additional demographics.csv, i.e. unique both within the just-uploaded demographics.csv file, as well as with the existing valid records in the database.
 
 ===Basic App Usage Report (Blue)===
 This functionality will allow a user to see four different app usage time reports for a given duration. The following subsections describe the request, response, and logic of each report in more detail. In all reports, you will need to consider all users who reported a valid data at least once during the given period.
@@ -594,16 +607,16 @@ If there are no users in a specific demographic combination, it is still display
 
 ====Breakdown by app category====
 Given a start date and end date (both inclusive), process data on a daily basis to calculate average daily app usage time per app category (Books/Social/Education/Entertainment/…).
-For each app category, show the daily usage duration (in hours) as well as the percentage of the total (i.e., compare the duration per category with the total duration across all categories).
+For each app category, show the daily usage duration as well as the percentage of the total (i.e., compare the duration per category with the total duration across all categories).
 
-If there is no usage in an app category (as defined in app-lookup.csv file validation), it is still displayed with 0 users.
+If there is no usage in an app category (as defined in app-lookup.csv file validation), it is still displayed with 0 duration.
 
 ====Diurnal pattern of app usage time====
-This report shows a diurnal pattern of the average app usage time given a specific day. Also, a user can (but does not has to) narrow down the target users by providing one or more demographics filtering conditions (year/gender/school).  If filter(s) are specified, consider all users who match the filtering conditions and report data at least once during the specified day. If no filter is specified, simply consider all users who reported app usage data during the day.
+This report shows a diurnal pattern of the average app usage time given a specific day. Also, a user can (but does not has to) narrow down the target users by providing one or more demographics filtering conditions (year/gender/school). The user can only pick at most one option for each filter (e.g. only sis for school, not sis and socsc). If filter(s) are specified, consider all users who match the filtering conditions and report data at least once during the specified day. If no filter is specified, simply consider all users who reported app usage data during the day.
 
 For those users, process app usage data on an hourly basis to compute app usage time per hour, averaged across all the target users, and output the average app usage time per user (in seconds) for every hour. The output should looks something like: 12 AM (inclusive) ~ 1AM (exclusive): 300 seconds, 1AM~2AM: 60 seconds, …. 5PM~6PM: 1200 seconds, 11PM~12AM: 1260 seconds.
 
-If there is no usage in a hourly window, it is still displayed with 0 minutes.
+If there is no usage in a hourly window, it is still displayed with 0 duration.
 
 
 ===Top-k App Usage Report (Blue)===
@@ -632,7 +645,7 @@ The ‘ranks’ are the various entries that make up the lists used for reportin
 |Calendar
 |}
 
-If you were asked to return the top-3 (top-k where k = 3) most popular app names, you would output ranks 1 (with two tied entries) and 3 from this table. Within each rank, the entries need to be sorted lexicographically.
+If you were asked to return the top-3 (top-k where k = 3) most popular app names, you would output ranks 1 (with two tied entries) and 3 from this table. Within each rank, the entries' app name/student name/school need to be sorted in ascending order.
 
 If you were asked to return the top-5, you would output the rank 1, 3, and 4 (with every tied entry). Note that in the above example, a total of six apps (from Facebook to SBS Transit) will be returned as all tied entries must be returned for the 4th rank.
 
@@ -641,13 +654,13 @@ There is no need to return the result with 0 entries. For instance, in the above
 For the below three top-k app usage reports, the user must select a single school/app category for filtering. In other words, there is no 'all schools' or 'all app categories' option.
 
 ====Top-k most used apps (given a school)====
-Given a certain school, start date and end date (both inclusive) as user input, show the top-k apps with most app usage time by students in that school.
+Given a certain school, start date and end date (both inclusive) as user input, show the top-k apps with most app usage time by students in that school. Display the rank, app name, and app usage time.
 
 ====Top-k students with most app usage (given an app category)====
-Given an app category, start date and end date (both inclusive) as user input, show the top-k students with most usage time in that app category. Report the app usage time (in hours) together with the rank, student name and mac address.
+Given an app category, start date and end date (both inclusive) as user input, show the top-k students with most usage time in that app category. Display the rank, student name, mac address and app usage time.
 
 ====Top-k schools with most app usage (given an app category)====
-Given an app category, start date and end date (both inclusive) as user input, show the top-k schools with the most app usage time in the specified category.
+Given an app category, start date and end date (both inclusive) as user input, show the top-k schools with the most app usage time in the specified category. Display the rank, school, and app usage time.
 
 
 
@@ -686,7 +699,7 @@ Also, the report calculates and outputs a combined overuse index based on the fo
 #The index is set to ‘Normal’ only when all three metrics are in ‘Light’ category.
 #The index is set to ‘ToBeCautious’ for all other cases.
 
-As the final output, report the the overuse index value (i.e., one of {Overusing, Normal, ToBeCautious}) along with values for the three metrics (i.e., one of {Severe, Moderate, Light}).
+As the final output, report the the overuse index value (i.e., one of {Overusing, Normal, ToBeCautious}) along with both the actual numerical value and category (i.e., one of {Severe, Moderate, Light}) for the three metrics.
 
 ===Dual Interfaces (Web UI and Web Services) (Blue)===
 Your application needs to provide not only web UI (to allow a user to query your SMUA system) but also web services interfaces, i.e., JSON APIs (to allow other machines/third party app to query your SMUA system).
@@ -726,8 +739,11 @@ Note: location.csv can and will contain location updates for many MAC addresses 
 |the unique identifier for the location; location-id is not an (x,y) coordinate. We will provide a floor map that shows the mapping between location ids and actual locations on the map
 |}
 
-=====List of validations for the location.csv=====
+List of validations for location.csv
 {| class="wikitable"
+!Field
+!Description
+|-
 |"invalid location"
 |if the location-id is not one of the valid location-id in the location-lookup file
 |-
@@ -755,9 +771,12 @@ This file maps the location ids (e.g., 211, 212) used in location.csv to semanti
 |the name of the semantic place in SIS-building. Should be of format "SMUSISL&lt;level number&gt;&lt;specific location&gt;" or "SMUSISB&lt;level number&gt;&lt;specific location&gt;"
 |}
 
-=====List of validations for the location-lookup.csv=====
+List of validations for the location-lookup.csv
 A row is discarded if any of the fields is invalid but all the errors will be returned.
 {| class="wikitable"
+!Field
+!Description
+|-
 |"invalid location id"
 |if the location-id is not a valid positive non-zero integer value.
 |-
@@ -856,24 +875,22 @@ Users would like to have a faster application, which means that the application 
 ==Web Service Requirements==
 
 ===Overview===
-SMUA uses a RESTful API using JSON. All JSON API requests result in a status value. The two status values are success and error.
+SMUA provides an API using the JSON format. All API responses are an JSON object, and include a 'status' value. The two possible status values are success and error.
 
-Requests use a simple REST-style HTTP GET/POST. To invoke the API, include a non-empty r value in the URL. The format of a request is as follows:
+Requests use a simple REST-style HTTP GET/POST. The format of a request is as follows:
 
 <pre>
 http://<host>/json/<service>?token=tokenValue&paramA=valueA&paramB=valueB
 </pre>
-The request queries parameter may vary across different services.
+The request query parameters may vary across different services.
 For this project, all requests (except for the authenticate service) require the sending of the token obtained via the authenticate service.
 
-For example:
-<pre>
-http://<host>/json/heatmap?floor=2&date=2014-03-29T12:30:00&token=eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0MDk3MTIxNTMsImlhdCI6MTQwOTcwODU1M30.h66rOPHh992gpEPtErfqBP3Hrfkh_nNxYwPG0gcAuCc
-</pre>
+Note that as defined in the HTTP specification, in any GET or POST request, the order of parameters in query string or request body is unimportant. Therefore, '?date=2014-03-29&time=12:30:00' and '?time=12:30:00&date=2014-03-29' are equivalent.
 
-===JSON Basic===
-Below are some clarification about the JSON language. When in doubt, refer to the [http://json.org/ JSON Specification]
-* If unsure, test it out with the json checker provided [https://github.com/yllee/jsonchecker JSON Checker]
+===JSON Basics===
+Below are some clarification about the JSON language. When in doubt, refer to the [http://json.org/ JSON Specification].
+If still unsure, test it out with the json checker provided: [https://github.com/yllee/jsonchecker JSON Checker].
+
 ==== JSON Values ====
 A JSON values can be a/an
 * number (integer or floating point). To indicate a floating number, always put a decimal place. For example, 12.0 instead of 12.
@@ -883,68 +900,106 @@ A JSON values can be a/an
 * object (in curly brackets)
 * null
 
+Note that strings are case-sensitive.
+
 ==== Ordering ====
 * An array is an ordered collection of values.
 * An object is an unordered set of name/value pairs.
 
 ==== Whitespace ====
-* JSON generally ignores any whitespace around or between syntactic elements (values and punctuation, but not within a string value).
-
-JSON format for each functionality is specified in detail below.
+* JSON generally ignores any whitespace around or between syntactic elements (values and punctuation), but not within a string value.
 
 ===Common Validations for JSON requests ===
 For all the input fields, you need to check
 # if the mandatory field is missing
-# if the field is blank.
-# if the token is invalid.
+# if the field is blank
+# if the token is invalid
 
 Valid Request:
 <pre>
-http://<host>/json/heatmap?token=[tokenValue]&floor=2&date=2014-03-29T12:30:00
+http://<host>/json/usage-heatmap?token=[tokenValue]&floor=2&date=2014-03-29&time=12:30:00
 </pre>
 
 Invalid request:
 <pre>
-http://<host>/json/heatmap?token=HappyHappyJoyJoy&date=
+http://<host>/json/usage-heatmap?token=HappyHappyJoyJoy&date=&time=
 </pre>
 
-The response return should be:
-(Note: The messages field should have all the missing/blank fields or invalid token errors)
+The returned response should be:
 
 <pre>
 {
-  "status": "error"
-  "messages": [ "blank date","invalid token", "missing floor" ]
+  "status": "error",
+  "messages": [ "blank date", "blank time", "invalid token", "missing floor" ]
 }
 </pre>
 
 Note:
-* If there is any missing/blank fields or invalid token, you can return the error and do not have to perform any other field validity checks or any other logical validations.
-* Sort all error messages in '''alphabetical order.'''
+* The error messages are "blank [field]", "invalid [field]" or "missing [field]", where the field name is as specified below in each function.
+* If there are any common validation errors (missing/blank fields or invalid token), you must return the error and should not perform any other field validity checks, any other logical validations, or any other processing.
+* All missing/blank field or invalid token errors must be returned.
+* Sort all common validation error messages in ascending order.
+* For fields marked "(optional)", it is not necessary to check if they are missing. However, if they are present and blank, then the "blank [field]" error is still triggered as usual.
 
-===Function-Specific Validations(Updating otw)===
+=== General Input Definitions ===
+Dates are validated with the rule "a proper date format(YYYY-MM-DD) and a valid date". The format implies that the date string must be 10 char long and including all leading zeros, like "2015-05-01". Also, dates like "2015-02-29" and "2015-13-32" are invalid.
+
+Times are validated with the rule "a proper time format(HH:MM:SS) and a valid time". The format implies that the time string must be 8 char long and including all leading zeros, like "08:03:05". Also, times like "24:60" are invalid.
+
+Valid years/genders/schools are those as defined in the validation for demographics.csv.
+
+Valid app categories are those as defined in the validation for app-lookup.csv.
+
+Mac address is valid only if it is a SHA-1 hash value (40 digit hexadecimal number) and is found inside demographics.csv.
+
+'order' parameter only allows the values 'year', 'gender' and 'school' separated by a single comma, and each of these values may only appear at most once. For instance, "year,year" and "year,,gender" are invalid.
+
+'''Note:''' For all input parameters (except token), you must accept the parameters in a case-insensitive way! For instance, both "m" and "M" must be accepted for gender without error and return the same results.
+
+=== General Output Definitions ===
+For all output, the case sensitivity is as defined here:
+
+*Name: same case as given in demographics.csv
+*Gender: capital "M" or "F"
+*School: all lowercase
+*MAC Address: all lowercase
+*appcategory: all lowercase
+
+As JSON strings are case-sensitive, your web services' output must exactly match these rules.
+
+Sorting order for arrays is defined with each function. When strings are specified to be sorted in ascending order, they should be sorted in ascending lexicographic ordering, based on each character's Unicode value.
+
+See also the earlier section, "Display of the results".
+
+=== Token ===
+For every JSON web service (except authenticate), you need to verify that the token is valid: the JWTUtility.verify() method must return a non-null string and not throw any exceptions.
+
+===Function-Specific Input/Output and Validations===
 ==== Authenticate ====
 Request:
 <pre>
 http://<host>/json/authenticate
 </pre>
 
-request post parameters:
+Request '''POST''' Parameters and Possible Errors:
 {| class="wikitable"
 !field
 !description
 !error message
 |-
 |username
-|the user's username
+|the user's username should match a record in the database
 |"invalid username/password"
 |-
 |password
-| the user's password
+|the user's password should match this particular user's record
 |"invalid username/password"
 |}
 
+Note that validation for this service is special: if both username and password fail validation, the error message "invalid username/password" is only included once in the response!
+
 Response:
+
 If authentication is successful, a JSON web token is returned:
 
 <pre>
@@ -954,77 +1009,107 @@ If authentication is successful, a JSON web token is returned:
 }
 </pre>
 
-Use the [http://blue.smu.edu.sg/is203/jwt API] (updated 8 Oct). You will need the following jar files [http://blue.smu.edu.sg/is203/jwt/lib/is203-jwt-v2.jar is203-jwt-v2.jar],[http://blue.smu.edu.sg/is203/jwt/lib/json-smart-1.2.jar json-smart-1.2.jar],[http://blue.smu.edu.sg/is203/jwt/lib/nimbus-jose-jwt-2.26.1.jar nimbus-jose-jwt-2.26.1.jar]. The process is as follows:
-#Upon check that the username & password pair is valid, generate a token using the sign method. You will need a sharedSecret (This is a random string of length 16 that you need to share with the instructional team).
-#For every JSON web service, you need to verify that the token is valid (i.e. the verify method returns true and does not throw any exceptions).
+Use the [http://blue.smu.edu.sg/is203/jwt API] (updated 8 Oct 2014). You will need the following jar files [http://blue.smu.edu.sg/is203/jwt/lib/is203-jwt-v2.jar is203-jwt-v2.jar], [http://blue.smu.edu.sg/is203/jwt/lib/json-smart-1.2.jar json-smart-1.2.jar], [http://blue.smu.edu.sg/is203/jwt/lib/nimbus-jose-jwt-2.26.1.jar nimbus-jose-jwt-2.26.1.jar]. The process is as follows:
+#After checking that the username and password pair is valid, generate a token using the JWTUtility.sign() method. The sharedSecret parameter is a string of length 16 that you choose, and will need to share with the teaching team.
+#Ensure that your sharedSecret is not easily guessable: otherwise other people will be able to generate their own username=admin token and randomly bootstrap your system while you are testing it!
 
 ====Bootstrap====
-Bootstrapping is done by sending a multi-part request (http://www.faqs.org/rfcs/rfc1867.html) to the server. You can assume that the user is using a form to send the multi-part request:
+Request:
+<pre>
+http://<host>/json/bootstrap
+</pre>
+
+Bootstrapping is done by sending a HTTP multipart/form-data POST request (http://www.faqs.org/rfcs/rfc1867.html) to the server. You can assume that the request is sent with these fields:
+
+Request '''POST''' Parameters:
+{| class="wikitable"
+!field
+!description
+|-
+|token
+|a valid token
+|-
+|bootstrap-file
+|a zip file
+|}
+
+While you may assume that the bootstrap-file is present, can be unzipped, etc., the common validations must still be applied for token: missing token, blank token, invalid token. As usual, if any of these common validations fail, return those error messages and no further processing is required.
+
+You can simulate the above POST parameters by using this HTML snippet:
 
 <pre>
 <form action="http://<host>/json/bootstrap"  method="post" enctype="multipart/form-data">
-
-  Filename:
+  File:
   <input type="file" name="bootstrap-file" /><br />
   <input type='text' name='token' value='eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0MDk3MTIxNTMsImlhdCI6MTQwOTcwODU1M30.h66rOPHh992gpEPtErfqBP3Hrfkh_nNxYwPG0gcAuCc' />
+  <!-- substitute the above value with a valid token -->
   <input type="submit" value="Bootstrap" />
 </form>
 </pre>
 
-Upload of additional location and demographics data file is done in a similar way to the http://&lt;host&gt;/json/update.
+Response:
 
-Note:
-#You must clear all existing data before bootstrapping.
-#If the bootstrapping is successful, the following response is returned. The num-record-loaded array is sorted by filename.
+If the bootstrapping is successful, the following response is returned.
 
 <pre>
 {
   "status": "success",
-  "num-record-loaded":
-     [
-        { "demographics.csv": 539 },
-        { "app-lookup.csv": 270 },
-        { "app.csv": 22578}
-     ]
+  "num-record-loaded": [
+    { "app-lookup.csv": 270 },
+    { "app.csv": 22578 },
+    { "demographics.csv": 539 }
+  ]
 }
 </pre>
 
-Note: "num-record-loaded" indicates the number of records loaded(i.e. processed) successfully (no error) into your system for each of file in the zipped file.
+The num-record-loaded array is sorted by filename (ascending order). num-record-loaded indicates, for each file, the number of records successfully loaded/processed with no errors into the system.
 
-#If the bootstrap is unsuccessful, return the following message with the appropriate errors (the full list of errors are listed below). The errors are ordered by file (alphabetical), then by line number. Within each array of error messages, the messages are also ordered.
-#*For missing field validations, follow the left-to-right order of the CSV field list specified for each file.
-#*For other validations, follow the order specified in the lists provided above.
+If the bootstrap is unsuccessful, the following response is returned.
+
 <pre>
 {
   "status": "error",
-  "num-record-loaded":
-     [
-        { "demographics.csv": 539 },
-        { "app-lookup.csv": 270 },
-        { "app.csv": 22578}
-     ],
-  "error":
-     [
-        {
-          "file" : "demographics.csv",
-          "line" : 452,
-          "message" : ["invalid email"]
-        },
-        {
-          "file" : "app.csv",
-          "line" : 5,
-          "message" : ["invalid app", "invalid mac address"]
-        },
-        {
-          "file" : "app.csv",
-          "line" : 153,
-          "message" : ["invalid app"]
-        }
-     ]
+  "num-record-loaded": [
+    { "app-lookup.csv": 270 },
+    { "app.csv": 22578 },
+    { "demographics.csv": 539 }
+   ],
+  "error": [
+    {
+      "file": "app.csv",
+      "line": 5,
+      "message": ["invalid app", "no matching mac address", "invalid timestamp"]
+    },
+    {
+      "file": "app-lookup.csv",
+      "line": 153,
+      "message": ["invalid app id"]
+    },
+    {
+      "file": "app-lookup.csv",
+      "line": 155,
+      "message": ["blank app-id", "blank app-name", "blank app-category"]
+    },
+    {
+      "file": "demographics.csv",
+      "line": 452,
+      "message": ["invalid email"]
+    }
+  ]
 }
 </pre>
 
-Note: The header row is row 1. The first row of data is row 2.
+Compared to the successful case, an additional error array is included. The error array is sorted by filename (ascending order), then by line number (ascending). For each file, line numbers start from 1 for the header row, and 2 for the first row of data. Within each message array, the messages are ordered as follows:
+*For missing field validations, follow the left-to-right order of the CSV field list specified for each file.
+*For other validations, follow the order specified in the file-specific validation lists provided above.
+
+====Upload additional data====
+Request:
+<pre>
+http://<host>/json/update
+</pre>
+
+Request and response formats are similar to Bootstrap, as defined above, and following the rules specified in the Detailed Logic Specification section.
 
 ====Basic App Usage Report====
 =====Breakdown by usage time category=====
@@ -1063,26 +1148,28 @@ an output will look like below:
     "status": "success",
     "breakdown": [
         {
-            "intense_count": 100
-            "intense_percent": 10
+            "intense-count": 100
+            "intense-percent": 10
         },
         {
-            "normal_count": 700
-            "normal_percent": 70
+            "normal-count": 700
+            "normal-percent": 70
         },
         {
-            "mild_count": 200
-            "mild_percent": 20
+            "mild-count": 200
+            "mild-percent": 20
         }
     ]
 }
 </pre>
 
+The breakdown array is sorted in this order: intense, normal, then mild category data.
+
 =====Breakdown by usage time category and demographics=====
 
 Request:
 <pre>
-http://<host>/json/basic-usetime-report?token=[tokenValue]
+http://<host>/json/basic-usetime-demographics-report?startdate=[startDate]&enddate=[enddate]&order=[order]&token=[tokenValue]
 </pre>
 
 Request Parameters and Possible Errors:
@@ -1100,11 +1187,12 @@ Request Parameters and Possible Errors:
 |"invalid enddate"
 |-
 |order
-|the order must be a comma-separated list that specify the order of the fields entered (year, gender, school). Only the values year, gender and school are allowed.
+|the order must be a comma-separated list that specify the order of the fields entered (year, gender, school). Only the values year, gender and school are allowed. Each value may only appear at most once.
 |"invalid order"
 |}
 
 Response:
+
 If the breakdown is calculated successfully, the following response is returned:
 
 For an example request below:
@@ -1116,104 +1204,104 @@ An example output will be returned as below:
 
 <pre>
 {
-	"status": "success",
-	"breakdown": [
-		{
-			"year": 2011,
-			"count": 20,
-			"percent": 20,
-			"breakdown": [
-				{
-            				"intense_count": 5
-            				"intense_percent": 5
-        			},
-        			{
-            				"normal_count": 10
-            				"normal_percent": 10
-        			},
-        			{
-            				"mild_count": 5
-            				"mild_percent": 5
-        			}
-			]
-		},
-		{
-			"year": 2012,
-			"count": 20,
-			"percent": 20,
-			"breakdown": [
-				{
-            				"intense_count": 5
-            				"intense_percent": 5
-        			},
-        			{
-            				"normal_count": 7
-            				"normal_percent": 7
-        			},
-        			{
-            				"mild_count": 8
-            				"mild_percent": 8
-        			}
-			]
-		},
-		{
-			"year": 2013,
-			"count": 20,
-			"percent": 20,
-			"breakdown": [
-				{
-            				"intense_count": 5
-            				"intense_percent": 5
-        			},
-        			{
-            				"normal_count": 15
-            				"normal_percent": 15
-        			},
-        			{
-            				"mild_count": 0
-            				"mild_percent": 0
-        			}
-			]
-		},
-		{
-			"year": 2014,
-			"count": 40,
-			"percent": 40,
-			"breakdown": [
-				{
-            				"intense_count": 0
-            				"intense_percent": 0
-        			},
-        			{
-            				"normal_count": 0
-            				"normal_percent": 0
-        			},
-        			{
-            				"mild_count": 40
-            				"mild_percent": 40
-        			}
-			]
-		},
-		{
-			"year": 2015,
-			"count": 0,
-			"percent": 0,
-			"breakdown": [
-				{
-            				"intense_count": 0
-            				"intense_percent": 0
-        			},
-        			{
-            				"normal_count": 0
-            				"normal_percent": 0
-        			},
-        			{
-            				"mild_count": 0
-            				"mild_percent": 0
-        			}
-			]
-		}
-    	]
+  "status": "success",
+  "breakdown": [
+    {
+      "year": 2011,
+      "count": 20,
+      "percent": 20,
+      "breakdown": [
+        {
+          "intense-count": 5,
+          "intense-percent": 5
+        },
+        {
+          "normal-count": 10,
+          "normal-percent": 10
+        },
+        {
+          "mild-count": 5,
+          "mild-percent": 5
+        }
+      ]
+    },
+    {
+      "year": 2012,
+      "count": 20,
+      "percent": 20,
+      "breakdown": [
+        {
+          "intense-count": 5,
+          "intense-percent": 5
+        },
+        {
+          "normal-count": 7,
+          "normal-percent": 7
+        },
+        {
+          "mild-count": 8,
+          "mild-percent": 8
+        }
+      ]
+    },
+    {
+      "year": 2013,
+      "count": 20,
+      "percent": 20,
+      "breakdown": [
+        {
+          "intense-count": 5,
+          "intense-percent": 5
+        },
+        {
+          "normal-count": 15,
+          "normal-percent": 15
+        },
+        {
+          "mild-count": 0,
+          "mild-percent": 0
+        }
+      ]
+    },
+    {
+      "year": 2014,
+      "count": 40,
+      "percent": 40,
+      "breakdown": [
+        {
+          "intense-count": 0,
+          "intense-percent": 0
+        },
+        {
+          "normal-count": 0,
+          "normal-percent": 0
+        },
+        {
+          "mild-count": 40,
+          "mild-percent": 40
+        }
+      ]
+    },
+    {
+      "year": 2015,
+      "count": 0,
+      "percent": 0,
+      "breakdown": [
+        {
+          "intense-count": 0,
+          "intense-percent": 0
+        },
+        {
+          "normal-count": 0,
+          "normal-percent": 0
+        },
+        {
+          "mild-count": 0,
+          "mild-percent": 0
+        }
+      ]
+    }
+  ]
 }
 </pre>
 
@@ -1225,222 +1313,223 @@ http://<host>/json/basic-usetime-report?startdate=2015-01-05&enddate=2015-01-05&
 An example output will be as below:
 <pre>
 {
-	"status": "success",
-	“breakdown”: [
-		{
-			“gender”: “M”,
-			“count”: 50,
-			“percent”: 50,
-			"breakdown": [
-				{
-					"year": 2011,
-					"count": 10,
-					"percent": 10,
-					"breakdown": [
-						{
-							"intense_count": 5
-							"intense_percent": 5
-						},
- 						{
-							"normal_count": 2
-							"normal_percent": 2
-						},
-        					{
-            						"mild_count": 3
-            						"mild_percent": 3
-        					}
-					]
-				},
-				{
-					"year": 2012,
-					"count": 10,
-					"percent": 10,
-					"breakdown": [
-						{
-            						"intense_count": 0
-            						"intense_percent": 0
-        					},
-        					{
-            						"normal_count": 0
-            						"normal_percent": 0
-        					},
-        					{
-            						"mild_count": 10
-            						"mild_percent": 10
-        					}
-					]
-				},
-				{
-					"year": 2013,
-					"count": 10,
-					"percent": 10,
-					"breakdown": [
-						{
-            						"intense_count": 1
-            						"intense_percent": 1
-        					},
-        					{
-            						"normal_count": 1
-            						"normal_percent": 1
-        					},
-        					{
-            						"mild_count": 8
-            						"mild_percent": 8
-        					}
-					]
-				},
-				{
-					"year": 2014,
-					"count": 10,
-					"percent": 10,
-					"breakdown": [
-						{
-            						"intense_count": 2
-            						"intense_percent": 2
-        					},
-        					{
-            						"normal_count": 2
-            						"normal_percent": 2
-        					},
-        					{
-            						"mild_count": 6
-            						"mild_percent": 6
-        					}
-					]
-				},
-				{
-					"year": 2015,
-					"count": 10,
-					"percent": 10,
-					"breakdown": [
-						{
-            						"intense_count": 0
-            						"intense_percent": 0
-        					},
-        					{
-            						"normal_count": 0
-            						"normal_percent": 0
-        					},
-        					{
-            						"mild_count": 10
-            						"mild_percent": 10
-        					}
-					]
-				}
-			]
-		},
-		{
-			“gender”: “F”,
-			“count”: 50,
-			“percent”: 50,
-			"breakdown": [
-				{
-					"year": 2011,
-					"count": 5,
-					"percent": 5,
-					"breakdown": [
-						{
-            						"intense_count": 0
-            						"intense_percent": 0
-        					},
-        					{
-            						"normal_count": 1
-            						"normal_percent": 1
-        					},
-        					{
-            						"mild_count": 4
-            						"mild_percent": 4
-        					}
-					]
-				},
-				{
-					"year": 2012,
-					"count": 10,
-					"percent": 10,
-					"breakdown": [
-						{
-            						"intense_count": 0
-            						"intense_percent": 0
-        					},
-        					{
-            						"normal_count": 0
-            						"normal_percent": 0
-        					},
-        					{
-            						"mild_count": 10
-            						"mild_percent": 10
-        					}
-					]
-				},
-				{
-					"year": 2013,
-					"count": 10,
-					"percent": 100,
-					"breakdown": [
-						{
-            						"intense_count": 1
-            						"intense_percent": 1
-        					},
-        					{
-            						"normal_count": 1
-            						"normal_percent": 1
-        					},
-        					{
-            						"mild_count": 8
-            						"mild_percent": 8
-        					}
-					]
-				},
-				{
-					"year": 2014,
-					"count": 10,
-					"percent": 10,
-					"breakdown": [
-						{
-            						"intense_count": 2
-            						"intense_percent": 2
-        					},
-        					{
-            						"normal_count": 2
-            						"normal_percent": 2
-        					},
-        					{
-            						"mild_count": 6
-            						"mild_percent": 6
-        					}
-					]
-				},
-				{
-					"year": 2015,
-					"count":15,
-					"percent": 15,
-					"breakdown": [
-						{
-            						"intense_count": 0
-            						"intense_percent": 0
-        					},
-        					{
-            						"normal_count": 5
-            						"normal_percent": 5
-        					},
-        					{
-            						"mild_count": 10
-            						"mild_percent": 10
-        					}
-					]
-				}
-    			]
-		}
-	]
+  "status": "success",
+  "breakdown": [
+    {
+      "gender": "F",
+      "count": 50,
+      "percent": 50,
+      "breakdown": [
+        {
+          "year": 2011,
+          "count": 10,
+          "percent": 10,
+          "breakdown": [
+            {
+              "intense-count": 5,
+              "intense-percent": 5
+            },
+            {
+              "normal-count": 2,
+              "normal-percent": 2
+            },
+            {
+              "mild-count": 3,
+              "mild-percent": 3
+            }
+          ]
+        },
+        {
+          "year": 2012,
+          "count": 10,
+          "percent": 10,
+          "breakdown": [
+            {
+              "intense-count": 0,
+              "intense-percent": 0
+            },
+            {
+              "normal-count": 0,
+              "normal-percent": 0
+            },
+            {
+              "mild-count": 10,
+              "mild-percent": 10
+            }
+          ]
+        },
+        {
+          "year": 2013,
+          "count": 10,
+          "percent": 10,
+          "breakdown": [
+            {
+              "intense-count": 1,
+              "intense-percent": 1
+            },
+            {
+              "normal-count": 1,
+              "normal-percent": 1
+            },
+            {
+              "mild-count": 8,
+              "mild-percent": 8
+            }
+          ]
+        },
+        {
+          "year": 2014,
+          "count": 10,
+          "percent": 10,
+          "breakdown": [
+            {
+              "intense-count": 2,
+              "intense-percent": 2
+            },
+            {
+              "normal-count": 2,
+              "normal-percent": 2
+            },
+            {
+              "mild-count": 6,
+              "mild-percent": 6
+            }
+          ]
+        },
+        {
+          "year": 2015,
+          "count": 10,
+          "percent": 10,
+          "breakdown": [
+            {
+              "intense-count": 0,
+              "intense-percent": 0
+            },
+            {
+              "normal-count": 0,
+              "normal-percent": 0
+            },
+            {
+              "mild-count": 10,
+              "mild-percent": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "gender": "M",
+      "count": 50,
+      "percent": 50,
+      "breakdown": [
+        {
+          "year": 2011,
+          "count": 5,
+          "percent": 5,
+          "breakdown": [
+            {
+              "intense-count": 0,
+              "intense-percent": 0
+            },
+            {
+              "normal-count": 1,
+              "normal-percent": 1
+            },
+            {
+              "mild-count": 4,
+              "mild-percent": 4
+            }
+          ]
+        },
+        {
+          "year": 2012,
+          "count": 10,
+          "percent": 10,
+          "breakdown": [
+            {
+              "intense-count": 0,
+              "intense-percent": 0
+            },
+            {
+              "normal-count": 0,
+              "normal-percent": 0
+            },
+            {
+              "mild-count": 10,
+              "mild-percent": 10
+            }
+          ]
+        },
+        {
+          "year": 2013,
+          "count": 10,
+          "percent": 10,
+          "breakdown": [
+            {
+              "intense-count": 1,
+              "intense-percent": 1
+            },
+            {
+              "normal-count": 1,
+              "normal-percent": 1
+            },
+            {
+              "mild-count": 8,
+              "mild-percent": 8
+            }
+          ]
+        },
+        {
+          "year": 2014,
+          "count": 10,
+          "percent": 10,
+          "breakdown": [
+            {
+              "intense-count": 2,
+              "intense-percent": 2
+            },
+            {
+              "normal-count": 2,
+              "normal-percent": 2
+            },
+            {
+              "mild-count": 6,
+              "mild-percent": 6
+            }
+          ]
+        },
+        {
+          "year": 2015,
+          "count": 15,
+          "percent": 15,
+          "breakdown": [
+            {
+              "intense-count": 0,
+              "intense-percent": 0
+            },
+            {
+              "normal-count": 5,
+              "normal-percent": 5
+            },
+            {
+              "mild-count": 10,
+              "mild-percent": 10
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
-
 </pre>
+
+The outer breakdown array is sorted in ascending order (year) or ascending order (gender/school). The innermost breakdown array is sorted in this order: intense, normal, then mild category data.
 
 =====Breakdown by app category=====
 
 Request:
 <pre>
-http://<host>/json/basic-appcategory-report?token=[tokenValue]
+http://<host>/json/basic-appcategory-report?startdate=[startdate]&enddate=[enddate]&token=[tokenValue]
 </pre>
 
 Request Parameters and Possible Errors
@@ -1459,6 +1548,7 @@ Request Parameters and Possible Errors
 |}
 
 Response:
+
 If the breakdown is calculated successfully, the following response is returned:
 
 For an example request:
@@ -1470,32 +1560,34 @@ An example output will be as below:
 
 <pre>
 {
-    "status": "success",
-    "breakdown": [
-        {
-            "category_name": "Books"
-            "category_hours": 0.1
-            "category_percent": 2
-        },
-        {
-            "category_name": "Social"
-            "category_hours": 1
-            "category_percent": 20
-        },
-        {
-            "category_name": "Books"
-            "category_hours": 0.5
-            "category_percent": 10
-        }
-        ...
-    ]
+  "status": "success",
+  "breakdown": [
+    {
+      "category-name": "Books",
+      "category-duration": 10,
+      "category-percent": 2
+    },
+    {
+      "category-name": "Social",
+      "category-duration": 100,
+      "category-percent": 20
+    },
+    {
+      "category-name": "Education",
+      "category-duration": 50,
+      "category-percent": 10
+    },
+    ...
+  ]
 }
 </pre>
+
+The breakdown array is sorted by category name ascending.
 
 =====Diurnal pattern of app usage time=====
 Request:
 <pre>
-http://<host>/json/basic-diurnalpatter-report?token=[tokenValue]
+http://<host>/json/basic-diurnalpattern-report?startdate=[startdate]&enddate=[enddate]&yearfilter=[yearfilter]&genderfilter=[genderfilter]&schoolfilter=[schoolfilter]&token=[tokenValue]
 </pre>
 
 Request Parameters and Possible Errors
@@ -1526,6 +1618,7 @@ Request Parameters and Possible Errors
 |}
 
 Response:
+
 If the breakdown is calculated successfully, the following response is returned:
 
 For an example request:
@@ -1537,36 +1630,42 @@ An example output will be as below:
 
 <pre>
 {
-    "status": "success",
-    "breakdown": [
-        {
-            "duration": "12:00-01:00"
-            "usagetime": 300
-        },
-        {
-            "duration": "01:00-02:00"
-            "usagetime": 60
-        },
-        {
-            "duration": "02:00-03:00"
-            "usagetime": 0
-        }
-        ...
-    ]
+  "status": "success",
+  "breakdown": [
+    {
+      "period": "00:00-01:00",
+      "duration": 300
+    },
+    {
+      "period": "01:00-02:00",
+      "duration": 60
+    },
+    {
+      "period": "02:00-03:00",
+      "duration": 0
+    },
+    ...
+    {
+      "period": "23:00-00:00",
+      "duration": 0
+    }
+  ]
 }
 </pre>
+
+The breakdown array is sorted by period ascending, i.e. "00:00-01:00" is first and "23:00-00:00" is last.
 
 ====Top-k App Usage Report====
 =====Top-k most used apps=====
 Request:
 <pre>
-http://<host>/json/top-k-most-used-apps?token=[tokenValue]
+http://<host>/json/top-k-most-used-apps?startdate=[startdate]&enddate=[enddate]&school=[school]&token=[tokenValue]
 </pre>
 
 Request Parameters and Possible Errors:
 {| class="wikitable"
 |k (optional)
-|an integer range from 1 to 10 with a default value of 3 (i.e., if not specified, k should be 3).
+|an integer range from 1 to 10 (both inclusive) with a default value of 3 (i.e., if not specified, k should be 3).
 |"invalid k"
 |-
 |startdate (required)
@@ -1577,14 +1676,14 @@ Request Parameters and Possible Errors:
 |the enddate should be in a proper date format(YYYY-MM-DD) and a valid date.
 |"invalid enddate"
 |-
-|school(required)
+|school (required)
 |the school should be one of the valid schools.
-|"invalid date"
+|"invalid school"
 |}
 
 Response:
+
 If the top-k most used apps are calculated successfully, the following response is returned:
-(sort by rank, app name).
 
 For an example request:
 <pre>
@@ -1595,55 +1694,62 @@ An example output will be returned as below:
 
 <pre>
 {
-    "status": "success",
-    "results": [
-        {
-            "rank": 1,
-            "appname": "Facebook",
-            "usagetime": 0.7
-        },
-        {
-            "rank": 1,
-            "appname": "WhatsApp",
-            "usagetime": 0.7
-        },
-        {
-            "rank": 3,
-            "appname": "Chrome",
-            "usagetime": 0.4
-        }
-    ]
+  "status": "success",
+  "results": [
+    {
+      "rank": 1,
+      "app-name": "Facebook",
+      "duration": 70
+    },
+    {
+      "rank": 1,
+      "app-name": "WhatsApp",
+      "duration": 70
+    },
+    {
+      "rank": 3,
+      "app-name": "Chrome",
+      "duration": 40
+    },
+    {
+      "rank": 3,
+      "app-name": "Telegram",
+      "duration": 40
+    }
+  ]
 }
 </pre>
 
-=====Top-k students with most app usage=====
+The results array is sorted by rank ascending, app name ascending.
 
+=====Top-k students with most app usage=====
 Request:
 <pre>
-http://<host>/json/top-k-most-used-students?token=[tokenValue]
+http://<host>/json/top-k-most-used-students?token=[tokenValue]&startdate=[startdate]&enddate=[enddate]&appcategory=[appcategory]
 </pre>
 
-request queries parameters:
+Request Parameters and Possible Errors:
 {| class="wikitable"
 |k (optional)
-|an integer range from 1 to 10 with a default value of 3 (i.e., if not specified, k should be 3).
+|an integer range from 1 to 10 (both inclusive) with a default value of 3 (i.e., if not specified, k should be 3).
 |"invalid k"
 |-
 |startdate (required)
-|the date should be in a proper date format (YYYY-MM-DD), where YYYY-MM-DD is a valid day.
-|"invalid date"
+|the startdate should be in a proper date format(YYYY-MM-DD) and a valid date.
+|"invalid startdate"
 |-
 |enddate (required)
-|the date should be in a proper date format (YYYY-MM-DD), where YYYY-MM-DD is a valid day.
-|"invalid date"
+|the enddate should be in a proper date format(YYYY-MM-DD) and a valid date.
+|"invalid enddate"
 |-
-|appcategory(required)
+|appcategory (required)
 |the appcategory should be one of the valid application categories.
 |"invalid app category"
 |}
 
 Response:
-If the top-k most used students are calculated successfully, the following response is returned: (sort by rank, student name).
+
+If the top-k most used students are calculated successfully, the following response is returned:
 
 For the example request below,
 <pre>
@@ -1654,52 +1760,53 @@ An example output will be returned as below:
 
 <pre>
 {
-    "status": "success",
-    "results": [
-        {
-            "rank": 1,
-            "name": "Brandon TAN",
-            "mac-adddress": "0bcaef7b08dd8539205383b2918df6e9446746f0",
-            "usagetime": 0.7
-        },
-        {
-            "rank": 2,
-            "name": "Jason TAN",
-            "mac-address": "124b2e06a5789138a77e307e607ac57057251bea"
-            "usagetime": 0.4
-        }
-    ]
+  "status": "success",
+  "results": [
+    {
+      "rank": 1,
+      "name": "Brandon TAN",
+      "mac-adddress": "0bcaef7b08dd8539205383b2918df6e9446746f0",
+      "duration": 70
+    },
+    {
+      "rank": 2,
+      "name": "Jason TAN",
+      "mac-address": "124b2e06a5789138a77e307e607ac57057251bea",
+      "duration": 40
+    }
+  ]
 }
 </pre>
 
-=====Top-k schools with most app usage=====
+The results array is sorted by rank ascending, and student name ascending.
 
+=====Top-k schools with most app usage=====
 Request:
 <pre>
-http://<host>/json/top-k-most-used-schools?token=[tokenValue]
+http://<host>/json/top-k-most-used-schools?token=[tokenValue]&startdate=[startdate]&enddate=[enddate]&appcategory=[appcategory]
 </pre>
 
 Request Parameters and Possible Errors:
 {| class="wikitable"
 |k (optional)
-|an integer range from 1 to 10 with a default value of 3 (i.e., if not specified, k should be 3).
+|an integer range from 1 to 10 (both inclusive) with a default value of 3 (i.e., if not specified, k should be 3).
 |"invalid k"
 |-
 |startdate (required)
-|the date should be in a proper date format (YYYY-MM-DD), where YYYY-MM-DD is a valid day.
-|"invalid date"
+|the startdate should be in a proper date format(YYYY-MM-DD) and a valid date.
+|"invalid startdate"
 |-
 |enddate (required)
-|the date should be in a proper date format (YYYY-MM-DD), where YYYY-MM-DD is a valid day.
-|"invalid date"
+|the enddate should be in a proper date format(YYYY-MM-DD) and a valid date.
+|"invalid enddate"
 |-
-|appcategory(required)
+|appcategory (required)
 |the appcategory should be one of the valid application categories.
 |"invalid app category"
 |}
 
 Response:
-If the top-k most used students are calculated successfully, the following response is returned: (sort by rank, student name).
+If the top-k most used students are calculated successfully, the following response is returned:
 
 For the example request below:
 <pre>
@@ -1710,37 +1817,38 @@ An example output will be returned as below:
 
 <pre>
 {
-    "status": "success",
-    "results": [
-        {
-            "rank": 1,
-            "school": "sis",
-            "usagetime": 4.1
-        },
-        {
-            "rank": 2,
-            "school": "socsc",
-            "usagetime": 3.8
-        }
-    ]
+  "status": "success",
+  "results": [
+    {
+      "rank": 1,
+      "school": "sis",
+      "duration": 41
+    },
+    {
+      "rank": 2,
+      "school": "socsc",
+      "duration": 38
+    }
+  ]
 }
 </pre>
 
-====Smartphone Overuse Report====
+The results array is sorted by rank ascending, school ascending.
 
+====Smartphone Overuse Report====
 Request:
 <pre>
-http://<host>/json/overuse-report?token=[tokenValue]
+http://<host>/json/overuse-report?token=[tokenValue]&startdate=[startdate]&enddate=[enddate]&macaddress=[macaddress]
 </pre>
 
 Request Parameters and Possible Errors:
 {| class="wikitable"
 |startdate
-|the date should be in a proper date format (YYYY-MM-DD), where YYYY-MM-DD is a valid day.
+|the startdate should be in a proper date format(YYYY-MM-DD) and a valid date.
 |"invalid startdate"
 |-
 |enddate
-|the date should be in a proper date format (YYYY-MM-DD), where YYYY-MM-DD is a valid day.
+|the enddate should be in a proper date format(YYYY-MM-DD) and a valid date.
 |"invalid enddate"
 |-
 |macaddress
@@ -1749,6 +1857,7 @@ Request Parameters and Possible Errors:
 |}
 
 Response:
+
 If the overuse report are calculated successfully, the following response is returned:
 
 For example, for the request as below:
@@ -1760,35 +1869,36 @@ An example output will be returned as follows:
 
 <pre>
 {
-    "status": "success",
-    "results": {
-        "overuse-index": "Overusing",
-        "metrics": [
-            {
-                "usagemetric": "Severe",
-                "usagetime": 5.7,
-            },
-            {
-                "gamingmetric": "Moderate",
-                "gamingtime": 1.7,
-            },
-            {
-                "accessfrequencymetric": "Moderate",
-                "accessfrequency": 4,
-            }
-        ]
-    }
+  "status": "success",
+  "results": {
+    "overuse-index": "Overusing",
+    "metrics": [
+      {
+        "usage-category": "Severe",
+        "usage-duration": 57
+      },
+      {
+        "gaming-category": "Moderate",
+        "gaming-duration": 17
+      },
+      {
+        "accessfrequency-category": "Moderate",
+        "accessfrequency": 4.23
+      }
+    ]
+  }
 }
 </pre>
 
-====Loading Location Data====
+The metrics array is sorted in this order: usage, gaming, then access frequency.
 
+====Loading Location Data====
 Request:
 <pre>
-http://<host>/json/location-upload?token=[tokenValue]
+http://<host>/json/location-upload
 </pre>
 
-The expected output will be similar to bootstrap.
+The expected request and response will be similar to bootstrap.
 
 ====Deletion of Location Data====
 
@@ -1797,7 +1907,7 @@ To be updated.
 ====Smartphone Usage Heatmap====
 Request:
 <pre>
-http://<host>/json/usage-heatmap?token=[tokenValue]
+http://<host>/json/usage-heatmap?token=[tokenValue]&floor=[floor]&date=[date]&time=[time]
 </pre>
 
 Request Parameters and Possible Errors:
@@ -1815,11 +1925,12 @@ Request Parameters and Possible Errors:
 |"invalid date"
 |-
 |time
-|the time is should be in a proper time format(HH:MM:SS) anda valid time.
+|the time is should be in a proper time format(HH:MM:SS) and a valid time.
 |"invalid time"
 |}
 
 Response:
+
 If the heatmap is calculated successfully, the following response is returned:
 
 For example, for the request below:
@@ -1831,60 +1942,59 @@ An example output will be returned as follows:
 
 <pre>
 {
-    "status": "success",
-    "heatmap": [
-        {
-            "semantic-place": "SMUSISL2LOBBY",
-            "num-people-using-phone": 10,
-            "density": 3
-        },
-        {
-            "semantic-place": "SMUSISL2SR2-1",
-            "num-people-using-phone": 1,
-            "density": 1
-        },
-        {
-            "semantic-place": "SMUSISL2SR2-2",
-            "num-people-using-phone": 8,
-            "density": 2
-        },
-        {
-            "semantic-place": "SMUSISL2SR2-3",
-            "num-people-using-phone": 14,
-            "density": 4
-        },
-        {
-            "semantic-place": "SMUSISL2SR2-4",
-            "num-people": 0,
-            "crowd-density": 0
-        },
-        {
-            "semantic-places": "SMUSISL2STUDYAREA1",
-            "number-people": 7,
-            "crowd-density": 2,
-        },
-        {
-            "semantic-place": "SMUSISL2STUDYAREA2",
-            "num-people": 21,
-            "crowd-density": 5
-        }
-    ]
+  "status": "success",
+  "heatmap": [
+    {
+      "semantic-place": "SMUSISL2LOBBY",
+      "num-people-using-phone": 10,
+      "crowd-density": 3
+    },
+    {
+      "semantic-place": "SMUSISL2SR2-1",
+      "num-people-using-phone": 1,
+      "crowd-density": 1
+    },
+    {
+      "semantic-place": "SMUSISL2SR2-2",
+      "num-people-using-phone": 8,
+      "crowd-density": 2
+    },
+    {
+      "semantic-place": "SMUSISL2SR2-3",
+      "num-people-using-phone": 14,
+      "crowd-density": 4
+    },
+    {
+      "semantic-place": "SMUSISL2SR2-4",
+      "num-people-using-phone": 0,
+      "crowd-density": 0
+    },
+    {
+      "semantic-places": "SMUSISL2STUDYAREA1",
+      "num-people-using-phone": 7,
+      "crowd-density": 2
+    },
+    {
+      "semantic-place": "SMUSISL2STUDYAREA2",
+      "num-people-using-phone": 21,
+      "crowd-density": 5
+    }
+  ]
 }
 </pre>
 
-Note: sort output by semantic-place (alphabetical order a-z)
+The heatmap array is sorted by semantic-place ascending.
 
 ====Social Activeness Report====
-
 Request:
 <pre>
-http://<host>/json/social-activeness-report?token=[tokenValue]
+http://<host>/json/social-activeness-report?token=[tokenValue]&date=[date]&macaddress=[macaddress]
 </pre>
 
 Request Parameters and Possible Errors:
 {| class="wikitable"
 |date
-|the date should be in a proper date format (YYYY-MM-DD), where YYYY-MM-DD is a valid day.
+|the date should be in a proper date format(YYYY-MM-DD) and a valid date.
 |"invalid date"
 |-
 |macaddress
@@ -1893,6 +2003,7 @@ Request Parameters and Possible Errors:
 |}
 
 Response:
+
 If the overuse report are calculated successfully, the following response is returned:
 
 For example, for the request as below:
@@ -1904,35 +2015,36 @@ An example output will be returned as follows:
 
 <pre>
 {
-    "status": "success",
-    "results": {
-        "total-socialapp-usetime": 3.1,
-        "individual-socialapp-usetime": [
-            {
-                "appname": "FaceBook"
-                "percent": 20
-            }
-            {
-                "appname": "WhatsApp"
-                "percent": 70
-            }
-            {
-                "appname": "Twitter"
-                "percent": 10
-            }
-        ]
-        "total-time-spent-in-sis": 5.0
-        "group-percent": 60
-        "solo-percent": 40
-    }
+  "status": "success",
+  "results": {
+    "total-social-app-usage-duration": 310,
+    "individual-social-app-usage": [
+      {
+        "app-name": "FaceBook",
+        "percent": 20
+      },
+      {
+        "app-name": "Twitter",
+        "percent": 10
+      },
+      {
+        "app-name": "WhatsApp",
+        "percent": 70
+      }
+    ],
+    "total-time-spent-in-sis": 500,
+    "group-percent": 60,
+    "solo-percent": 40
+  }
 }
 </pre>
 
-====Advanced Smartphone Overuse Report ====
+The individual-socialapp-usetime array is sorted by appname ascending.
 
+====Advanced Smartphone Overuse Report====
 Request:
 <pre>
-http://<host>/json/advanced-overuse-report?token=[tokenValue]
+http://<host>/json/advanced-overuse-report?token=[tokenValue]&startdate=[startdate]&enddate=[enddate]&macaddress=[macaddress]
 </pre>
 
 Request Parameters and Possible Errors:
@@ -1951,24 +2063,25 @@ Request Parameters and Possible Errors:
 |}
 
 Response:
-If the overuse report are calculated successfully, the following response is returned:
+
+If the advanced overuse report is calculated successfully, the following response is returned:
 
 For example, for the request as below:
 <pre>
-http://<host>/json/overuse-report?token=[tokenValue]&startdate=2015-09-27&enddate=2015-10-03&macaddress=0bcaef7b08dd8539205383b2918df6e9446746f0
+http://<host>/json/advanced-overuse-report?token=[tokenValue]&startdate=2015-09-27&enddate=2015-10-03&macaddress=0bcaef7b08dd8539205383b2918df6e9446746f0
 </pre>
 
 An example output will be returned as follows:
 
 <pre>
 {
-    "status": "success",
-    "results": {
-        "overuse-index": "Overusing",
-        "total-class-hours": 6.0
-        "total-smallgroup-hours": 3.0
-        "non-productive-app-hours": 1.5
-    }
+  "status": "success",
+  "results": {
+    "overuse-index": "Overusing",
+    "total-class-duration": 60,
+    "total-small-group-duration": 30,
+    "non-productive-app-duration": 15
+  }
 }
 </pre>
 
@@ -2023,7 +2136,7 @@ Make sure to have the following directory structure. Otherwise, we might not fin
 |- minutes
   |- internal
   |- supervisor
-|-app           	    // your app related sources & files
+|-app               // your app related sources & files
   |--javadocs
   |--sql
   |--src
