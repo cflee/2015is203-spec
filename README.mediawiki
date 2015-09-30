@@ -446,6 +446,17 @@ Additionally, if there is any whitespace at the start or end of each field, it m
 ====Common Validations for all data files====
 For all the fields, you need to check if the field is blank. An error message "blank [field]" is produced for each blank field, and output in the left-to-right order of the CSV fields. A row is discarded, with no need to do further file-specific validation listed below, if any of the fields is blank.
 
+====Validation Definitions====
+These definitions apply across all bootstrap and upload additional data functionalities, and are not fully expanded in each file's validation list for brevity.
+
+Timestamps are validated against the format "YYYY-MM-DD HH:MM:SS", and must also be a valid timestamp. The format implies that the timestamp string must be 19 char long and including all leading zeros, like "2015-01-02 03:04:05". Date components like "2015-02-29" and "2015-13-32" are invalid, and time components like "24:60" are invalid.
+
+Mac addresses are case-insensitive, and should always be a valid 40-digit hexadecimal number.
+
+Email, gender, app category are case-insensitive, i.e. "m" and "M" gender are treated the same.
+
+Student name, password, app name, semantic place name are case-sensitive, and must be loaded and later retrieved in exactly the same case.
+
 ====File-specific Validations====
 If one or more fields fail the file-specific validations, the row is discarded, but all the errors are returned. Errors are output in the order they are listed in the tables below.
 
@@ -483,7 +494,7 @@ List of validations for demographics.csv
 |if the length of the password is less than 8 characters or it includes whitespace
 |-
 |"invalid email"
-|if email is not of the format xxx.&lt;year&gt;@&lt;school&gt;.smu.edu.sg where school is either business, accountancy, sis, economics, law, or socsc, and year is between 2011 to 2015 (both inclusive). xxx should contains only letters (a-z or A-Z), numbers or dot.
+|if email is not of the format xxx.&lt;year&gt;@&lt;school&gt;.smu.edu.sg where school is either business, accountancy, sis, economics, law, or socsc, and year is between 2011 to 2015 (both inclusive). xxx should contains only letters (a-z or A-Z), numbers or dots.
 |-
 |"invalid gender"
 |if gender is not either "M" or "F" (case-insensitive)
