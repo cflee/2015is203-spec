@@ -596,7 +596,7 @@ If there are no users in a specific demographic combination, it is still display
 
 ====Breakdown by app category====
 Given a start date and end date (both inclusive), process data on a daily basis to calculate average daily app usage time per app category (Books/Social/Education/Entertainment/…).
-For each app category, show the daily usage duration (in hours) as well as the percentage of the total (i.e., compare the duration per category with the total duration across all categories).
+For each app category, show the daily usage duration as well as the percentage of the total (i.e., compare the duration per category with the total duration across all categories).
 
 If there is no usage in an app category (as defined in app-lookup.csv file validation), it is still displayed with 0 duration.
 
@@ -646,7 +646,7 @@ For the below three top-k app usage reports, the user must select a single schoo
 Given a certain school, start date and end date (both inclusive) as user input, show the top-k apps with most app usage time by students in that school. Display the rank, app name, and app usage time.
 
 ====Top-k students with most app usage (given an app category)====
-Given an app category, start date and end date (both inclusive) as user input, show the top-k students with most usage time in that app category. Display the rank, student name, mac address and app usage time (in hours).
+Given an app category, start date and end date (both inclusive) as user input, show the top-k students with most usage time in that app category. Display the rank, student name, mac address and app usage time.
 
 ====Top-k schools with most app usage (given an app category)====
 Given an app category, start date and end date (both inclusive) as user input, show the top-k schools with the most app usage time in the specified category. Display the rank, school, and app usage time.
@@ -1547,17 +1547,17 @@ An example output will be as below:
   "breakdown": [
     {
       "category_name": "Books",
-      "category_hours": 0.1,
+      "category_duration": 10,
       "category_percent": 2
     },
     {
       "category_name": "Social",
-      "category_hours": 1,
+      "category_duration": 100,
       "category_percent": 20
     },
     {
       "category_name": "Education",
-      "category_hours": 0.5,
+      "category_duration": 50,
       "category_percent": 10
     },
     ...
@@ -1682,22 +1682,22 @@ An example output will be returned as below:
     {
       "rank": 1,
       "appname": "Facebook",
-      "usagetime": 0.7
+      "usagetime": 70
     },
     {
       "rank": 1,
       "appname": "WhatsApp",
-      "usagetime": 0.7
+      "usagetime": 70
     },
     {
       "rank": 3,
       "appname": "Chrome",
-      "usagetime": 0.4
+      "usagetime": 40
     },
     {
       "rank": 3,
       "appname": "Telegram",
-      "usagetime": 0.4
+      "usagetime": 40
     }
   ]
 }
@@ -1749,13 +1749,13 @@ An example output will be returned as below:
       "rank": 1,
       "name": "Brandon TAN",
       "mac-adddress": "0bcaef7b08dd8539205383b2918df6e9446746f0",
-      "usagetime": 0.7
+      "usagetime": 70
     },
     {
       "rank": 2,
       "name": "Jason TAN",
       "mac-address": "124b2e06a5789138a77e307e607ac57057251bea",
-      "usagetime": 0.4
+      "usagetime": 40
     }
   ]
 }
@@ -1805,12 +1805,12 @@ An example output will be returned as below:
     {
       "rank": 1,
       "school": "sis",
-      "usagetime": 4.1
+      "usagetime": 41
     },
     {
       "rank": 2,
       "school": "socsc",
-      "usagetime": 3.8
+      "usagetime": 38
     }
   ]
 }
@@ -1858,15 +1858,15 @@ An example output will be returned as follows:
     "metrics": [
       {
         "usagemetric": "Severe",
-        "usagetime": 5.7
+        "usagetime": 57
       },
       {
         "gamingmetric": "Moderate",
-        "gamingtime": 1.7
+        "gamingtime": 17
       },
       {
         "accessfrequencymetric": "Moderate",
-        "accessfrequency": 4
+        "accessfrequency": 4.23
       }
     ]
   }
@@ -2000,7 +2000,7 @@ An example output will be returned as follows:
 {
   "status": "success",
   "results": {
-    "total-socialapp-usetime": 3.1,
+    "total-socialapp-usetime": 310,
     "individual-socialapp-usetime": [
       {
         "appname": "FaceBook",
@@ -2015,7 +2015,7 @@ An example output will be returned as follows:
         "percent": 70
       }
     ],
-    "total-time-spent-in-sis": 5.0,
+    "total-time-spent-in-sis": 500,
     "group-percent": 60,
     "solo-percent": 40
   }
@@ -2061,9 +2061,9 @@ An example output will be returned as follows:
   "status": "success",
   "results": {
     "overuse-index": "Overusing",
-    "total-class-hours": 6.0,
-    "total-smallgroup-hours": 3.0,
-    "non-productive-app-hours": 1.5
+    "total-class-duration": 60,
+    "total-smallgroup-duration": 30,
+    "non-productive-app-duration": 15
   }
 }
 </pre>
