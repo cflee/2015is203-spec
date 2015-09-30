@@ -645,7 +645,7 @@ The ‘ranks’ are the various entries that make up the lists used for reportin
 |Calendar
 |}
 
-If you were asked to return the top-3 (top-k where k = 3) most popular app names, you would output ranks 1 (with two tied entries) and 3 from this table. Within each rank, the entries' app name/student name/school need to be sorted in ascending alphabetical order.
+If you were asked to return the top-3 (top-k where k = 3) most popular app names, you would output ranks 1 (with two tied entries) and 3 from this table. Within each rank, the entries' app name/student name/school need to be sorted in ascending order.
 
 If you were asked to return the top-5, you would output the rank 1, 3, and 4 (with every tied entry). Note that in the above example, a total of six apps (from Facebook to SBS Transit) will be returned as all tied entries must be returned for the 4th rank.
 
@@ -1062,7 +1062,7 @@ If the bootstrapping is successful, the following response is returned.
 }
 </pre>
 
-The num-record-loaded array is sorted by filename (ascending alphabetical order). num-record-loaded indicates, for each file, the number of records successfully loaded/processed with no errors into the system.
+The num-record-loaded array is sorted by filename (ascending order). num-record-loaded indicates, for each file, the number of records successfully loaded/processed with no errors into the system.
 
 If the bootstrap is unsuccessful, the following response is returned.
 
@@ -1099,7 +1099,7 @@ If the bootstrap is unsuccessful, the following response is returned.
 }
 </pre>
 
-Compared to the successful case, an additional error array is included. The error array is sorted by filename (ascending alphabetical order), then by line number (ascending). For each file, line numbers start from 1 for the header row, and 2 for the first row of data. Within each message array, the messages are ordered as follows:
+Compared to the successful case, an additional error array is included. The error array is sorted by filename (ascending order), then by line number (ascending). For each file, line numbers start from 1 for the header row, and 2 for the first row of data. Within each message array, the messages are ordered as follows:
 *For missing field validations, follow the left-to-right order of the CSV field list specified for each file.
 *For other validations, follow the order specified in the file-specific validation lists provided above.
 
@@ -1523,7 +1523,7 @@ An example output will be as below:
 }
 </pre>
 
-The outer breakdown array is sorted in ascending order (year) or ascending alphabetical order (gender/school). The innermost breakdown array is sorted in this order: intense, normal, then mild category data.
+The outer breakdown array is sorted in ascending order (year) or ascending order (gender/school). The innermost breakdown array is sorted in this order: intense, normal, then mild category data.
 
 =====Breakdown by app category=====
 
