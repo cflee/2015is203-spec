@@ -1619,11 +1619,15 @@ An example output will be as below:
       "usagetime": 0
     },
     ...
+    {
+    	"duration": "23:00-00:00",
+    	"usagetime": 0
+    }
   ]
 }
 </pre>
 
-Usagetime is in seconds.
+Usagetime is in seconds. The breakdown array is sorted by duration ascending, i.e. "00:00-01:00" is first and "23:00-00:00" is last.
 
 ====Top-k App Usage Report====
 =====Top-k most used apps=====
