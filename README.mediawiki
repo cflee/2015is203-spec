@@ -1137,6 +1137,8 @@ an output will look like below:
 }
 </pre>
 
+The breakdown array is sorted in this order: intense, normal, then mild category data.
+
 =====Breakdown by usage time category and demographics=====
 
 Request:
