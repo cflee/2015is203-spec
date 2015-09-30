@@ -1556,6 +1556,8 @@ An example output will be as below:
 }
 </pre>
 
+The breakdown array is sorted by category name ascending.
+
 =====Diurnal pattern of app usage time=====
 Request:
 <pre>
